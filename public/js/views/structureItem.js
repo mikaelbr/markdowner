@@ -4,8 +4,8 @@ define([
         'underscore', 
         'jquery', 
         'vent',
-        'text!/templates/sidebar/folder.html', 
-        'text!/templates/sidebar/link.html'
+        'text!templates/sidebar/folder.html', 
+        'text!templates/sidebar/link.html'
         ], function (Backbone, _, $, vent, FolderTemplate, LinkTemplate) {
     return Backbone.View.extend({
         tagName: 'li',

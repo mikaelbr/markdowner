@@ -2,7 +2,7 @@ define(['backbone',
         'underscore', 
         'jquery', 
         'vent', 
-        'text!/templates/menu/themes.html',
+        'text!templates/menu/themes.html',
         'keymaster',
         'js/libs/jquery.fullscreen'
     ],  function (Backbone, _, $, vent, ThemesTemplate, key) {
