@@ -8,8 +8,7 @@ require.config({
    }
 });
 
-define(
-    [
+define([
         'backbone', 
         'jquery', 
         'js/collections/structure', 
@@ -20,7 +19,7 @@ define(
         'js/views/fileOptions',
         'js/views/user',
         'js/views/load',
-        'order!bootstrap/js/bootstrap-dropdown',
+        'order!bootstrap/js/bootstrap-dropdown'
     ], 
     function (Backbone, $, StructureCollection, StructureView, NavTopView, EditorView, CompiledView, FileOptions, UserBox, LoadingScreen) {
 
