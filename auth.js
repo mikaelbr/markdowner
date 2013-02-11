@@ -13,7 +13,7 @@ var twitterConnect = function () {
   passport.use(new TwitterStrategy({
       consumerKey: conf.twit.consumerKey,
       consumerSecret: conf.twit.consumerSecret,
-      callbackURL: "http://mdtype.dev:3000/auth/twitter/callback"
+      callbackURL: "http://markdowner.herokuapp.com/auth/twitter/callback"
     },
     function(token, tokenSecret, profile, done) {
       var twitObj = {
