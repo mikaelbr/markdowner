@@ -4,7 +4,7 @@ define(['backbone', 'underscore', 'jquery', 'vent',
    
     return Backbone.View.extend({
         el: "#file-options",
-        publicBase: 'http://localhost:3000/document/',
+        publicBase: 'http://markdowner.herokuapp.com/document/',
 
         initialize: function () {
             this.$el.modal({
