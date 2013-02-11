@@ -1,0 +1,36 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  },
+  "dependencies": {
+    "express": "3.0.1",
+    "jade": "*",
+    "less-middleware": "*",
+    "mongojs": "~0.5.1",
+    "express-resource": "~1.0.0",
+    "config": "~0.4.18",
+    "node-markdown": "~0.1.1",
+    "markdown": "~0.4.0",
+    "passport": "~0.1.15",
+    "passport-twitter": "~0.1.4"
+  },
+  "jam": {
+    "packageDir": "public/js/vendor",
+    "baseUrl": "public",
+    "dependencies": {
+      "jquery": "1.9",
+      "backbone": null,
+      "bootstrap": null,
+      "ace": null,
+      "text": null,
+      "keymaster": null
+    }
+  }
+}

@@ -1,0 +1,174 @@
+extends layout
+
+block content
+  
+  div#top-nav.navbar.navbar-static-top.navbar-inverse
+    div.navbar-inner
+      a.brand(href='/') Markdowner
+      ul.nav
+        li.dropdown
+          a.dropdown-toggle(data-toggle='dropdown', href="#") File
+            b.caret
+          ul.dropdown-menu
+            li
+              a#savefile(href='#') Save
+                span.pull-right &#x2318;S
+            li.divider
+            li
+              a(href='#', style='color: #ccc') Export file 
+                span.pull-right &#x2318;E
+            li
+              a#file-options-button(href='#') File Options
+
+        li.dropdown
+          a.dropdown-toggle(data-toggle='dropdown', href="#") New
+            b.caret
+          ul.dropdown-menu
+            li
+              a#newfile(href='#') Markdown
+                span.pull-right &#x2318;L
+            li
+              a#newfolder(href='#') Folder
+                span.pull-right &#x21E7;&#x2318;L
+
+        li.dropdown
+          a.dropdown-toggle(data-toggle='dropdown', href="#") Build
+            b.caret
+          ul.dropdown-menu
+            li
+              a#compile-button(href='#') Compile
+                span.pull-right &#x2318;M
+
+        li.dropdown.view
+          a#theme-button.dropdown-toggle(data-toggle='dropdown', href="#") Theme
+            b.caret
+          ul#themelist.dropdown-menu
+            li.nav-header Bright
+            li 
+              a(href='#') Chrome
+            li 
+              a(href='#') Clouds
+            li 
+              a(href='#') Crimson Editor
+            li 
+              a(href='#') Dawn
+            li 
+              a(href='#') Dreamweaver
+            li 
+              a(href='#') Eclipse
+            li 
+              a(href='#') GitHub
+            li 
+              a(href='#') Solarized Light
+            li 
+              a(href='#') TextMate
+            li 
+              a(href='#') Tomorrow
+            li 
+              a(href='#') XCode
+            li.nav-header Dark
+            li 
+              a(href='#') Ambiance
+            li 
+              a(href='#') Chaos
+            li 
+              a(href='#') Clouds Midnight
+            li 
+              a(href='#') Cobalt
+            li 
+              a(href='#') idleFingers
+            li 
+              a(href='#') krTheme
+            li 
+              a(href='#') Merbivore
+            li 
+              a(href='#') Merbivore Soft
+            li 
+              a(href='#') Mono Industrial
+            li 
+              a(href='#') Monokai
+            li 
+              a(href='#') Pastel on dark
+            li 
+              a(href='#') Solarized Dark
+            li 
+              a(href='#') Twilight
+            li 
+              a(href='#') Tomorrow Night
+            li 
+              a(href='#') Tomorrow Night Blue
+            li 
+              a(href='#') Tomorrow Night Bright
+            li 
+              a(href='#') Tomorrow Night 80s
+            li 
+              a(href='#') Vibrant Ink
+
+        li.dropdown
+          a.dropdown-toggle(data-toggle='dropdown', href="#") View
+            b.caret
+          ul.dropdown-menu
+            li
+              a#toggle-sidebar(href='#') Toggle Sidebar
+                span.pull-right &#x2318;H
+            li
+              a#toggle-horizontal(href='#') Toggle Horizontal View
+
+     
+
+      ul.nav.pull-right
+        li
+          a#fullscreen-button(href='#')
+            i.icon-fullscreen.icon-white
+
+      - if (user)
+        ul.nav.pull-right
+          li
+            a(href="#user-box", role="button", data-toggle="modal")= user.twitterObj.username
+
+
+  div#filelist.filestructure.well
+    ul.nav.nav-list
+      //- li.active
+      //-   a(href='/') Filename.md
+      //- li
+      //-   a(href='/') A Really Long Filename Goes Here.md
+
+      //- li 
+      //-   span.nav-header Some Folder
+      //-     i.icon-chevron-up.pull-right
+      //-   ul.nav.nav-list
+      //-     li
+      //-       a(href='/') AnotherFile.md
+      //-     li
+      //-       a(href='/') AnotherFile.md
+
+      //- li 
+      //-   span.nav-header Some Folder
+      //-     i.icon-chevron-down.pull-right
+
+  div.tool-wrapper
+    div#editor.editor
+    div.markdown
+      p.weak-text Compiled Output
+      div#compiled.compiled.github
+
+  
+  include fileOptions
+  include userBox
+
+  div#load-screen.saving-screen
+    div.progress.progress-striped.active
+      div.bar(style='width: 100%')
+        p.load-text Saving...
+
+  script(src='http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js')
+
+  script(src='js/vendor/require.js')
+
+  script
+    require(['js/main'], function (App) {
+      App.init();
+    });
+    
+    

@@ -1,0 +1,22 @@
+extends export_layout
+
+block content
+
+  div#login.modal
+    div.modal-header
+      h3 Log in to Markdown Typer
+    div.modal-body 
+      p 
+        | Markdown Type is a small document processor for Markdown documents. Easily create 
+        | new markdown documents and export them as PDF or .MD files. Complete with previewing, 
+        | syntax highlighting and more.
+      
+      p.login-button
+        a.btn.btn-large.btn-success(href="/auth/twitter")
+          i.icon-magnet
+          |  Login with Twitter
+
+      p 
+        em
+          | To use Markdown Type, you need to authenticate using your Twitter account. 
+          | Markdown Type uses Twitter solely to authenticate, and will never read, post or change anything on your Twitter profile.
