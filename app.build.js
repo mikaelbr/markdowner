@@ -41,6 +41,23 @@
             "main": "underscore.js"
         }
     ],
+    "shim": {
+        "backbone": {
+            "deps": [
+                "underscore",
+                "jquery"
+            ],
+            "exports": "Backbone"
+        },
+        "keymaster": {
+            "exports": "key"
+        },
+        "underscore": {
+            "exports": "_"
+        }
+    },
     name: "js/main",
-    out: "public/js/vendor/require.js"
+    dir: 'dist/',
+    mainConfigFile: 'public/js/main.js',
+    optimizeCSS: 'standard'
 })
