@@ -124,6 +124,10 @@ a {
   max-height: 500px;
   overflow: auto;
 }
+.navbar .user-avatar {
+  height: 15px;
+  margin-right: 5px;
+}
 .compiled.github {
   font-family: Helvetica, arial, sans-serif;
   font-size: 14px;
@@ -574,4 +578,15 @@ a {
   right: 190px;
   z-index: 1500;
   width: 100px;
+}
+.user-box .modal-body figure {
+  padding: 0;
+  margin: 0;
+  margin-right: 10px;
+}
+.user-box .modal-body h4 {
+  margin: 0;
+}
+.user-box .modal-body hr {
+  margin: 10px 0;
 }

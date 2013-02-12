@@ -2,5 +2,24 @@ extends export_layout
 
 block content
 
-    div#document-export.compiled.github.document-export
-        != md(doc.body)
+  div#top-nav.navbar.navbar-fixed-top.navbar-inverse
+    div.navbar-inner
+      p.brand
+        img.user-avatar(src=user.twitterObj._json.profile_image_url, alt=user.twitterObj.username)
+        = user.twitterObj.username
+      //- ul.nav
+      //-   li.divider-vertical
+      //-   li.dropdown
+      //-     a.dropdown-toggle(data-toggle='dropdown', href="#") Download as
+      //-       b.caret
+      //-     ul.dropdown-menu
+      //-       li
+      //-         a.disable(href='#') PDF
+      //-       li
+      //-         a(href='#') Markdown 
+
+  div#document-export.compiled.github.document-export
+      != md(doc.body)
+
+  script(src='/js/vendor/jquery/dist/jquery.js')
+  script(src='/js/vendor/bootstrap/js/bootstrap-dropdown.js')
