@@ -1,1 +1,0 @@
-define(["backbone","jquery"],function(e,t){return e.Model.extend({urlRoot:"api/structure",idAttribute:"_id",validate:function(e){if(e.type===0&&typeof e.expanded=="undefined")return"A folder needs to have the expanded property";if(e.name===null||!e.name||!t.trim(e.name))return"A name is required"}})});
