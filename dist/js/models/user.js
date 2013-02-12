@@ -1,0 +1,1 @@
+define(["backbone"],function(e){return e.Model.extend({urlRoot:"/api/user",idAttribute:"_id"})});
