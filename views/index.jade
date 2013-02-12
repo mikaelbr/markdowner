@@ -124,7 +124,9 @@ block content
       - if (user)
         ul.nav.pull-right
           li
-            a(href="#user-box", role="button", data-toggle="modal")= user.twitterObj.username
+            a(href="#user-box", role="button", data-toggle="modal")
+              img.user-avatar(src=user.twitterObj._json.profile_image_url, alt=user.twitterObj.username)
+              = user.twitterObj.username
 
 
   div#filelist.filestructure.well

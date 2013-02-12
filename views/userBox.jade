@@ -1,11 +1,19 @@
-div.modal.hide.fade#user-box
+div.modal.hide.fade#user-box.user-box
     div.modal-header
         button.close(data-dismiss='modal', aria-hidden='true', type='button') &times;
         h3 User Settings
     div.modal-body
+        header
+            figure.pull-left
+                img.media-object(src=user.twitterObj._json.profile_image_url, alt=user.twitterObj.username)
+            div.media-body
+                h4= user.twitterObj.displayName
+                p 
+                    a(href='/logout') Log out »
+        hr
         
         p Do you wish to connect with Dropbox to synchronize your documents?
         p.login-button
-            a.btn.btn-large.btn-success(href="/auth/twitter")
+            a.btn.btn-large.btn-block.btn-success.disabled(href="#")
               i.icon-magnet
               |  Connect with Dropbox

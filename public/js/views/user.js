@@ -37,6 +37,8 @@ define([
             _settings.activeDocument && vent.trigger('sidebar:loadDocument', _settings.activeDocument, this);
             typeof _settings.horizontal !== "undefined" && vent.trigger('editor:toggleHorizontal', _settings.horizontal, this);
             typeof _settings.sidebarVisible !== "undefined" && vent.trigger('sidebar:toggle', _settings.sidebarVisible, this);
+
+            this.render();
         },
 
         showModal: function (model) {
@@ -75,6 +77,10 @@ define([
             var _settings = this.model.get('settings') || {};
             _settings.sidebarVisible = visible;
             this.model.save({'settings': _settings});
+        },
+
+        render: function () {
+            
         }
 
         
