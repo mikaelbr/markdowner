@@ -6,6 +6,7 @@
 var express = require('express')
   , routes = require('./routes')
   , documentRoute = require('./routes/document')
+  , adminRoute = require('./routes/admin')
   , resource = require('express-resource')
   , http = require('http')
   , path = require('path');
@@ -27,6 +28,16 @@ app.configure(function(){
   auth.configure(app);
   app.use(app.router);
 
+  app.use(function(err, req, res, next){
+    console.log("Heeer");
+    console.log(err);
+    res.render('500', {
+      title: "Error",
+      status: err.status || 500,
+      error: err
+    });
+  });
+
 });
 
 app.configure('production', function(){
@@ -42,10 +53,9 @@ app.configure('development', function(){
 });
 
 
-
-
 app.get('/', auth.ensureAuthenticated, routes.index);
 app.get('/document/:document', documentRoute.index);
+adminRoute.connect(app, auth);
 
 // JSON API
 // Ensure Auth on API

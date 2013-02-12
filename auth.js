@@ -6,6 +6,8 @@ var passport = require('passport')
   , callbackUrl = confB.Site.callback
   , db = require('./lib/db');
 
+User.setBeta(conf.beta);
+
 exports.configure = function (app) {
   app.use(passport.initialize());
   app.use(passport.session());
@@ -22,7 +24,7 @@ var twitterConnect = function () {
         twitter_id: profile.id,
         twitterObj: profile
       };
-      User.getOrCreate({twitter_id: profile.id}, twitObj, function (err, user) {
+      User.getOrCreate({twitter_id: profile.id}, twitObj, function (err, user) {        
         done(err, user);
       });
     }
@@ -70,5 +72,22 @@ exports.ensureAPIAuthenticated = function (req, res, next) {
       msg: 'Authentification needed.',
       code: 401
     }
+  });
+};
+
+exports.ensureAdminAuthenticated = function (req, res, next) {
+  if(!req.isAuthenticated()) {
+    res.redirect('/login')
+    return;
+  }
+
+  if (req.user.admin === true) {
+    return next();
+  }
+
+  res.render('500', {
+    title: 'Admin Page',
+    status: 401,
+    error: 'No access'
   });
 };

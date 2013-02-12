@@ -35,6 +35,9 @@ html
                   a(href='#markdowner') Markdowner
 
                 li
+                  a(href='#beta') Beta
+
+                li
                   a(href='#features') Features
 
                 li
@@ -65,6 +68,20 @@ html
 
 
     div.container
+
+      h2#beta Apply for Beta
+
+      div.alert.alert-info
+        form.pull-right(action='/wish', method='post')
+          fieldset
+            div.input-append
+              input.span4(type='text', placeholder='Twitter Username', name='username')
+              button.btn(type='submit') Apply!
+
+        p For now, Markdowner is in early beta stages. You can apply for Beta testing by submitting your Twitter username below.
+
+      
+
       h2#features Features
 
       div.row-fluid.marketing
@@ -130,7 +147,7 @@ html
 
 
       h2#help Help
-      div.alert
+      div.alert.alert-info
         p Help and guides will soon be available.
 
       hr.featurette-divider

@@ -1,0 +1,50 @@
+extends ../export_layout
+
+block content
+
+    div.compiled.github.document-export
+      h1 Beta Invites
+
+      form(action="", method="post")
+        div.input-append
+            input.span8(type='text', placeholder='Twitter Username', name='username')
+            button.btn(type='submit') Add!
+        
+      table.table.table-striped
+        thead
+            tr
+                th #
+                th Username
+                th Actions
+        tbody
+            each user, i in invitees
+                tr
+                    td=i+1
+                    td=user.username
+                    td
+                        a(href="/admin/"+ user._id)
+                            i.icon-trash
+                            | Remove  
+
+      h2 Wish list
+      table.table.table-striped
+        thead
+            tr
+                th #
+                th Username
+                th Date
+                th Actions
+        tbody
+            each user, i in wishlist
+                tr
+                    td=i+1
+                    td=user.username
+                    td=user.date
+                    td
+                        a(href="/admin/wish/approve/"+ user.username + "/" + user._id)
+                            i.icon-ok
+                            | Approve
+                         
+                        a(href="/admin/wish/remove/"+ user._id)
+                            i.icon-trash
+                            | Remove

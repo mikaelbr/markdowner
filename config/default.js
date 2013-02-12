@@ -6,7 +6,8 @@ module.exports = {
     "twit": {
         "consumerKey": process.env.MARKDOWNER_CONSUMER_KEY
       , "consumerSecret": process.env.MARKDOWNER_CONSUMER_SECRET
-    }
+    },
+    'beta': true
   },
   "Site": {
     "callback": process.env.MARKDOWNER_CALLBACK
