@@ -57,7 +57,7 @@ body {
 -------------------------------------------------- */
 /* Carousel base class */
 .header-box {
-  margin-bottom: 60px;
+  margin-bottom: 0px;
 }
 .header-box .container {
   position: relative;
@@ -144,6 +144,10 @@ body {
 }
 .marketing p + h4 {
   margin-top: 28px;
+}
+h2 {
+  margin-top: -40px;
+  padding-top: 100px;
 }
 /* Featurettes
 ------------------------- */

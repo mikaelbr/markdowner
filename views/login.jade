@@ -16,8 +16,9 @@ html
     link(rel="apple-touch-icon-precomposed", sizes="114x114", href="/js/vendor/bootstrap/docs/assets/ico/apple-touch-icon-114-precomposed.png")
     link(rel="apple-touch-icon-precomposed", sizes="72x72", href="/js/vendor/bootstrap/docs/assets/ico/apple-touch-icon-72-precomposed.png")
     link(rel="apple-touch-icon-precomposed", href="/js/vendor/bootstrap/docs/assets/ico/apple-touch-icon-57-precomposed.png")
-    link(rel="shortcut icon", href="/js/vendor/bootstrap/docs/assets/ico/favicon.png")
-  body(data-spy="scroll", data-target=".navbar")
+    link(rel="shortcut icon", href="/favicon.ico")
+
+  body(data-spy="scroll", data-target=".navbar", data-offset="50")
 
     div.navbar-wrapper#nav-floater
       div.container
@@ -50,7 +51,7 @@ html
               span.muted 
                 small Coming Soon
               | Markdowner
-                
+
             p.lead 
               | Markdowner is a cloud based application for writing and sharing Markdown documents. You can register and log in  
               | using your Twitter account, and access your Markdown document on any computer where ever you are. 
@@ -92,7 +93,7 @@ html
         div.span6
           h4 Instant Markdown preview
           p 
-          | As you type, you are allways just a hotkey away from compiling and previewing 
+          | As you type, you are always just a hotkey away from compiling and previewing 
           | your Markdown document. The document style will match the style of <a href="http://github.com">Github</a>, 
           | so you'll see how the Markdown-file would look on Github.
 
@@ -141,23 +142,23 @@ html
         p &copy; 2013 Company, Inc. &middot; 
 
 
-    script(src="/js/vendor/bootstrap/docs/assets/js/jquery.js")
-    script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-transition.js")
-    script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-alert.js")
-    script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-modal.js")
-    script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-dropdown.js")
+    script(src="/js/vendor/jquery/dist/jquery.js")
+    script(src="/js/libs/jquery.scrollTo.js")
     script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-scrollspy.js")
-    script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-tab.js")
     script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-tooltip.js")
-    script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-popover.js")
-    script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-button.js")
-    script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-collapse.js")
-    script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-carousel.js")
-    script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-typeahead.js")
     script
       var padding = 20,
           threshold = 375;
+      $(document).on('click', 'ul.nav a', function () {
+        var $this = $(this),
+            target = $this.attr('href');
+        $.scrollTo( target, 1000, {easing:'', onAfter: function () {
+          $this.parent('li').addClass('active').siblings('li').removeClass('active');
+        }} );
+        return false;
+      });
       $(function () {
+       
         $('.header-box').tooltip({
           selector: "a[data-toggle=tooltip]"
         });
@@ -181,5 +182,3 @@ html
           }
         });
       });
-
-    script(src="/js/vendor/bootstrap/docs/assets/js/holder/holder.js")
