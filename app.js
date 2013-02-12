@@ -58,7 +58,7 @@ var user = app.resource('api/user', require('./models/user'));
 
 app.get('/login', function (req, res) {
   res.render('login', {
-    title: 'mdtype.me',
+    title: 'Markdowner',
     user: req.user
   });
 });

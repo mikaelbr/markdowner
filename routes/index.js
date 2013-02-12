@@ -4,5 +4,5 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'mdtype.me', user: req.user });
+  res.render('index', { title: 'Markdowner', user: req.user });
 };
