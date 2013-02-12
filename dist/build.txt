@@ -139,6 +139,10 @@ stylesheets/document-export.css
 ----------------
 stylesheets/document-export.css
 
+stylesheets/remark-export.css
+----------------
+stylesheets/remark-export.css
+
 stylesheets/style.css
 ----------------
 stylesheets/style.css
