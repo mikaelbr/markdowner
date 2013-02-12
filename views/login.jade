@@ -1,22 +1,185 @@
-extends export_layout
+doctype 5
+html
+  head
+    meta(charset='utf-8')
+    title= title
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="description", content="A cloud based Markdown document processor.")
+    link(rel='stylesheet', href='/js/vendor/bootstrap/docs/assets/css/bootstrap.css')
+    link(rel='stylesheet', href='/stylesheets/login.css')
 
-block content
+    //if lt IE 9
+      script(src='/js/vendor/bootstrap/docs/assets/js/html5shiv.js')
 
-  div#login.modal
-    div.modal-header
-      h3 Log in to Markdown Typer
-    div.modal-body 
-      p 
-        | Markdown Type is a small document processor for Markdown documents. Easily create 
-        | new markdown documents and export them as PDF or .MD files. Complete with previewing, 
-        | syntax highlighting and more.
-      
-      p.login-button
-        a.btn.btn-large.btn-success(href="/auth/twitter")
-          i.icon-magnet
-          |  Login with Twitter
 
-      p 
-        em
-          | To use Markdown Type, you need to authenticate using your Twitter account. 
-          | Markdown Type uses Twitter solely to authenticate, and will never read, post or change anything on your Twitter profile.
+    link(rel="apple-touch-icon-precomposed", sizes="144x144", href="/js/vendor/bootstrap/docs/assets/ico/apple-touch-icon-144-precomposed.png")
+    link(rel="apple-touch-icon-precomposed", sizes="114x114", href="/js/vendor/bootstrap/docs/assets/ico/apple-touch-icon-114-precomposed.png")
+    link(rel="apple-touch-icon-precomposed", sizes="72x72", href="/js/vendor/bootstrap/docs/assets/ico/apple-touch-icon-72-precomposed.png")
+    link(rel="apple-touch-icon-precomposed", href="/js/vendor/bootstrap/docs/assets/ico/apple-touch-icon-57-precomposed.png")
+    link(rel="shortcut icon", href="/js/vendor/bootstrap/docs/assets/ico/favicon.png")
+  body(data-spy="scroll", data-target=".navbar")
+
+    div.navbar-wrapper#nav-floater
+      div.container
+        div.navbar
+          div.navbar-inner
+            button.btn.btn-navbar(type='button', data-toggle='collapse', data-target='.nav-collapse')
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+
+            div.nav-collapse.collapse
+              ul.nav
+                li.active
+                  a(href='#markdowner') Markdowner
+
+                li
+                  a(href='#features') Features
+
+                li
+                  a(href='#help') Help
+
+    div.header-box
+      div.header-box-inner
+        div.header-box-style
+          div.header-box-style-inner
+        div.container
+          img.screenshots.pull-right(src='/images/screenshots.png')
+          div.header-box-caption
+            h1#markdowner 
+              span.muted 
+                small Coming Soon
+              | Markdowner
+                
+            p.lead 
+              | Markdowner is a cloud based application for writing and sharing Markdown documents. You can register and log in  
+              | using your Twitter account, and access your Markdown document on any computer where ever you are. 
+              | You can also write and share slideshows using Markdown.
+
+
+            //- a.btn.btn-large.btn-success(href='/auth/twitter')
+            a.btn.btn-large.btn-success.disabled(href='#', data-toggle="tooltip", title="In closed Beta for now.")
+              i.icon-user  
+              |  Sign up or log in using Twitter now
+
+
+    div.container
+      h2#features Features
+
+      div.row-fluid.marketing
+        div.span6
+          h4 Markdown Syntax
+          p 
+          | Markdowner uses <a href="http://daringfireball.net/projects/markdown/syntax">Markdown syntax</a> to easily create great formatted documents in HTML.
+
+
+          p 
+          | Markdowner uses <a href="http://ace.ajax.org/">ACE.js</a>, a high performance editor built with 
+          | javascript. This allows for several themes with syntax highlighting.
+
+          
+          h4 Remark
+          p 
+          | As an optional document setting, you can activate the Remark mode. <a href="http://github.com/gnab/remark">Remark</a> 
+          | is a simplistic way to write in-browser Markdown based slideshows. See info about Remark on a 
+          | <a href="http://www.markdowner.com/document/511a119ee289930200000002">Markdowner Remark Demo</a> 
+          
+          h4 Cloud based
+          p 
+          | Markdowner is cloud based. All your changes, are stored in the clouds. If you hide the sidebar, 
+          | the sidebar will be hidden the next time you log on, no matter from where. 
+
+        div.span6
+          h4 Instant Markdown preview
+          p 
+          | As you type, you are allways just a hotkey away from compiling and previewing 
+          | your Markdown document. The document style will match the style of <a href="http://github.com">Github</a>, 
+          | so you'll see how the Markdown-file would look on Github.
+
+          
+          h4 Share public documents
+          p 
+          | If you want either a Remark document, or a regular Markdown document to be 
+          | available publicly, you can set so in the File Options, and share the Document Share Link.
+
+          
+          h4 Auto-saving
+          p The documents are saved regularly, making sure you won't lose your content.
+
+      h3 Coming soon
+
+      div.row-fluid.marketing
+        div.span6
+          h4 Export to .md and .pdf files 
+          p 
+          | In a short time, exporting and downloading documents as .PDF files and .MD files will be possible. 
+          | As for now, sharing is the only way to show your documents to others. 
+
+        div.span6
+          h4 Dropbox synchronization
+          p 
+          | Some time, in the not too distant future, you can sync Markdowner with your Dropbox account, and 
+          | your documents will automatically be stored on Dropbox as well.
+
+
+
+
+
+      hr.featurette-divider
+
+
+      h2#help Help
+      div.alert
+        p Help and guides will soon be available.
+
+      hr.featurette-divider
+
+
+      footer
+        p.pull-right
+          a(href="#") Back to top
+        p &copy; 2013 Company, Inc. &middot; 
+
+
+    script(src="/js/vendor/bootstrap/docs/assets/js/jquery.js")
+    script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-transition.js")
+    script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-alert.js")
+    script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-modal.js")
+    script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-dropdown.js")
+    script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-scrollspy.js")
+    script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-tab.js")
+    script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-tooltip.js")
+    script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-popover.js")
+    script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-button.js")
+    script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-collapse.js")
+    script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-carousel.js")
+    script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-typeahead.js")
+    script
+      var padding = 20,
+          threshold = 375;
+      $(function () {
+        $('.header-box').tooltip({
+          selector: "a[data-toggle=tooltip]"
+        });
+        var $el = $("#nav-floater"),
+            $window = $(window);
+        $(document).on('scroll', function () {
+          var offset = $el.offset();
+          var height = $window.scrollTop();
+          if (threshold - padding <= height) {
+            $el.css({
+              'position': 'fixed',
+              'top': '5px'
+            });
+          } else {
+            if($el.css('position') === 'fixed') {
+              $el.css({
+                'position': 'absolute',
+                'top': '355px'
+              });
+            }
+          }
+        });
+      });
+
+    script(src="/js/vendor/bootstrap/docs/assets/js/holder/holder.js")
