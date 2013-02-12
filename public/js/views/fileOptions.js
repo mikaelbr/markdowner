@@ -17,7 +17,8 @@ define(['backbone', 'underscore', 'jquery', 'vent',
         },
 
         events: {
-            'change .checkbox input': 'makePublic',
+            'change .public input': 'makePublic',
+            'change .remark input': 'makeRemark',
             'focus input[type="text"]': 'selectText'
         },
 
@@ -34,7 +35,12 @@ define(['backbone', 'underscore', 'jquery', 'vent',
         },
 
         makePublic: function () {
-            this.model.set('public', this.$el.find('.checkbox input').is(':checked')).save();
+            this.model.set('public', this.$el.find('.public input').is(':checked')).save();
+            this.render();
+        },
+
+        makeRemark: function () {
+            this.model.set('remark', this.$el.find('.remark input').is(':checked')).save();
             this.render();
         },
 
@@ -55,19 +61,26 @@ define(['backbone', 'underscore', 'jquery', 'vent',
 
         render: function () {
             var body = this.$el.find('.modal-body form'),
-                checkBox = body.find('input[type="checkbox"]'),
+                publicCheckBox = body.find('.public input[type="checkbox"]'),
+                remarkCheckBox = body.find('.remark input[type="checkbox"]'),
                 input = body.find('input[type="text"]'),
                 btn = body.find('a.btn'),
-                copyButton = 
-                isPublic = this.model.get('public') || false;
+                isPublic = this.model.get('public') || false,
+                isRemark = this.model.get('remark') || false;
 
             input.val(this.publicBase + this.model.get('_id'));
             if ( isPublic ) {
-                checkBox.attr('checked', 'checked');
+                publicCheckBox.attr('checked', 'checked');
                 input.addClass('readonly').removeAttr('disabled');
             } else {
-                checkBox.removeAttr('checked');
+                publicCheckBox.removeAttr('checked');
                 input.removeClass('readonly').attr('disabled', 'disabled');
+            }
+
+            if ( isRemark ) {
+                remarkCheckBox.attr('checked', 'checked');
+            } else {
+                remarkCheckBox.removeAttr('checked');
             }
 
             return this;

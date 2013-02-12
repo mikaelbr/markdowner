@@ -16,9 +16,11 @@ exports.index = function(req, res){
         }
         var user_id = file.user_id;
 
+        var view = file.remark ? 'remark' : 'document';
+
         user.get({'_id': user_id}, function (err, user) {
             store.get(id, function(err, data) {
-                res.render('document', { 
+                res.render(view, { 
                     title: file.name, 
                     doc: data,
                     md:md,

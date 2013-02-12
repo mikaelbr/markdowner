@@ -33,6 +33,10 @@ define([
         },
 
         compile: function () {
+            if (this.fileModel.get('remark') ){
+                vent.trigger('compiled:remark', this.fileModel);
+                return;
+            }
             vent.trigger('compiled:render', this.e.getValue());
         },
 

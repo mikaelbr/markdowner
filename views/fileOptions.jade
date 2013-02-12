@@ -6,8 +6,15 @@ div.modal.hide.fade#file-options
         
         form
             fieldset
-                label.checkbox
+                label.checkbox.public
                     input(type='checkbox') 
                     | Publicly Available?
                 
                 input.input-block-level(type='text', value='http://localhost:3000/document/hjkh13kjh321jkh32', disabled, readonly)
+
+
+                label.checkbox.remark
+                    input(type='checkbox')  
+                    |  Is it a <a href="http://gnab.github.com/remark/">Remark</a> document?
+                
+                span.help-block Remark is a tool for easily making slides from markdown.

@@ -1,0 +1,15 @@
+doctype 5
+html
+  head
+    meta(charset='utf-8')
+    title= title
+    link(rel='stylesheet', href='/stylesheets/remark-export.css')
+
+    script(src="https://github.com/downloads/gnab/remark/remark-0.4.4.min.js")
+        {"highlightStyle": "monokai"}
+
+    script
+        var hljs = remark.highlighter.engine();
+    script(src="http://gnab.github.com/remark/remark.language.js")
+  body
+    block content
