@@ -137,48 +137,22 @@ html
 
 
       footer
-        p.pull-right
-          a(href="#") Back to top
-        p &copy; 2013 Company, Inc. &middot; 
+        p.pull-right.top
+          a(href="#markdowner") Back to top
+        p 
+          a.twitter-share-button(href='https://twitter.com/share', 
+            data-lang="en", data-counturl='http://www.markdowner.com/', 
+            data-text='Markdowner: A cloud based application for writing and sharing Markdown documents and slide shows.',
+            data-hashtags='markdowner',
+            data-url='http://www.markdowner.com/') Tweet
 
 
     script(src="/js/vendor/jquery/dist/jquery.js")
     script(src="/js/libs/jquery.scrollTo.js")
     script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-scrollspy.js")
     script(src="/js/vendor/bootstrap/docs/assets/js/bootstrap-tooltip.js")
+    script(src="/js/libs/login.js")
+
     script
-      var padding = 20,
-          threshold = 375;
-      $(document).on('click', 'ul.nav a', function () {
-        var $this = $(this),
-            target = $this.attr('href');
-        $.scrollTo( target, 1000, {easing:'', onAfter: function () {
-          $this.parent('li').addClass('active').siblings('li').removeClass('active');
-        }} );
-        return false;
-      });
-      $(function () {
-       
-        $('.header-box').tooltip({
-          selector: "a[data-toggle=tooltip]"
-        });
-        var $el = $("#nav-floater"),
-            $window = $(window);
-        $(document).on('scroll', function () {
-          var offset = $el.offset();
-          var height = $window.scrollTop();
-          if (threshold - padding <= height) {
-            $el.css({
-              'position': 'fixed',
-              'top': '5px'
-            });
-          } else {
-            if($el.css('position') === 'fixed') {
-              $el.css({
-                'position': 'absolute',
-                'top': '355px'
-              });
-            }
-          }
-        });
-      });
+      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+      
