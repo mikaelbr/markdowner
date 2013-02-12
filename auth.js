@@ -1,7 +1,9 @@
 var passport = require('passport')
   , TwitterStrategy = require('passport-twitter').Strategy
   , User = require('./lib/user')
-  , conf = require('config').Auth
+  , confB = require('config')
+  , conf = confB.Auth
+  , callbackUrl = confB.Site.callback
   , db = require('./lib/db');
 
 exports.configure = function (app) {
@@ -13,7 +15,7 @@ var twitterConnect = function () {
   passport.use(new TwitterStrategy({
       consumerKey: conf.twit.consumerKey,
       consumerSecret: conf.twit.consumerSecret,
-      callbackURL: "http://markdowner.herokuapp.com/auth/twitter/callback"
+      callbackURL: callbackUrl
     },
     function(token, tokenSecret, profile, done) {
       var twitObj = {

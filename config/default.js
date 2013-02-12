@@ -7,5 +7,8 @@ module.exports = {
         "consumerKey": process.env.MARKDOWNER_CONSUMER_KEY
       , "consumerSecret": process.env.MARKDOWNER_CONSUMER_SECRET
     }
+  },
+  "Site": {
+    "callback": process.env.MARKDOWNER_CALLBACK
   }
 };

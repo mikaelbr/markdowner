@@ -94,7 +94,6 @@ define(['backbone',
     newfile: function (parent) {
 
       var parentId = parent && (parentId = parent.get('_id')) || null;
-      console.log(parent);
       var name = prompt('Enter filename for new file', 'Markdown File #1');
 
       var item = {

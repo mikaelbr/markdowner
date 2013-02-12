@@ -34,7 +34,6 @@ define(['backbone', 'underscore', 'jquery', 'vent',
         },
 
         makePublic: function () {
-            console.log('makePublic')
             this.model.set('public', this.$el.find('.checkbox input').is(':checked')).save();
             this.render();
         },

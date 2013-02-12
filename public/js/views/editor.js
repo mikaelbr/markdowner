@@ -44,14 +44,12 @@ define([
         onChange: function (e) {
             // Editor changed. Save once per 10 change
             if (this.changeIterator++ > this.changeSaveThreshold) {
-                console.log("Auto Saving");
                 this.changeIterator = 0;
                 vent.trigger('editor:saveDocument');
             }
         },
 
         toggleHorizontal: function (horizontal) {
-            console.log(horizontal);
             if (typeof horizontal === 'undefined') {
                 this.$el.parent().toggleClass('horizontal');
                 vent.trigger('user:setView', this.$el.parent().hasClass('horizontal'));

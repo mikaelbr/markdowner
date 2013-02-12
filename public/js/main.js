@@ -1,10 +1,7 @@
 require.config({
    paths: {
       order: 'js/libs/requirejs-plugins/order',
-      jqueryContextMenu: 'js/libs/jquery.contextMenu',
-      jqueryuiPosition: 'js/libs/jquery.ui.position',
-      vent: 'js/vent',
-      // templates: 'templates/'
+      vent: 'js/vent'
    }
 });
 

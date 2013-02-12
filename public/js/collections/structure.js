@@ -33,7 +33,6 @@ define(['backbone', 'underscore', 'jquery', 'js/models/fileStructure'], function
         },
 
         getTree: function () {
-            console.log('Inne i getTree()');
             var tree = this._buildTree(this.models);
             tree = _.sortBy(tree, function (el) {
                 return el.item.get('name');

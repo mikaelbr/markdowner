@@ -33,7 +33,6 @@ define([
 
         initiateMarkdowner: function () {
             var _settings = this.model.get('settings') || {};
-            console.log(_settings);
             _settings.theme && vent.trigger('editor:changeTheme', _settings.theme);
             _settings.activeDocument && vent.trigger('sidebar:loadDocument', _settings.activeDocument, this);
             typeof _settings.horizontal !== "undefined" && vent.trigger('editor:toggleHorizontal', _settings.horizontal, this);

@@ -111,7 +111,6 @@ define(['backbone',
         },
 
         newfolder: function (e) {
-            console.log('heer');
             e.preventDefault();
             vent.trigger('sidebar:newfolder');
             return false;
@@ -146,7 +145,6 @@ define(['backbone',
 
         
         compile: function (e) {
-            console.log('heer');
             vent.trigger('editor:compile');
             return false;
         }

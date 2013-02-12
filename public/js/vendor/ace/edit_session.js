@@ -965,8 +965,6 @@ var EditSession = function(text, mode) {
             try {
                 this.$worker = this.$mode.createWorker(this);
             } catch (e) {
-                console.log("Could not load worker");
-                console.log(e);
                 this.$worker = null;
             }
         }
@@ -1755,10 +1753,8 @@ var EditSession = function(text, mode) {
     };
 
     this.$updateRowLengthCache = function(firstRow, lastRow, b) {
-        //console.log(firstRow, lastRow, b)
         this.$rowLengthCache[firstRow] = null;
         this.$rowLengthCache[lastRow] = null;
-        //console.log(this.$rowLengthCache)
     };
 
     /** internal, hide
