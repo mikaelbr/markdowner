@@ -156,6 +156,7 @@ js/main.js
 js/vendor/underscore/underscore.js
 js/vendor/jquery/dist/jquery.js
 js/vendor/backbone/backbone.js
+js/vendor/bootstrap/docs/assets/js/bootstrap.js
 js/models/fileStructure.js
 js/collections/structure.js
 js/vent.js
@@ -233,15 +234,8 @@ js/vendor/ace/ace.js
 js/models/document.js
 js/views/editor.js
 js/views/compiled.js
-js/libs/requirejs-plugins/order.js
-js/vendor/bootstrap/js/bootstrap-transition.js
-order!bootstrap/js/bootstrap-transition
-js/vendor/bootstrap/js/bootstrap-modal.js
-order!bootstrap/js/bootstrap-modal
 js/views/fileOptions.js
 js/models/user.js
 js/views/user.js
 js/views/load.js
-js/vendor/bootstrap/js/bootstrap-dropdown.js
-order!bootstrap/js/bootstrap-dropdown
 js/main.js
