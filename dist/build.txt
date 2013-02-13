@@ -135,22 +135,6 @@ js/vendor/bootstrap/less/tests/css-tests.css
 ----------------
 js/vendor/bootstrap/less/tests/css-tests.css
 
-stylesheets/document-export.css
-----------------
-stylesheets/document-export.css
-
-stylesheets/login.css
-----------------
-stylesheets/login.css
-
-stylesheets/remark-export.css
-----------------
-stylesheets/remark-export.css
-
-stylesheets/style.css
-----------------
-stylesheets/style.css
-
 js/main.js
 ----------------
 js/vendor/underscore/underscore.js

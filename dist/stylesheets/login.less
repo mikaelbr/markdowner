@@ -1,7 +1,7 @@
 /* GLOBAL STYLES
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */
-@import 'elements.less';
+@import "helpers/elements.less";
 
 body {
   padding-bottom: 40px;
@@ -11,11 +11,6 @@ body {
 }
 
 
-
-/* CUSTOMIZE THE NAVBAR
--------------------------------------------------- */
-
-/* Special class on .container surrounding .navbar, used for positioning it into place. */
 .navbar-wrapper {
   position: absolute;
   top: 355px;
@@ -23,7 +18,7 @@ body {
   right: 0;
   z-index: 10;
   margin-top: 20px;
-  margin-bottom: -90px; /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
+  margin-bottom: -90px; 
 }
 .navbar-wrapper .navbar {
 }
