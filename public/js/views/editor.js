@@ -98,11 +98,7 @@ define([
             this.fetchingDocument = true;
             this.activeDoc = new DocumentModel({file_id: documentId});
             this.activeDoc.fetch().then(function () {
-                if (!self.activeDoc.get('body')) {
-                    self.createDocument(documentId);
-                } else {
-                    self.setContent();
-                }                
+                self.setContent();
             });
         },
 
@@ -120,16 +116,6 @@ define([
             vent.trigger('editor:compile');
 
             this.fetchingDocument = false;
-        },
-
-        createDocument: function (documentId) {
-            var newFile = {
-                file_id: documentId,
-                body: 'Hello World\n===\nLorem ipsum...'
-            };
-
-            this.activeDoc = new DocumentModel(newFile);
-            this.activeDoc.save().then($.proxy(this.setContent, this));
         },
 
         saveDocument: function (cb) {
