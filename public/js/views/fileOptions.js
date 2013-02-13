@@ -39,6 +39,10 @@ define(['backbone',
         },
 
         togglePublic: function () {
+            if (!this.model) {
+                return;
+            }
+
             var isPublic = this.model.get('public') || false;
             if (this.model.get('remark')) {
                 return;
@@ -47,6 +51,9 @@ define(['backbone',
         },
 
         toggleRemark: function () {
+            if (!this.model) {
+                return;
+            }
             var isRemark = this.model.get('remark') || false;
             if (!this.model.get('public')) {
                 this.model.set('public', true);
@@ -70,6 +77,10 @@ define(['backbone',
 
 
         render: function () {
+            if (!this.model) {
+                return;
+            }
+            
             var input = this.$el.find('input[type="text"]'),
                 publicButton = this.$el.find('.public-button'),
                 remarkButton = this.$el.find('.remark-button'),
