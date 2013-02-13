@@ -1,17 +1,4 @@
-/*body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
 
-a {
-  color: #00B7FF;
-}*/
-/*---------------------------------------------------
-    LESS Elements 0.9
-  ---------------------------------------------------
-    A set of useful LESS mixins
-    More info at: http://lesselements.com
-  ---------------------------------------------------*/
 .filestructure {
   width: 230px;
   padding: 8px 0;
@@ -44,7 +31,6 @@ a {
   -ms-user-select: none;
   user-select: none;
 }
-/* 2nd level */
 .nav-list .nav-list > li > a {
   padding-left: 30px;
 }
@@ -53,7 +39,6 @@ a {
   margin-left: -30px;
   margin-right: -30px;
 }
-/* 3rd level */
 .nav-list .nav-list .nav-list > li > a {
   padding-left: 45px;
 }
@@ -62,7 +47,6 @@ a {
   margin-left: -45px;
   margin-right: -45px;
 }
-/* 4th level */
 .nav-list .nav-list .nav-list .nav-list > li > a {
   padding-left: 60px;
 }
@@ -182,7 +166,7 @@ a {
   margin: 15px 0;
 }
 .compiled.github hr {
-  background: transparent url("../../images/modules/pulls/dirty-shade.png") repeat-x 0 0;
+  background: transparent url("/images/dirty-shade.png") repeat-x 0 0;
   border: 0 none;
   color: #cccccc;
   height: 4px;
@@ -501,8 +485,7 @@ a {
   top: 0;
   height: 30px;
   background: #cedce7;
-  /* Old browsers */
-
+  
   -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);

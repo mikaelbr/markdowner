@@ -1,5 +1,4 @@
 @import url(http://fonts.googleapis.com/css?family=Droid+Serif);
-
 @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
 body {
   font-family: 'Droid Serif';
@@ -69,7 +68,6 @@ code {
   color: #f3f3f3;
   line-height: 0.8em;
 }
-/* Slide-specific styling */
 #slide-how .slides {
   font-size: 0.9em;
   position: absolute;
@@ -100,7 +98,6 @@ code {
   background: #fff;
   z-index: 0;
 }
-/* Two-column layout */
 .left-column {
   color: #777;
   width: 20%;

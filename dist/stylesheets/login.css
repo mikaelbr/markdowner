@@ -1,20 +1,9 @@
-/* GLOBAL STYLES
--------------------------------------------------- */
-/* Padding below the footer and lighter body text */
-/*---------------------------------------------------
-    LESS Elements 0.9
-  ---------------------------------------------------
-    A set of useful LESS mixins
-    More info at: http://lesselements.com
-  ---------------------------------------------------*/
+
 body {
   padding-bottom: 40px;
   color: #5a5a5a;
   background-image: url('/images/login/body.png');
 }
-/* CUSTOMIZE THE NAVBAR
--------------------------------------------------- */
-/* Special class on .container surrounding .navbar, used for positioning it into place. */
 .navbar-wrapper {
   position: absolute;
   top: 355px;
@@ -23,39 +12,30 @@ body {
   z-index: 10;
   margin-top: 20px;
   margin-bottom: -90px;
-  /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
-
+  
 }
 .container {
   max-width: 870px;
 }
-/* Remove border and change up box shadow for more contrast */
 .navbar .navbar-inner {
   border: 0;
   -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
 }
-/* Downsize the brand/project name a bit */
 .navbar .brand {
   padding: 14px 20px 16px;
-  /* Increase vertical padding to match navbar links */
-
+  
   font-size: 16px;
   font-weight: bold;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
 }
-/* Navbar links: increase padding for taller navbar */
 .navbar .nav > li > a {
   padding: 15px 20px;
 }
-/* Offset the responsive button for proper vertical alignment */
 .navbar .btn-navbar {
   margin-top: 10px;
 }
-/* CUSTOMIZE THE CAROUSEL
--------------------------------------------------- */
-/* Carousel base class */
 .header-box {
   margin-bottom: 0px;
 }
@@ -90,29 +70,21 @@ body {
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=30);
   filter: alpha(opacity=30);
   background: #87e0fd;
-  /* Old browsers */
-
+  
   background: -moz-radial-gradient(center, ellipse cover, #87e0fd 0%, #53cbf1 40%, #05abe0 100%);
-  /* FF3.6+ */
-
+  
   background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #87e0fd), color-stop(40%, #53cbf1), color-stop(100%, #05abe0));
-  /* Chrome,Safari4+ */
-
+  
   background: -webkit-radial-gradient(center, ellipse cover, #87e0fd 0%, #53cbf1 40%, #05abe0 100%);
-  /* Chrome10+,Safari5.1+ */
-
+  
   background: -o-radial-gradient(center, ellipse cover, #87e0fd 0%, #53cbf1 40%, #05abe0 100%);
-  /* Opera 12+ */
-
+  
   background: -ms-radial-gradient(center, ellipse cover, #87e0fd 0%, #53cbf1 40%, #05abe0 100%);
-  /* IE10+ */
-
+  
   background: radial-gradient(ellipse at center, #87e0fd 0%, #53cbf1 40%, #05abe0 100%);
-  /* W3C */
-
+  
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#87e0fd', endColorstr='#05abe0', GradientType=1);
-  /* IE6-9 fallback on horizontal gradient */
-
+  
 }
 .header-box-caption {
   background-color: transparent;
@@ -136,9 +108,6 @@ body {
   font-size: 0.5em;
   margin-right: 10px;
 }
-/* MARKETING CONTENT
--------------------------------------------------- */
-/* Supporting marketing content */
 .marketing {
   margin: 20px 0;
 }
@@ -149,34 +118,26 @@ h2 {
   margin-top: -40px;
   padding-top: 100px;
 }
-/* Featurettes
-------------------------- */
 .featurette-divider {
   margin: 80px 0;
-  /* Space out the Bootstrap <hr> more */
-
+  
 }
 .featurette {
   padding-top: 120px;
-  /* Vertically center images part 1: add padding above and below text. */
-
+  
   overflow: hidden;
-  /* Vertically center images part 2: clear their floats. */
-
+  
 }
 .featurette-image {
   margin-top: -120px;
-  /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
-
+  
 }
-/* Give some space on the sides of the floated elements so text doesn't run right into it. */
 .featurette-image.pull-left {
   margin-right: 40px;
 }
 .featurette-image.pull-right {
   margin-left: 40px;
 }
-/* Thin out the marketing headings */
 .featurette-heading {
   font-size: 50px;
   font-weight: 300;
