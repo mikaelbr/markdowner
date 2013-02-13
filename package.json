@@ -31,7 +31,8 @@
       "bootstrap": null,
       "ace": null,
       "text": null,
-      "keymaster": null
+      "keymaster": null,
+      "marked": null
     }
   }
 }

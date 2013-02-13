@@ -1,4 +1,4 @@
-define(['backbone', 'underscore', 'jquery', 'vent'], function (Backbone, _, $, vent) {
+define(['backbone', 'underscore', 'jquery', 'vent', 'marked'], function (Backbone, _, $, vent, marked) {
 
     return Backbone.View.extend({
         el: '#compiled',
@@ -7,7 +7,21 @@ define(['backbone', 'underscore', 'jquery', 'vent'], function (Backbone, _, $, v
         rmWrapper: '<iframe class="remark-preview" />',
 
         initialize: function () {
-            this.converter = new Showdown.converter;
+            marked.setOptions({
+              gfm: true,
+              tables: true,
+              breaks: true,
+              pedantic: false,
+              sanitize: true,
+              smartLists: true,
+              langPrefix: 'language-',
+              // highlight: function(code, lang) {
+              //   if (lang === 'js') {
+              //     return highlighter.javascript(code);
+              //   }
+              //   return code;
+              // }
+            });
             this.$el.find('.compiled').hide();
             vent.on('compiled:render', this.setOutput, this);
             vent.on('compiled:remark', this.setRemark, this);
@@ -20,8 +34,7 @@ define(['backbone', 'underscore', 'jquery', 'vent'], function (Backbone, _, $, v
                 $inEl = $(this.mdWrapper).appendTo(this.$el);
                 this.$el.find('.remark-preview').remove();
             }
-            $inEl.html(this.converter.makeHtml(input));
-            $inEl.show();
+            $inEl.html(marked(input)).show();
         },
 
         setRemark: function (fileModel) {

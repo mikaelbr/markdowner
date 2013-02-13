@@ -27,6 +27,11 @@
             "main": "dist/jquery.js"
         },
         {
+            "name": "marked",
+            "location": "js/vendor/marked",
+            "main": "./lib/marked.js"
+        },
+        {
             "name": "keymaster",
             "location": "js/vendor/keymaster",
             "main": "keymaster.js"

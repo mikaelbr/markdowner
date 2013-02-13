@@ -25,6 +25,11 @@ var jam = {
             "main": "keymaster.js"
         },
         {
+            "name": "marked",
+            "location": "js/vendor/marked",
+            "main": "./lib/marked.js"
+        },
+        {
             "name": "text",
             "location": "js/vendor/text",
             "main": "text.js"
@@ -81,6 +86,11 @@ if (typeof require !== "undefined" && require.config) {
             "main": "keymaster.js"
         },
         {
+            "name": "marked",
+            "location": "js/vendor/marked",
+            "main": "./lib/marked.js"
+        },
+        {
             "name": "text",
             "location": "js/vendor/text",
             "main": "text.js"
@@ -134,6 +144,11 @@ else {
             "name": "keymaster",
             "location": "js/vendor/keymaster",
             "main": "keymaster.js"
+        },
+        {
+            "name": "marked",
+            "location": "js/vendor/marked",
+            "main": "./lib/marked.js"
         },
         {
             "name": "text",
