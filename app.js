@@ -29,9 +29,7 @@ app.configure(function(){
   app.use(app.router);
 
   app.use(function(err, req, res, next){
-    console.log("Heeer");
-    console.log(err);
-    res.render('500', {
+    res.render('error/500', {
       title: "Error",
       status: err.status || 500,
       error: err

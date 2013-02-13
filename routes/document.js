@@ -9,7 +9,7 @@ exports.index = function(req, res){
     structure.get(id, function (err, file) {
         if (!file || file.type === 0 || !file.public) {
             res.status(404);
-            res.render('404', {
+            res.render('error/404', {
                 title: 'Not found'
             });
             return;
