@@ -62,7 +62,12 @@ var wish = function (req, res) {
     if (!username) {
         res.redirect('/');
     }
-    user.betaWish(username, function() {
+    user.betaWish(username, function(err, data) {
+        if(!err) {
+            req.flash('info', 'Beta invite requested!');
+        } else {
+            req.flash('error', err);
+        }
         res.redirect('/');
     });
 };

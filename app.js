@@ -9,7 +9,8 @@ var express = require('express')
   , adminRoute = require('./routes/admin')
   , resource = require('express-resource')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , flash = require('connect-flash');
 
 var app = express()
   , auth = require('./auth');
@@ -21,12 +22,16 @@ app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.logger('dev'));
-  app.use(express.cookieParser());
+  app.use(express.cookieParser('DSAKDKLSNkdnsakjndskajndkjsandsa____D:Sd.sa,dsds'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(express.session({ secret: 'keyboard cat' }));
+  app.use(express.session({ secret: 'ndsk____D:Sdajndkj____D:Sdsandsa____D:Sd.sa,dsds', cookie: { maxAge: 60000 } }));
   auth.configure(app);
+
+  app.use(flash());
+
   app.use(app.router);
+
 
   app.use(function(err, req, res, next){
     res.render('error/500', {
@@ -66,7 +71,9 @@ var user = app.resource('api/user', require('./models/user'));
 app.get('/login', function (req, res) {
   res.render('login', {
     title: 'Markdowner',
-    user: req.user
+    user: req.user,
+    infoMsg: req.flash('info'),
+    errorMsg: req.flash('error')
   });
 });
 

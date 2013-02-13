@@ -71,6 +71,17 @@ html
 
       h2#beta Apply for Beta
 
+      if errorMsg.length
+        div.alert.alert-error
+          p
+            strong Error: 
+            | This username as already requested a Beta invite.
+
+      for msg in infoMsg
+        div.alert.alert-success
+          p= msg
+
+
       div.alert.alert-info
         form.pull-right(action='/wish', method='post')
           fieldset

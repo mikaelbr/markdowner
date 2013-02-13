@@ -19,7 +19,8 @@
     "node-markdown": "~0.1.1",
     "markdown": "~0.4.0",
     "passport": "~0.1.15",
-    "passport-twitter": "~0.1.4"
+    "passport-twitter": "~0.1.4",
+    "connect-flash": "~0.1.0"
   },
   "jam": {
     "packageDir": "public/js/vendor",
