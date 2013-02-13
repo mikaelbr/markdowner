@@ -3,7 +3,8 @@
     paths: {
         order: 'js/libs/requirejs-plugins/order',
         vent: 'js/vent',
-        templates: 'templates'
+        templates: 'templates',
+        bootstrap: 'js/vendor/bootstrap/docs/assets/js/bootstrap'
     },
      "packages": [
         {
@@ -54,6 +55,9 @@
         },
         "underscore": {
             "exports": "_"
+        },
+        'bootstrap': {
+          deps: ['jquery']
         }
     },
     name: "js/main",

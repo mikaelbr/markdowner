@@ -3,7 +3,8 @@ define([
         'underscore',
         'jquery',
         'vent',
-        'js/models/user'
+        'js/models/user',
+        'bootstrap'
     ], 
     function (Backbone, _, $, vent, UserModel) {
 

@@ -1,24 +1,28 @@
-define(['backbone', 'underscore', 'jquery', 'vent',
-        'order!bootstrap/js/bootstrap-transition',
-        'order!bootstrap/js/bootstrap-modal', 'vent'], function(Backbone, _, $, vent) {
+define(['backbone', 
+        'underscore', 
+        'jquery', 
+        'vent',
+        'bootstrap'
+        ], function(Backbone, _, $, vent) {
    
     return Backbone.View.extend({
-        el: "#file-options",
+        el: "#file-settings",
         publicBase: 'http://www.markdowner.com/document/',
 
         initialize: function () {
-            this.$el.modal({
-                show: false,
-                keyboard: true
+            vent.on('editor:loadDocument', this.setModel, this);
+            vent.on('fileOptions:show', this.show, this);
+            vent.on('fileOptions:hide', this.hide, this);
+            vent.on('fileOptions:toggle', this.toggle, this);
+
+            this.$el.tooltip({
+                selector: 'a[data-toggle="tooltip"]'
             });
-            vent.on('fileOptions:show', this.showModal, this);
-            vent.on('fileOptions:hide', this.hideModal, this);
-            vent.on('fileOptions:toggle', this.toggleModal, this);
         },
 
         events: {
-            'change .public input': 'makePublic',
-            'change .remark input': 'makeRemark',
+            'click .public-button': 'togglePublic',
+            'click .remark-button': 'toggleRemark',
             'focus input[type="text"]': 'selectText'
         },
 
@@ -34,54 +38,59 @@ define(['backbone', 'underscore', 'jquery', 'vent',
             }, 300);
         },
 
-        makePublic: function () {
-            this.model.set('public', this.$el.find('.public input').is(':checked')).save();
-            this.render();
+        togglePublic: function () {
+            var isPublic = this.model.get('public') || false;
+            if (this.model.get('remark')) {
+                return;
+            }
+            this.model.save({ "public": !isPublic }).then($.proxy(this.render, this));
         },
 
-        makeRemark: function () {
-            this.model.set('remark', this.$el.find('.remark input').is(':checked')).save();
-            this.render();
+        toggleRemark: function () {
+            var isRemark = this.model.get('remark') || false;
+            if (!this.model.get('public')) {
+                this.model.set('public', true);
+            }
+            this.model.save({ "remark": !isRemark }).then($.proxy(this.render, this));
         },
 
-        showModal: function (model) {
-            model && this.setModel(model);
-            this.$el.modal('show');
-        },
-
-        hideModal: function () {
-            this.$el.modal('hide');
-        },
-
-        toggleModal: function (model) {
+        show: function (model) {
             this.setModel(model);
-            this.$el.modal('toggle');
+            this.$el.show();
+        },
+
+        hide: function () {
+            this.$el.hide();
+        },
+
+        toggle: function (model) {
+            this.setModel(model);
+            this.$el.toggle();
         },
 
 
         render: function () {
-            var body = this.$el.find('.modal-body form'),
-                publicCheckBox = body.find('.public input[type="checkbox"]'),
-                remarkCheckBox = body.find('.remark input[type="checkbox"]'),
-                input = body.find('input[type="text"]'),
-                btn = body.find('a.btn'),
-                isPublic = this.model.get('public') || false,
-                isRemark = this.model.get('remark') || false;
+            var input = this.$el.find('input[type="text"]'),
+                publicButton = this.$el.find('.public-button'),
+                remarkButton = this.$el.find('.remark-button'),
+                isPublic = this.model.get('public'),
+                isRemark = this.model.get('remark');
 
             input.val(this.publicBase + this.model.get('_id'));
             if ( isPublic ) {
-                publicCheckBox.attr('checked', 'checked');
+                publicButton.addClass('btn-info active');
                 input.addClass('readonly').removeAttr('disabled');
             } else {
-                publicCheckBox.removeAttr('checked');
+                publicButton.removeClass('btn-info active');
                 input.removeClass('readonly').attr('disabled', 'disabled');
             }
 
             if ( isRemark ) {
-                remarkCheckBox.attr('checked', 'checked');
+                remarkButton.addClass('btn-info active');
             } else {
-                remarkCheckBox.removeAttr('checked');
+                remarkButton.removeClass('btn-info active');
             }
+            vent.trigger('editor:compile');
 
             return this;
         }

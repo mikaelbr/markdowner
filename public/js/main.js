@@ -1,13 +1,20 @@
 require.config({
-   paths: {
-      order: 'js/libs/requirejs-plugins/order',
-      vent: 'js/vent'
-   }
+  paths: {
+    order: 'js/libs/requirejs-plugins/order',
+    vent: 'js/vent',
+    bootstrap: 'js/vendor/bootstrap/docs/assets/js/bootstrap'
+  },
+  shim: {
+    'bootstrap': {
+      deps: ['jquery']
+    }
+  }
 });
 
 define([
         'backbone', 
         'jquery', 
+        'bootstrap',
         'js/collections/structure', 
         'js/views/structure', 
         'js/views/navtop',
@@ -15,10 +22,9 @@ define([
         'js/views/compiled',
         'js/views/fileOptions',
         'js/views/user',
-        'js/views/load',
-        'order!bootstrap/js/bootstrap-dropdown'
+        'js/views/load'
     ], 
-    function (Backbone, $, StructureCollection, StructureView, NavTopView, EditorView, CompiledView, FileOptions, UserBox, LoadingScreen) {
+    function (Backbone, $, boot, StructureCollection, StructureView, NavTopView, EditorView, CompiledView, FileOptions, UserBox, LoadingScreen) {
 
   var structureCollection = new StructureCollection(),
       sidebarStructureView = new StructureView({collection: structureCollection});
