@@ -1,8 +1,23 @@
-var md = require("node-markdown").Markdown;
+var md = require("marked");
 var store = require('../lib/store'),
     user = require('../lib/user'),
     structure = require('../lib/folderHierarchy');
 
+md.setOptions({
+  gfm: true,
+  tables: true,
+  breaks: true,
+  pedantic: false,
+  sanitize: true,
+  smartLists: true,
+  langPrefix: 'language-',
+  // highlight: function(code, lang) {
+  //   if (lang === 'js') {
+  //     return highlighter.javascript(code);
+  //   }
+  //   return code;
+  // }
+});
 
 exports.index = function(req, res){
     var id = req.params.document;
@@ -23,7 +38,7 @@ exports.index = function(req, res){
                 res.render(view, { 
                     title: file.name, 
                     doc: data,
-                    md:md,
+                    md: md,
                     user: user,
                     file: file
                 });
