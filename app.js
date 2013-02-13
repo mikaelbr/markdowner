@@ -25,7 +25,14 @@ app.configure(function(){
   app.use(express.cookieParser('DSAKDKLSNkdnsakjndskajndkjsandsa____D:Sd.sa,dsds'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(express.session({ secret: 'ndsk____D:Sdajndkj____D:Sdsandsa____D:Sd.sa,dsds', cookie: { maxAge: 60000 } }));
+  app.use(express.session({ 
+    secret: 'ndsk____D:Sdajndkj____D:Sdsandsa____D:Sd.sa,dsds', 
+    cookie: { 
+      expires: false, 
+      maxAge: 365 * 24 * 60 * 60 * 1000 
+    } 
+  }));
+  
   auth.configure(app);
 
   app.use(flash());
