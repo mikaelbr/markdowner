@@ -579,6 +579,11 @@ a {
   z-index: 1500;
   width: 100px;
 }
+.markdown .remark-preview {
+  height: 99%;
+  width: 100%;
+  border: 0;
+}
 .user-box .modal-body figure {
   padding: 0;
   margin: 0;

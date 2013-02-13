@@ -43,6 +43,7 @@ define([
 
         loadDocument: function (e) {
             e.preventDefault();
+            if(this.$el.hasClass('active')) return false;
             vent.trigger('editor:loadDocument', this.model);
             return false;
         },

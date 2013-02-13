@@ -12,10 +12,12 @@ define([
     return Backbone.View.extend({
         el: '#editor',
         changeIterator: 0,
-        changeSaveThreshold: 20,
+        changeSaveThreshold: 40,
+        fetchingDocument: false,
 
         initialize: function () {
             this.e = ace.edit(this.el);
+            this.e.setReadOnly(true);
             this.e.setTheme(themeBase + "twilight");
             this.e.getSession().setMode("ace/mode/markdown");
 
@@ -33,11 +35,14 @@ define([
         },
 
         compile: function () {
-            if (this.fileModel.get('remark') ){
-                vent.trigger('compiled:remark', this.fileModel);
+            var self = this;
+            if (self.fileModel.get('remark') ){
+                vent.trigger('editor:saveDocument', function () {
+                    vent.trigger('compiled:remark', self.fileModel);
+                });
                 return;
             }
-            vent.trigger('compiled:render', this.e.getValue());
+            vent.trigger('compiled:render', self.e.getValue());
         },
 
         changeTheme: function (themeName) {
@@ -57,6 +62,8 @@ define([
             if (typeof horizontal === 'undefined') {
                 this.$el.parent().toggleClass('horizontal');
                 vent.trigger('user:setView', this.$el.parent().hasClass('horizontal'));
+
+                this.e.resize();
                 return;
             }
 
@@ -65,6 +72,7 @@ define([
             } else {
                 this.$el.parent().removeClass('horizontal');
             }
+            this.e.resize();
         },
 
         currentEditorFileOptions: function () {
@@ -72,43 +80,79 @@ define([
         },
 
         loadDocument: function (file) {
+            if(!file || this.fetchingDocument) {
+                return;
+            }
+
+            // Save old document before changing.
+            if(this.activeDoc) {
+                vent.trigger('editor:saveDocument');
+            }
+
             var self = this;
             this.fileModel = file;
             var documentId = file.get('_id');
 
-            this.fileModel.trigger('loaded');
-            vent.trigger('user:setActiveDocument', this.fileModel);
+            vent.trigger('load:show', 'Opening ...');
 
+            this.fetchingDocument = true;
             this.activeDoc = new DocumentModel({file_id: documentId});
             this.activeDoc.fetch().then(function () {
                 if (!self.activeDoc.get('body')) {
                     self.createDocument(documentId);
-                    return;
-                }
-                self.setContent();
+                } else {
+                    self.setContent();
+                }                
             });
         },
 
         setContent: function () {
             this.e.setValue(this.activeDoc.get('body'));
+            vent.trigger('load:hide');
+
             this.e.clearSelection();
             this.e.moveCursorTo(0,0);
+
+            this.fileModel.trigger('loaded');
+            vent.trigger('user:setActiveDocument', this.fileModel);
+            this.e.setReadOnly(false);
+
+            vent.trigger('editor:compile');
+
+            this.fetchingDocument = false;
         },
 
         createDocument: function (documentId) {
             var newFile = {
                 file_id: documentId,
-                body: 'Hello World\n========\nLorem ipsum...'
+                body: 'Hello World\n===\nLorem ipsum...'
             };
 
             this.activeDoc = new DocumentModel(newFile);
             this.activeDoc.save().then($.proxy(this.setContent, this));
         },
 
-        saveDocument: function () {
+        saveDocument: function (cb) {
+            cb = cb || function () {};
             vent.trigger('load:show', 'Saving ...');
             this.activeDoc.save({'body': this.e.getValue()}).then(function () {
                 vent.trigger('load:hide');
+                cb();
+            });
+        },
+
+        _deactivateCommand: function (name, win, mac) {
+            // Deactivate some commands:
+            this.e.commands.addCommand({ 
+                name: name, 
+                bindKey: { 
+                    win: win,
+                    mac: mac
+                },
+                exec: function(t){
+                    return false;
+                },
+                readOnly: true
             });
         },
 
@@ -177,6 +221,12 @@ define([
                 },
                 readOnly: true
             });
+
+            // Deactivate some commands:
+            this._deactivateCommand("search", "Ctrl-F", "Command-F");
+            this._deactivateCommand("replace", "Ctrl-R", "Command-Option-F");
+            this._deactivateCommand("replaceall", "Ctrl-Shift-R", "Command-Shift-Option-F");
+
         }
     });
 

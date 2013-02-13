@@ -131,29 +131,13 @@ block content
 
   div#filelist.filestructure.well
     ul.nav.nav-list
-      //- li.active
-      //-   a(href='/') Filename.md
-      //- li
-      //-   a(href='/') A Really Long Filename Goes Here.md
 
-      //- li 
-      //-   span.nav-header Some Folder
-      //-     i.icon-chevron-up.pull-right
-      //-   ul.nav.nav-list
-      //-     li
-      //-       a(href='/') AnotherFile.md
-      //-     li
-      //-       a(href='/') AnotherFile.md
-
-      //- li 
-      //-   span.nav-header Some Folder
-      //-     i.icon-chevron-down.pull-right
 
   div.tool-wrapper
     div#editor.editor
-    div.markdown
+    div.markdown#compiled
       p.weak-text Compiled Output
-      div#compiled.compiled.github
+      div.compiled.github
 
   
   include fileOptions
@@ -162,7 +146,7 @@ block content
   div#load-screen.saving-screen
     div.progress.progress-striped.active
       div.bar(style='width: 100%')
-        p.load-text Saving...
+        p.load-text Loading...
 
   script(src='http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js')
 
