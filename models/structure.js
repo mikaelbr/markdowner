@@ -36,7 +36,6 @@ exports.create = function(req, res){
     };
 
     store.insert(newDocument, function(err, createdDocument) {
-      console.log(err, createdDocument);
       res.json(item);
     });
   });
@@ -44,7 +43,6 @@ exports.create = function(req, res){
 
 exports.show = function(req, res){
   structure.get(req.params.structure, function (err, item) {
-    console.log(err, item);
     res.json(item);
   });
 };

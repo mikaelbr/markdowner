@@ -2,6 +2,10 @@ node_modules/
 config/runtime.json
 data/cache.json
 
+# Generated files #
+###################
+public/stylesheets/*.css
+
 # Logs and databases #
 ######################
 *.log

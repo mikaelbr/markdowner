@@ -32,7 +32,6 @@ exports.index = function(req, res){
 // };
 
 exports.show = function(req, res){
-  console.log('Show user');
   res.json(req.user);
 };
 
@@ -42,10 +41,7 @@ exports.show = function(req, res){
 // };
 
 exports.update = function(req, res){
-  console.log('Saving user');
-  // console.log(req.body);
   user.save(req.body, function (err, item) {
-    console.log(err, item);
     res.json(req.body);
   })
 };

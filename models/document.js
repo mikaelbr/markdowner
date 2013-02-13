@@ -42,7 +42,6 @@ exports.show = function(req, res){
 
 exports.update = function(req, res){
   store.save(req.body, function (err, item) {
-    console.log(err, item);
     res.json(req.body);
   })
 };

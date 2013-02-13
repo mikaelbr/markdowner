@@ -12,9 +12,6 @@ body {
   color: #5a5a5a;
   background-image: url('/images/login/body.png');
 }
-/* CUSTOMIZE THE NAVBAR
--------------------------------------------------- */
-/* Special class on .container surrounding .navbar, used for positioning it into place. */
 .navbar-wrapper {
   position: absolute;
   top: 355px;
@@ -23,8 +20,6 @@ body {
   z-index: 10;
   margin-top: 20px;
   margin-bottom: -90px;
-  /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
-
 }
 .container {
   max-width: 870px;
