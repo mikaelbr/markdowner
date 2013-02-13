@@ -14,12 +14,11 @@ block content
 
   script(src='http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js')
   script(src='js/vendor/require.js')
-    
-  include helpers/google
 
   script
-    require('js/main', function (App) {
+    require(['js/main'], function (App) {
       App.init();
     });
-
-  
+    
+    
+  include helpers/google
