@@ -52,10 +52,16 @@ define([
 
         onChange: function (e) {
             // Editor changed. Save once per 10 change
-            if (this.changeIterator++ > this.changeSaveThreshold) {
+            if (this.changeIterator > this.changeSaveThreshold) {
                 this.changeIterator = 0;
                 vent.trigger('editor:saveDocument');
             }
+
+            if (this.changeIterator % 5 === 0)  {
+                vent.trigger('editor:compile');
+            }
+
+            this.changeIterator++;
         },
 
         toggleHorizontal: function (horizontal) {
