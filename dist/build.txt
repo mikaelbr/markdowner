@@ -135,6 +135,22 @@ js/vendor/bootstrap/less/tests/css-tests.css
 ----------------
 js/vendor/bootstrap/less/tests/css-tests.css
 
+stylesheets/default-remark.css
+----------------
+stylesheets/default-remark.css
+
+stylesheets/document.css
+----------------
+stylesheets/document.css
+
+stylesheets/login.css
+----------------
+stylesheets/login.css
+
+stylesheets/main.css
+----------------
+stylesheets/main.css
+
 js/main.js
 ----------------
 js/vendor/underscore/underscore.js
