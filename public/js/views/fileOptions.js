@@ -47,7 +47,9 @@ define(['backbone',
             if (this.model.get('remark')) {
                 return;
             }
-            this.model.save({ "public": !isPublic }).then($.proxy(this.render, this));
+            this.model.save({ 
+                'public': !isPublic 
+            }).then($.proxy(this.render, this));
         },
 
         toggleRemark: function () {
@@ -58,7 +60,10 @@ define(['backbone',
             if (!this.model.get('public')) {
                 this.model.set('public', true);
             }
-            this.model.save({ "remark": !isRemark }).then($.proxy(this.render, this));
+            this.model.save({ 
+                'remark': !isRemark, 
+                'type': (1 + !isRemark) 
+            }).then($.proxy(this.render, this));
         },
 
         show: function (model) {

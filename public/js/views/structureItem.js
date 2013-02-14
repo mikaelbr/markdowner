@@ -119,7 +119,7 @@ define([
                 if (!model.expanded) model.expanded = false;
                 this.$el.html(this.folderTemplate(model));
                 vent.trigger('sidebar:renderChildren', this);
-            } else if (this.model.get('type') === 1) {
+            } else if (this.model.get('type') > 0) {
                 // is regular MD file
                 this.$el.html(this.fileTemplate(this.model.toJSON()));
             }
