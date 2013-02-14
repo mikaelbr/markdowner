@@ -5,6 +5,7 @@ data/cache.json
 # Generated files #
 ###################
 public/stylesheets/*.css
+dist/stylesheets/*.css
 
 # Logs and databases #
 ######################
