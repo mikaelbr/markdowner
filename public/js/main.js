@@ -2,7 +2,8 @@ require.config({
   paths: {
     order: 'js/libs/requirejs-plugins/order',
     vent: 'js/vent',
-    bootstrap: 'js/vendor/bootstrap/docs/assets/js/bootstrap'
+    bootstrap: 'js/vendor/bootstrap/docs/assets/js/bootstrap',
+    'ace/ace/lib': 'js/vendor/ace/lib'
   },
   shim: {
     'bootstrap': {
@@ -10,6 +11,11 @@ require.config({
     }
   }
 });
+
+// require(["ace/config"], function (config) {
+//   // config.set("packaged", true) 
+//   config.set("libPath", "js/vendor/ace/lib") 
+// });
 
 define([
         'backbone', 

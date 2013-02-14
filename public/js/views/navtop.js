@@ -49,6 +49,8 @@ define(['backbone',
         initialize: function () {
             this.render();
             this.bindKeyMaster();
+
+            vent.on('editor:loadDocument', this.fileLoaded, this);
         },
 
         themeTemplate: _.template(ThemesTemplate),
@@ -63,7 +65,8 @@ define(['backbone',
             'click #file-options-button': 'fileOptions',
             'click #savefile': 'save',
             'click #toggle-sidebar': 'toggleSidebar',
-            'click #toggle-horizontal': 'toggleHorizontal'
+            'click #toggle-horizontal': 'toggleHorizontal',
+            'click #toggle-style': 'toggleStyling'
         },
 
         bindKeyMaster: function () {
@@ -72,6 +75,21 @@ define(['backbone',
             key('⌘+m, ctrl+m', $.proxy(this.compile, this));
             key('⌘+s, ctrl+s', $.proxy(this.save, this));
             key('⌘+k, ctrl+k', $.proxy(this.toggleSidebar, this));
+        },
+
+        fileLoaded: function (file) {
+            // Is of type remark?
+            if (file.get('type') === 2) {
+                this.$el.find('#toggle-style').show();
+            } else {
+                this.$el.find('#toggle-style').hide();
+            }
+        },
+
+        toggleStyling: function (e) {
+            e.preventDefault();
+            vent.trigger('editor:editStyling');
+            return false;
         },
 
         fileOptions: function (e) {

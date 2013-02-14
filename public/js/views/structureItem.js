@@ -21,7 +21,7 @@ define([
             'click .tool-container:first .delete': 'delete',
             'click .tool-container:first .rename': 'rename',
             'click .tool-container:first .new-file': 'newfile',
-            'click .tool-container:first .options': 'fileOptions'
+            'click .tool-container:first .styling': 'styling'
         },
 
         initialize: function () {
@@ -48,9 +48,9 @@ define([
             return false;
         },
 
-        fileOptions: function (e) {
+        styling: function (e) {
             e.preventDefault();
-            vent.trigger('fileOptions:show', this.model);
+            vent.trigger('editor:editStyling', this.model);
             return false;
         },
 

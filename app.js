@@ -64,6 +64,7 @@ app.configure('development', function(){
 
 
 app.get('/', auth.ensureAuthenticated, routes.index);
+app.get('/document/:document.css', documentRoute.style);
 app.get('/document/:document', documentRoute.index);
 adminRoute.connect(app, auth);
 

@@ -11,27 +11,75 @@ define([
 
     return Backbone.View.extend({
         el: '#editor',
-        changeIterator: 0,
-        changeSaveThreshold: 40,
-        fetchingDocument: false,
+
+        _defaultTheme: "twilight",
+        _cssMode: "ace/mode/less",
+        _markdownMode: "ace/mode/markdown",
+
+        _changeIterator: 0,
+        _changeSaveThreshold: 40,
+        _fetchingDocument: false,
+        _activeStyling: false,
 
         initialize: function () {
             this.e = ace.edit(this.el);
             this.e.setReadOnly(true);
-            this.e.setTheme(themeBase + "twilight");
-            this.e.getSession().setMode("ace/mode/markdown");
-
+            this.e.setTheme(themeBase + this._defaultTheme);
+            this.e.getSession().setMode(this._markdownMode);
             this.addCommand();
 
             this.e.on('change', $.proxy(this.onChange, this));
 
             vent.on('editor:compile', this.compile, this);
             vent.on('editor:changeTheme', this.changeTheme, this);
+            vent.on('editor:editStyling', this.toggleEditStyling, this);
             vent.on('editor:loadDocument', this.loadDocument, this);
             vent.on('editor:saveDocument', this.saveDocument, this);
             vent.on('editor:currentEditorFileOptions', this.currentEditorFileOptions, this);
 
             vent.on('editor:toggleHorizontal', this.toggleHorizontal, this);
+        },
+
+        toggleEditStyling: function (file) {
+            file = file || this.fileModel;
+            var self = this;
+            var toggle = function () {
+                if (self._activeStyling) {
+                    return self.regularWriteMode();
+                }
+                return self.stylingWriteMode();
+            };
+            if (file.get('_id') === this.fileModel.get('_id')) {
+                return toggle();
+            }
+
+            this.loadDocument(file, toggle);
+        },
+
+        stylingWriteMode: function () {
+            var style = this.activeDoc.get('style') || '// Write in LESS\n\n// Default style:\n@import "/stylesheets/default-remark.css";';
+            var self = this;
+            this.saveDocument(function () {
+                // Saved. We can now switch to styling mode.
+                self._activeStyling = true;
+                self.e.getSession().setMode(self._cssMode);
+                self.e.setValue(style);
+                self.e.clearSelection();
+                self.e.moveCursorTo(0,0);
+            });
+        },
+
+        regularWriteMode: function () {
+            var body = this.activeDoc.get('body');
+            var self = this;
+            this.saveDocument(function () {
+                // Saved. We can now switch to styling mode.
+                self._activeStyling = false;
+                self.e.getSession().setMode(self._markdownMode);
+                self.e.setValue(body);
+                self.e.clearSelection();
+                self.e.moveCursorTo(0,0);
+            });
         },
 
         compile: function () {
@@ -51,17 +99,21 @@ define([
         },
 
         onChange: function (e) {
+            if(this._activeStyling) {
+                return;
+            }
+
             // Editor changed. Save once per 10 change
-            if (this.changeIterator > this.changeSaveThreshold) {
-                this.changeIterator = 0;
+            if (this._changeIterator > this._changeSaveThreshold) {
+                this._changeIterator = 0;
                 vent.trigger('editor:saveDocument');
             }
 
-            if (this.changeIterator % 5 === 0)  {
+            if (this._changeIterator % 5 === 0)  {
                 vent.trigger('editor:compile');
             }
 
-            this.changeIterator++;
+            this._changeIterator++;
         },
 
         toggleHorizontal: function (horizontal) {
@@ -85,8 +137,8 @@ define([
             vent.trigger('fileOptions:show', this.fileModel);
         },
 
-        loadDocument: function (file) {
-            if(!file || this.fetchingDocument) {
+        loadDocument: function (file, cb) {
+            if(!file || this._fetchingDocument) {
                 return;
             }
 
@@ -101,14 +153,21 @@ define([
 
             vent.trigger('load:show', 'Opening ...');
 
-            this.fetchingDocument = true;
+            this._fetchingDocument = true;
             this.activeDoc = new DocumentModel({file_id: documentId});
             this.activeDoc.fetch().then(function () {
-                self.setContent();
+                self.setContent(cb);
             });
         },
 
-        setContent: function () {
+        setContent: function (cb) {
+            cb = cb || function () {};
+
+            if (this._activeStyling) {
+                this._activeStyling = false;
+                this.e.getSession().setMode(this._markdownMode);
+            }
+
             this.e.setValue(this.activeDoc.get('body'));
             vent.trigger('load:hide');
 
@@ -121,13 +180,21 @@ define([
 
             vent.trigger('editor:compile');
 
-            this.fetchingDocument = false;
+            this._fetchingDocument = false;
+            cb();
         },
 
         saveDocument: function (cb) {
             cb = cb || function () {};
+
+            var val = this.e.getValue(),
+                changeObj = {'body': val};
+            if (this._activeStyling === true) {
+                changeObj = {'style': val};
+            } 
+
             vent.trigger('load:show', 'Saving ...');
-            this.activeDoc.save({'body': this.e.getValue()}).then(function () {
+            this.activeDoc.save(changeObj).then(function () {
                 vent.trigger('load:hide');
                 cb();
             });

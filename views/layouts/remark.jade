@@ -3,7 +3,11 @@ html
   head
     meta(charset='utf-8')
     title= title
-    link(rel='stylesheet', href='/stylesheets/default-remark.css')
+    if hasStyle
+        link(rel='stylesheet', href="/document/" + file._id + ".css")
+    else
+        link(rel='stylesheet', href="/stylesheets/default-remark.css")
+
 
     script(src="https://github.com/downloads/gnab/remark/remark-0.4.4.min.js")
         {"highlightStyle": "monokai"}
