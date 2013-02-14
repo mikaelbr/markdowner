@@ -82,14 +82,26 @@ html
           p= msg
 
 
-      div.alert.alert-info
-        form.pull-right(action='/wish', method='post')
+      div.alert.alert-info.beta-request
+        form.pull-right.form-horizontal(action='/wish', method='post')
           fieldset
-            div.input-append
+            div.control-group
+              input.span4(type='text', placeholder='E-mail for notification', name='email')
+
+            div.control-group
               input.span4(type='text', placeholder='Twitter Username', name='username')
+            
+            div.control-group
               button.btn(type='submit') Apply!
 
-        p For now, Markdowner is in early beta stages. You can apply for Beta testing by submitting your Twitter username below.
+        p For now, Markdowner is in early beta stages. You can request for a Beta invite by 
+          | submitting your Twitter username and e-mail. 
+
+        p The only thing your e-mail will be used
+          | as, is to notify you when you get access to Markdowner. If you prefer not to submit your
+          | e-mail, you can omit it – but you'd have to check manually for access 
+          | by trying to <a href="/auth/twitter">log in here</a>. The e-mail address is only stored 
+          | until the request is approved. When this happens, it is deleted from the system.
 
       
       h3 Issues and Feedback
@@ -100,37 +112,32 @@ html
       div.row-fluid.marketing
         div.span6
           h4 Markdown Syntax
-          p 
-          | Markdowner uses <a href="http://daringfireball.net/projects/markdown/syntax">Markdown syntax</a> to easily create great formatted documents in HTML.
+          p Markdowner uses <a href="http://daringfireball.net/projects/markdown/syntax">Markdown syntax</a> to 
+            | easily create great formatted documents in HTML.
 
 
-          p 
-          | Markdowner uses <a href="http://ace.ajax.org/">ACE.js</a>, a high performance editor built with 
-          | javascript. This allows for several themes with syntax highlighting.
+          p Markdowner uses <a href="http://ace.ajax.org/">ACE.js</a>, a high performance editor built with 
+            | javascript. This allows for several themes with syntax highlighting.
 
           
           h4 Remark
-          p 
-          | As an optional document setting, you can activate the Remark mode. <a href="http://github.com/gnab/remark">Remark</a> 
-          | is a simplistic way to write in-browser Markdown based slideshows. See more info about Remark on this 
-          | <a href="http://www.markdowner.com/document/511b9fea4913db020000000e">Markdowner Remark Demo</a> 
+          p  As an optional document setting, you can activate the Remark mode. <a href="http://github.com/gnab/remark">Remark</a> 
+            | is a simplistic way to write in-browser Markdown based slideshows. See more info about Remark on this 
+            | <a href="http://www.markdowner.com/document/511b9fea4913db020000000e">Markdowner Remark Demo</a> 
           
           h4 Cloud based
-          p 
-          | Markdowner is cloud based. All your changes, are stored in the clouds. If you hide the sidebar, 
-          | the sidebar will be hidden the next time you log on, no matter from where. 
+          p Markdowner is cloud based. All your changes, are stored in the clouds. If you hide the sidebar, 
+            | the sidebar will be hidden the next time you log on, no matter from where. 
 
         div.span6
           h4 Instant Markdown preview
-          p 
-          | As you type, you are always just a hotkey away from compiling and previewing 
-          | your Markdown or Remark document. The document style will match the style of <a href="http://github.com">Github</a>. 
+          p As you type, you are always just a hotkey away from compiling and previewing 
+            | Your Markdown or Remark document. The document style will match the style of <a href="http://github.com">Github</a>. 
 
           
           h4 Share public documents
-          p 
-          | If you want either a Remark document, or a regular Markdown document to be 
-          | available publicly, you can set so in the File Options, and share the Document Share Link.
+          p If you want either a Remark document, or a regular Markdown document to be 
+            | available publicly, you can set so in the File Options, and share the Document Share Link.
 
           
           h4 Auto-saving
@@ -141,19 +148,16 @@ html
       div.row-fluid.marketing
         div.span6
           h4 Export to .md and .pdf files 
-          p 
-          | In a short time, exporting and downloading documents as .PDF files and .MD files will be possible. 
-          | As for now, sharing is the only way to show your documents to others. 
+          p In a short time, exporting and downloading documents as .PDF files and .MD files will be possible. 
+            | As for now, sharing is the only way to show your documents to others. 
 
           h4 Define your own Remark style 
-          p 
-          | Planned features includes a way to optinally define your own CSS styling on Remark Documents.
+          p Planned features includes a way to optinally define your own CSS styling on Remark Documents.
 
         div.span6
           h4 Dropbox synchronization
-          p 
-          | Some time, in the not too distant future, you can sync Markdowner with your Dropbox account, and 
-          | your documents will automatically be stored on Dropbox as well.
+          p Some time, in the not too distant future, you can sync Markdowner with your Dropbox account, and 
+            | your documents will automatically be stored on Dropbox as well.
 
 
 

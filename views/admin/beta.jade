@@ -32,6 +32,7 @@ block content
             tr
                 th #
                 th Username
+                th E-mail
                 th Date
                 th Actions
         tbody
@@ -39,6 +40,7 @@ block content
                 tr
                     td=i+1
                     td=user.username
+                    td=user.email
                     td=user.date
                     td
                         a(href="/admin/wish/approve/"+ user.username + "/" + user._id)

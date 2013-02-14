@@ -58,17 +58,22 @@ var approve = function (req, res) {
 };
 
 var wish = function (req, res) {
-    var username = req.body.username;
-    if (!username) {
-        res.redirect('/');
+    var obj = {
+        username: req.body.username,
+        email: req.body.email
+    };
+
+    if (!obj.username) {
+        req.flash('error', 'No Twitter Username Given');
+        res.redirect('/login');
     }
-    user.betaWish(username, function(err, data) {
+    user.betaWish(obj, function(err, data) {
         if(!err) {
             req.flash('info', 'Beta invite requested!');
         } else {
             req.flash('error', err);
         }
-        res.redirect('/');
+        res.redirect('/login');
     });
 };
 
