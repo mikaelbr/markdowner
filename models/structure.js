@@ -29,6 +29,10 @@ exports.create = function(req, res){
 
   structure.insert(newItem, function(err, item) {
 
+    if (item.type === 0) {
+      return res.json(item);
+    }
+
     var newDocument = {
       body: item.name + "\n===",
       file_id: item._id,
