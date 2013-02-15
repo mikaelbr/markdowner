@@ -30,6 +30,8 @@ define([
 
             this.e.on('change', $.proxy(this.onChange, this));
 
+            vent.on('editor:setReadOnly', this.setReadOnly, this);
+
             vent.on('editor:compile', this.compile, this);
             vent.on('editor:changeTheme', this.changeTheme, this);
             vent.on('editor:editStyling', this.toggleEditStyling, this);
@@ -158,6 +160,10 @@ define([
             this.activeDoc.fetch().then(function () {
                 self.setContent(cb);
             });
+        },
+
+        setReadOnly: function () {
+            this.e.setReadOnly(true);
         },
 
         setContent: function (cb) {

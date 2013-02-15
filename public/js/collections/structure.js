@@ -7,7 +7,7 @@ define(['backbone', 'underscore', 'jquery', 'js/models/fileStructure'], function
         initialize: function () {
             this.on('add', this.getTree, this);
             this.on('reset', this.getTree, this);
-            this.on('destroy', this.getTree, this);
+            this.on('destroy', this.getTreeSilent, this);
         },
 
         _buildTree: function (list) {
@@ -39,6 +39,14 @@ define(['backbone', 'underscore', 'jquery', 'js/models/fileStructure'], function
             });
             this.tree = tree;
             this.trigger('tree:sync', tree);
+        },
+
+        getTreeSilent: function () {
+            var tree = this._buildTree(this.models);
+            tree = _.sortBy(tree, function (el) {
+                return el.item.get('name');
+            });
+            this.tree = tree;
         }
     });
 });

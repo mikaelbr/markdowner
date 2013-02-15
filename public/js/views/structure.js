@@ -7,13 +7,24 @@ define(['backbone',
         function (Backbone, _, $, ItemView, vent) {
 
 
-  var getChilderenFromItemInTree = function (tree, id) {
+  
+
+  var getModelFromItemInTree = function (tree, id) {
     for(var i = 0, len = tree.length; i < len; i++) {
       if (tree[i].item.get('_id') === id) {
-        return tree[i].children;
+        return tree[i];
       }
     } 
     return null;
+  };
+
+  var getChilderenFromItemInTree = function (tree, id) {
+    var item = getModelFromItemInTree(tree, id);
+    if (!item) {
+      return null;
+    }
+
+    return item.children;
   };
 
   return Backbone.View.extend({
@@ -32,6 +43,7 @@ define(['backbone',
       vent.on('sidebar:newfile', this.newfile, this);
       vent.on('sidebar:newfolder', this.newfolder, this);
       vent.on('sidebar:deletefolder', this.deleteFolder, this);
+      vent.on('sidebar:loadFileAfterDelete', this.loadFileAfterDelete, this);
       vent.on('sidebar:renderChildren', this.renderChildrenOfModelInView, this);
 
       vent.on('sidebar:hide', this.hide, this);
@@ -45,7 +57,28 @@ define(['backbone',
       'click .sidebar-context .new-folder': 'contextNewfolder'
     },
 
+    loadFileAfterDelete: function (i) {
+      // Get file below
+      var model = this.collection.tree[i-1];
 
+      // Check for file below and if it is Folder
+      if (!model || !model.item || model.item.get('type') === 0) {
+        model = this.collection.tree[i];
+      }
+
+      // Check for file below and if it is Folder
+      if (!model || !model.item || model.item.get('type') === 0) {
+        model = this.collection.tree[i+1];
+      }
+
+      if (!model || !model.item || model.item.get('type') === 0) {
+        // No files, disable editor
+        return vent.trigger('editor:setReadOnly');
+      }
+
+      // We now got a model, change this to the active one. 
+      return vent.trigger('editor:loadDocument', model.item);
+    },
 
     toggleContextMenu: function (e) {
         e.preventDefault();

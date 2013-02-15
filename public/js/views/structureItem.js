@@ -26,7 +26,7 @@ define([
 
         initialize: function () {
             this.model.on('change', this.render, this);
-            this.model.on('destroy', this.remove, this);
+            this.model.on('destroy', this.removeItem, this);
             this.model.on('loaded', this.setActive, this);
         },
 
@@ -39,6 +39,13 @@ define([
 
         setActive: function (e) {
             $('#filelist').find('li').not(this.$el.addClass('active')).removeClass('active');
+        },
+
+        removeItem: function () {
+            if (this.$el.hasClass('active')) {
+                vent.trigger('sidebar:loadFileAfterDelete', this.$el.index())
+            }
+            this.remove();
         },
 
         loadDocument: function (e) {
@@ -56,6 +63,8 @@ define([
 
         delete: function (e) {
             // Temporary solution. Need to trigger a Model View.
+            var self = this;
+            self.nIndex = this.$el.index();
             var msg = 'Do you really want to delete this file?';
             if (this.model.get('type') === 0) {
                 msg = 'Are you sure you want to delete this folder and all the files in it?';

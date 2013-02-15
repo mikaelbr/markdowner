@@ -78,6 +78,9 @@ define(['backbone',
         },
 
         fileLoaded: function (file) {
+            if(!file) {
+                return;
+            }
             // Is of type remark?
             if (file.get('type') === 2) {
                 this.$el.find('#toggle-style').show();
