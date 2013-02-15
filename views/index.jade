@@ -5,6 +5,23 @@ block content
   include helpers/navbar
 
   div#filelist.filestructure.well
+    div.popover.fade.bottom.in.tool-container.sidebar-context
+        div.arrow
+        div.popover-inner
+            h3.popover-title New
+            div.popover-content
+              ul
+                li 
+                  a.new-file(title="New File", href="#") 
+                    i.icon-file
+                    | File
+                li 
+                  a.new-folder(title="Create Folder", href="#") 
+                    i.icon-folder-open
+                    | Folder
+              
+
+    
     ul.nav.nav-list
 
   include helpers/tool

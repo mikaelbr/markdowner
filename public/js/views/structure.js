@@ -39,6 +39,39 @@ define(['backbone',
       vent.on('sidebar:toggle', this.toggle, this);
     },
 
+    events: {
+      'contextmenu': 'toggleContextMenu',
+      'click .sidebar-context .new-file': 'contextNewfile',
+      'click .sidebar-context .new-folder': 'contextNewfolder'
+    },
+
+
+
+    toggleContextMenu: function (e) {
+        e.preventDefault();
+        var menu = this.$el.children('.tool-container');
+        menu.css({
+            "margin-left": menu.outerWidth()/2 * -1,
+            'top': e.clientY - 20
+        });
+        $('.tool-container').not(menu.toggle()).hide();
+        return false;
+    },
+
+    contextNewfile: function (e) {
+      e.preventDefault();
+      this.$el.children('.tool-container').hide();
+      vent.trigger('sidebar:newfile');
+      return false;
+    },
+
+    contextNewfolder: function (e) {
+      e.preventDefault();
+      this.$el.children('.tool-container').hide();
+      vent.trigger('sidebar:newfolder');
+      return false;
+    },
+
     render: function () {
       this.$elul.empty();
       _.each(this.collection.tree, this.renderOne, this);
@@ -119,7 +152,7 @@ define(['backbone',
       if (name === null) {
         return;
       }
-      
+
       var item = {
         name: name,
         parentId: null,
