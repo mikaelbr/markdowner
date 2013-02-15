@@ -96,6 +96,10 @@ define(['backbone',
       var parentId = parent && (parentId = parent.get('_id')) || null;
       var name = prompt('Enter filename for new file', 'Markdown File #1');
 
+      if (name === null) {
+        return;
+      }
+
       var item = {
         name: name,
         parentId: parentId,
@@ -112,6 +116,10 @@ define(['backbone',
     newfolder: function () {
       var name = prompt('Enter filename for new folder', 'Folder #1');
 
+      if (name === null) {
+        return;
+      }
+      
       var item = {
         name: name,
         parentId: null,
