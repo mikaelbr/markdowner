@@ -41,6 +41,7 @@ app.configure(function(){
 
 
   app.use(function(err, req, res, next){
+    console.log(err);
     res.render('error/500', {
       title: "Error",
       status: err.status || 500,
@@ -64,8 +65,7 @@ app.configure('development', function(){
 
 
 app.get('/', auth.ensureAuthenticated, routes.index);
-app.get('/document/:document.css', documentRoute.style);
-app.get('/document/:document', documentRoute.index);
+app.get('/document/:document.:format?', documentRoute.index);
 adminRoute.connect(app, auth);
 
 // JSON API

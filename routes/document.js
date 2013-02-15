@@ -1,5 +1,6 @@
 var md = require('marked'),
     less = require('less');
+
 var store = require('../lib/store'),
     user = require('../lib/user'),
     structure = require('../lib/folderHierarchy');
@@ -11,7 +12,7 @@ md.setOptions({
   pedantic: false,
   sanitize: true,
   smartLists: true,
-  langPrefix: 'language-',
+  langPrefix: 'language-'
   // highlight: function(code, lang) {
   //   if (lang === 'js') {
   //     return highlighter.javascript(code);
@@ -20,10 +21,10 @@ md.setOptions({
   // }
 });
 
-exports.index = function(req, res){
+exports.renderDocument = function (req, res) {
   var id = req.params.document;
   structure.get(id, function (err, file) {
-    if (!file || file.type === 0 || !file.public) {
+    if (!file || file.type === 0 || !file['public']) {
       res.status(404);
       res.render('error/404', {
           title: 'Not found'
@@ -47,17 +48,41 @@ exports.index = function(req, res){
       });
     });
   });
-    
-};
+}
+
+exports.json = function (req, res) {
+  var id = req.params.document;
+  structure.get(id, function (err, file) {
+    if (!file || file.type === 0 || !file['public']) {
+      res.json(404, {
+          msg: 'Not found'
+      });
+      return;
+    }
+    var user_id = file.user_id;
+    var view = file.remark ? 'remark' : 'document';
+
+    user.get({'_id': user_id}, function (err, user) {
+
+      // Remove info from public API listing. 
+      delete user.twitterObj; 
+      delete user.settings.activeDocument; 
+      delete user.admin; 
+
+      store.get(id, function(err, data) {
+        data.user = user;
+        data.file = file;
+        res.json(data);
+      });
+    });
+  });
+}
 
 exports.style = function(req, res){
-  console.log('STYYYLE', req.params.document);
   var id = req.params.document;
   structure.get(id, function (err, file) {
 
-    console.log(file);
-
-    if (!file || file.type < 2 || !file.public || !file.remark) {
+    if (!file || file.type < 2 || !file['public'] || !file.remark) {
         res.status(404);
         res.render('error/404', {
             title: 'Not found'
@@ -65,10 +90,7 @@ exports.style = function(req, res){
         return;
     }
 
-    console.log()
-
     store.get(id, function(err, data) {
-      console.log(data);
       var lessData = data.style;
 
       less.render(lessData, function (e, css) {
@@ -87,4 +109,18 @@ exports.style = function(req, res){
     });
     
   });
-}
+};
+
+
+exports.index = function (req, res) {
+  if (req.params.format === 'css') {
+    return exports.style(req, res);
+  }
+
+  if (req.params.format === 'json') {
+    return exports.json(req, res);
+  }
+
+  exports.renderDocument(req, res);
+};
+
