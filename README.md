@@ -48,8 +48,18 @@ NODE_ENV                   => production or development
 the ```/dist``` folder is run. If ```NODE_ENV``` = ```development```, the ```/public``` 
 directory is used. 
 
+Once these are added you can run the application. If you have Foreman installed, just run
+```
+foreman start
+```
+
+In the project root. Also ```npm start``` or just ```node app```.
+
 
 ### Compile & Optimize Front-end Code
+
+After changing the front-end source at ```/public```, it needs to be compiled. If a feature is added or a bug is fixed, 
+compile the front-end as a part of the same commit. 
 
 Use Require.js (```r.js```) to optimize the front-end code. From root run the following:
 
