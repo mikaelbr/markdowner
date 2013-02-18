@@ -38,7 +38,7 @@ exports.index = function(req, res){
     , user: user
     , folders: result.folders
     , documents: result.doc
-    , fileModel: activeDocument
+    , fileModel: activeDocument || null
     , startup: !result.folders || result.folders.length < 1 || !result.doc
     });
   });
