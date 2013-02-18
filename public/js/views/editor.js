@@ -39,7 +39,7 @@ define([
 
             this.e.on('change', $.proxy(this.onChange, this));
 
-            vent.on('editor:setReadOnly', this.setReadOnly, this);
+            this.noFile();
 
             vent.on('editor:compile', this.compile, this);
             vent.on('editor:changeTheme', this.changeTheme, this);
@@ -119,13 +119,10 @@ define([
         onChange: function (e) {
 
             if(this._activeStyling) {
-                this.activeDoc.set({'style': this.e.getValue()});
                 return;
             }
 
-            this.activeDoc.set({'body': this.e.getValue()});
-
-            if (this.fileModel.get('remark') === true) {
+            if (this.fileModel && this.fileModel.get('remark') === true) {
                 return;
             }
 
@@ -218,11 +215,19 @@ define([
             vent.trigger('editor:compile');
 
             this._fetchingDocument = false;
+            this._changeIterator = 0;
             cb();
         },
 
         saveDocument: function (cb) {
             cb = cb || function () {};
+
+            if (this._activeStyling) {
+                this.activeDoc.set({'style': this.e.getValue()});
+            } else {
+                this.activeDoc.set({'body': this.e.getValue()});
+            }
+
             vent.trigger('load:show', 'Saving ...');
             this.activeDoc.save().then(function () {
                 vent.trigger('load:hide');

@@ -64,8 +64,9 @@ define([
 
       new NavTopView();
       new LoadingScreen();
-      var editor = new EditorView(existingDocs);
       new CompiledView();
+      
+      var editor = new EditorView(existingDocs);
       new FileOptions();
       new UserBox();
 
