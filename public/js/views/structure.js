@@ -29,6 +29,7 @@ define(['backbone',
 
     initialize: function () {
       this.collection.on('tree:sync', this.render, this);
+      this.collection.on('tree:destroy', this.loadFileAfterDelete, this);
 
       this.$elul = this.$el.children('ul');
 
@@ -40,8 +41,8 @@ define(['backbone',
       vent.on('sidebar:newfile', this.newfile, this);
       vent.on('sidebar:newfolder', this.newfolder, this);
       vent.on('sidebar:deletefolder', this.deleteFolder, this);
-      vent.on('sidebar:loadFileAfterDelete', this.loadFileAfterDelete, this);
       vent.on('sidebar:renderChildren', this.renderChildrenOfModelInView, this);
+      vent.on('sidebar:deactivateAllButModel', this.deactivateAllButModel, this);
 
       vent.on('sidebar:hide', this.hide, this);
       vent.on('sidebar:show', this.show, this);
@@ -54,27 +55,47 @@ define(['backbone',
       'click .sidebar-context .new-folder': 'contextNewfolder'
     },
 
-    loadFileAfterDelete: function (i) {
+    loadFileAfterDelete: function (prevModel, tree) {
       // Get file below
-      var model = this.collection.tree[i-1];
-
-      // Check for file below and if it is Folder
-      if (!model || !model.item || model.item.get('type') === 0) {
-        model = this.collection.tree[i];
+      if (prevModel.get('selected') !== true) {
+        return;
       }
 
-      // Check for file below and if it is Folder
-      if (!model || !model.item || model.item.get('type') === 0) {
-        model = this.collection.tree[i+1];
+      if (tree.length < 1) {
+        return vent.trigger('editor:noFile');
       }
 
-      if (!model || !model.item || model.item.get('type') === 0) {
-        // No files, disable editor
-        return vent.trigger('editor:setReadOnly');
+      // Check if in a level
+      if (prevModel.get('parentId')) {
+        // Try to select a model inside same folder. 
+        var models = this.collection.where({
+          'parentId': prevModel.get('parentId')
+        });
+
+        if (models.length > 0) {
+          return vent.trigger('editor:loadDocument', models[0]);
+        }
       }
 
-      // We now got a model, change this to the active one. 
-      return vent.trigger('editor:loadDocument', model.item);
+      // Not a child of something. Just select the first document
+      var models = this.collection.filter(function (m) {
+        return (m.get('parentId') === null && m.get('type') > 0);
+      });
+
+      if (models.length > 0) {
+        return vent.trigger('editor:loadDocument', models[0]);
+      }
+
+      // Nothing found. 
+      return vent.trigger('editor:noFile');
+    },
+
+    deactivateAllButModel: function (selectedModel) {
+      this.collection.forEach(function(model) {
+        if (model.get('_id') !== selectedModel.get('_id')) {
+          model.set('selected', false);
+        }
+      });
     },
 
     toggleContextMenu: function (e) {

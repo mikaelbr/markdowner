@@ -29,11 +29,11 @@ define([
             this.addCommand();
 
 
-            if (options.fileModel) {
+            if (options && options.fileModel) {
                 this.fileModel = options.fileModel;
             }
 
-            if (options.activeDoc) {
+            if (options && options.activeDoc) {
                 this.activeDoc = options.activeDoc;
             }
 
@@ -48,7 +48,15 @@ define([
             vent.on('editor:saveDocument', this.saveDocument, this);
             vent.on('editor:currentEditorFileOptions', this.currentEditorFileOptions, this);
 
+            vent.on('editor:noFile', this.noFile, this);
+
             vent.on('editor:toggleHorizontal', this.toggleHorizontal, this);
+        },
+
+        noFile: function () {
+            this.e.setValue('# No file defined. Create a new one or select from the sidebar');
+            this.e.setReadOnly(true);
+            vent.trigger('compiled:render', this.e.getValue());
         },
 
         toggleEditStyling: function (file) {
@@ -160,7 +168,7 @@ define([
                 return;
             }
 
-            if(this.activeDoc.get('file_id') === file.get('_id')) {
+            if(this.activeDoc && this.activeDoc.get('file_id') === file.get('_id')) {
                 return;
             }
 

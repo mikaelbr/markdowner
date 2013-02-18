@@ -26,7 +26,7 @@ define([
 
         initialize: function () {
             this.model.on('change', this.render, this);
-            this.model.on('destroy', this.removeItem, this);
+            this.model.on('destroy', this.remove, this);
             this.model.on('loaded', this.setActive, this);
         },
 
@@ -38,14 +38,9 @@ define([
         },
 
         setActive: function (e) {
+            this.model.set('selected', true);
+            vent.trigger('sidebar:deactivateAllButModel', this.model);
             $('#filelist').find('li').not(this.$el.addClass('active')).removeClass('active');
-        },
-
-        removeItem: function () {
-            if (this.$el.hasClass('active')) {
-                vent.trigger('sidebar:loadFileAfterDelete', this.$el.index())
-            }
-            this.remove();
         },
 
         loadDocument: function (e) {

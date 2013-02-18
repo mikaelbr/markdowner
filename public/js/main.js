@@ -48,23 +48,28 @@ define([
 
   return {
     init: function(tree, doc, fileModel) {
+      var existingDocs;
 
       sidebarStructureView = new StructureView({
         collection: new StructureCollection(tree)
       });
       sidebarStructureView.collection.getTree();
 
+      if (fileModel && doc) {
+        existingDocs = {
+          activeDoc: new DocumentModel(doc),
+          fileModel: sidebarStructureView.collection.get(fileModel._id)
+        };
+      }
+
       new NavTopView();
       new LoadingScreen();
-      var editor = new EditorView({
-        activeDoc: new DocumentModel(doc),
-        fileModel: sidebarStructureView.collection.get(fileModel._id)
-      });
+      var editor = new EditorView(existingDocs);
       new CompiledView();
       new FileOptions();
       new UserBox();
 
-      if (fileModel && doc)
+      if (existingDocs)
         editor.setContent();
     }
   };

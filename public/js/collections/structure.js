@@ -41,12 +41,14 @@ define(['backbone', 'underscore', 'jquery', 'js/models/fileStructure'], function
             this.trigger('tree:sync', tree);
         },
 
-        getTreeSilent: function () {
+        getTreeSilent: function (model) {
+            console.log('Get new treee');
             var tree = this._buildTree(this.models);
             tree = _.sortBy(tree, function (el) {
                 return el.item.get('name');
             });
             this.tree = tree;
+            this.trigger('tree:destroy', model, tree);
         }
     });
 });
