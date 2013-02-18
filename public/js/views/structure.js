@@ -6,9 +6,6 @@ define(['backbone',
         'vent'], 
         function (Backbone, _, $, ItemView, vent) {
 
-
-  
-
   var getModelFromItemInTree = function (tree, id) {
     for(var i = 0, len = tree.length; i < len; i++) {
       if (tree[i].item.get('_id') === id) {

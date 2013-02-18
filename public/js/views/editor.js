@@ -21,12 +21,21 @@ define([
         _fetchingDocument: false,
         _activeStyling: false,
 
-        initialize: function () {
+        initialize: function (options) {
             this.e = ace.edit(this.el);
             this.e.setReadOnly(true);
             this.e.setTheme(themeBase + this._defaultTheme);
             this.e.getSession().setMode(this._markdownMode);
             this.addCommand();
+
+
+            if (options.fileModel) {
+                this.fileModel = options.fileModel;
+            }
+
+            if (options.activeDoc) {
+                this.activeDoc = options.activeDoc;
+            }
 
             this.e.on('change', $.proxy(this.onChange, this));
 
@@ -87,10 +96,9 @@ define([
         compile: function () {
             var self = this;
             if (self.fileModel.get('remark') ){
-                vent.trigger('editor:saveDocument', function () {
+                return vent.trigger('editor:saveDocument', function () {
                     vent.trigger('compiled:remark', self.fileModel);
                 });
-                return;
             }
             vent.trigger('compiled:render', self.e.getValue());
         },
@@ -101,7 +109,15 @@ define([
         },
 
         onChange: function (e) {
+
             if(this._activeStyling) {
+                this.activeDoc.set({'style': this.e.getValue()});
+                return;
+            }
+
+            this.activeDoc.set({'body': this.e.getValue()});
+
+            if (this.fileModel.get('remark') === true) {
                 return;
             }
 
@@ -144,22 +160,29 @@ define([
                 return;
             }
 
-            // Save old document before changing.
-            if(this.activeDoc) {
-                vent.trigger('editor:saveDocument');
+            if(this.activeDoc.get('file_id') === file.get('_id')) {
+                return;
             }
 
             var self = this;
-            this.fileModel = file;
-            var documentId = file.get('_id');
+            var loadDoc = function () {
+                self.fileModel = file;
+                var documentId = file.get('_id');
 
-            vent.trigger('load:show', 'Opening ...');
+                vent.trigger('load:show', 'Opening ...');
 
-            this._fetchingDocument = true;
-            this.activeDoc = new DocumentModel({file_id: documentId});
-            this.activeDoc.fetch().then(function () {
-                self.setContent(cb);
-            });
+                self._fetchingDocument = true;
+                self.activeDoc = new DocumentModel({file_id: documentId});
+                self.activeDoc.fetch().then(function () {
+                    self.setContent(cb);
+                });
+            };
+
+            // Save old document before changing.
+            if(this.activeDoc) {
+                return self.saveDocument(loadDoc);
+            }
+            loadDoc();
         },
 
         setReadOnly: function () {
@@ -192,15 +215,8 @@ define([
 
         saveDocument: function (cb) {
             cb = cb || function () {};
-
-            var val = this.e.getValue(),
-                changeObj = {'body': val};
-            if (this._activeStyling === true) {
-                changeObj = {'style': val};
-            } 
-
             vent.trigger('load:show', 'Saving ...');
-            this.activeDoc.save(changeObj).then(function () {
+            this.activeDoc.save().then(function () {
                 vent.trigger('load:hide');
                 cb();
             });

@@ -32,7 +32,7 @@ block content
   script(src='js/vendor/require.js')
   script
     require(['js/main'], function (App) {
-      App.init();
+      App.init(!{JSON.stringify(folders)}, !{JSON.stringify(documents)}, !{JSON.stringify(fileModel)});
     });
     
     

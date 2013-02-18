@@ -35,7 +35,7 @@ define([
         initiateMarkdowner: function () {
             var _settings = this.model.get('settings') || {};
             _settings.theme && vent.trigger('editor:changeTheme', _settings.theme);
-            _settings.activeDocument && vent.trigger('sidebar:loadDocument', _settings.activeDocument, this);
+            // _settings.activeDocument && vent.trigger('sidebar:loadDocument', _settings.activeDocument, this);
             typeof _settings.horizontal !== "undefined" && vent.trigger('editor:toggleHorizontal', _settings.horizontal, this);
             typeof _settings.sidebarVisible !== "undefined" && vent.trigger('sidebar:toggle', _settings.sidebarVisible, this);
 
@@ -57,7 +57,6 @@ define([
 
         setActiveDocument: function (fileModel) {
             var _settings = this.model.get('settings') || {};
-
             _settings.activeDocument = fileModel;
             this.model.save({'settings': _settings});
         },

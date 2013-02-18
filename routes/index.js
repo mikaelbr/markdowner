@@ -9,8 +9,7 @@ var async = require('async')
 exports.index = function(req, res){
 
   var user = req.user
-    , activeDocumentId = user.settings.activeDocument.file_id;
-
+    , activeDocumentId = user.settings.activeDocument._id;
   async.series({
     folders: function (done) {
       structure.list(user._id, function (err, list) {
@@ -21,19 +20,19 @@ exports.index = function(req, res){
     , doc: function (done) {
       if (!activeDocumentId) done(null, null);
 
-      store.get(req.params.document, function (err, item) {
+      store.get(activeDocumentId, function (err, item) {
         done(err, item);
       });
     }
-
   }
 
-  , function (err, res) {
+  , function (err, result) {
     res.render('index', { 
       title: 'Markdowner' 
     , user: user
-    , folders: res.folders
-    , documents: res.doc
+    , folders: result.folders
+    , documents: result.doc
+    , fileModel: user.settings.activeDocument
     });
   });
 };
