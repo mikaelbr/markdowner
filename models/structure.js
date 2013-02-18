@@ -63,7 +63,10 @@ exports.update = function(req, res){
 };
 
 exports.destroy = function(req, res){
-  structure.delete(req.params.structure, function (err, item) {
-    res.json(item);
+  structure.delete(req.params.structure, req.user._id, function (err, item) {
+    store.delete(req.params.structure, req.user._id, function (err, doc) {
+      console.log(item, doc);
+      res.json(item);
+    });
   });
 };
