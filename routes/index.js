@@ -9,9 +9,11 @@ var async = require('async')
 exports.index = function(req, res){
 
   var user = req.user
-    , activeDocumentId;
+    , activeDocumentId
+    , activeDocument;
   if (user.settings && user.settings.activeDocument) {
-    activeDocumentId = user.settings.activeDocument._id;
+    activeDocument = user.settings.activeDocument;
+    activeDocumentId = activeDocument._id;
   }
 
   async.series({
@@ -36,7 +38,7 @@ exports.index = function(req, res){
     , user: user
     , folders: result.folders
     , documents: result.doc
-    , fileModel: user.settings.activeDocument
+    , fileModel: activeDocument
     , startup: !result.folders || result.folders.length < 1 || !result.doc
     });
   });
