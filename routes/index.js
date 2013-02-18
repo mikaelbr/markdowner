@@ -8,12 +8,12 @@ var async = require('async')
 
 exports.index = function(req, res){
 
-  var user = req.user,
+  var user = req.user
     , activeDocumentId;
   if (user.settings && user.settings.activeDocument) {
     activeDocumentId = user.settings.activeDocument._id;
   }
-  
+
   async.series({
     folders: function (done) {
       structure.list(user._id, function (err, list) {
