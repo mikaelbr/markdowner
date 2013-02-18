@@ -157,9 +157,9 @@ js/vendor/underscore/underscore.js
 js/vendor/jquery/dist/jquery.js
 js/vendor/backbone/backbone.js
 js/vendor/bootstrap/docs/assets/js/bootstrap.js
+js/vent.js
 js/models/fileStructure.js
 js/collections/structure.js
-js/vent.js
 js/vendor/text/text.js
 text!templates/sidebar/folder.html
 text!templates/sidebar/link.html

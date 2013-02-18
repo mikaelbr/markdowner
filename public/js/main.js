@@ -21,6 +21,7 @@ define([
         'backbone', 
         'jquery', 
         'bootstrap',
+        'vent',
         'js/collections/structure', 
         'js/views/structure', 
         'js/views/navtop',
@@ -35,6 +36,7 @@ define([
     function (Backbone, 
               $, 
               boot, 
+              vent, 
               StructureCollection, 
               StructureView, 
               NavTopView, 
@@ -47,7 +49,7 @@ define([
               FileModel) {
 
   return {
-    init: function(tree, doc, fileModel) {
+    init: function(tree, fileModel) {
 
       var existingDocs;
 
@@ -56,12 +58,6 @@ define([
       });
       sidebarStructureView.collection.getTree();
 
-      if (fileModel && doc) {
-        existingDocs = {
-          activeDoc: new DocumentModel(doc),
-          fileModel: sidebarStructureView.collection.get(fileModel._id)
-        };
-      }
 
       new NavTopView();
       new LoadingScreen();
@@ -71,8 +67,9 @@ define([
       new FileOptions();
       new UserBox();
 
-      if (existingDocs)
-        editor.setContent();
+      if (fileModel) {
+        vent.trigger('editor:loadDocument', sidebarStructureView.collection.get(fileModel._id));
+      }
 
       // Set Startup Box as a model:
       $("#startup-box").modal();
