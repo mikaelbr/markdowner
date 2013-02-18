@@ -12,7 +12,6 @@ var structure = require('../lib/folderHierarchy'),
 exports.index = function(req, res){
   var user = req.user || {_id: 1};
   structure.list(user._id, function (err, list) {
-    console.log(err, list);
     res.json(list);
   });
 };
@@ -63,7 +62,6 @@ exports.update = function(req, res){
 };
 
 exports.destroy = function(req, res){
-  console.log(req.params.structure, req.user._id);
   structure.delete(req.params.structure, req.user._id, function (err, item) {
     store.delete(req.params.structure, req.user._id, function (err, doc) {
       res.json(item);
