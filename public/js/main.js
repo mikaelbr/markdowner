@@ -48,6 +48,7 @@ define([
 
   return {
     init: function(tree, doc, fileModel) {
+
       var existingDocs;
 
       sidebarStructureView = new StructureView({
@@ -72,6 +73,9 @@ define([
 
       if (existingDocs)
         editor.setContent();
+
+      // Set Startup Box as a model:
+      $("#startup-box").modal();
     }
   };
 });

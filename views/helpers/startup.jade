@@ -1,0 +1,31 @@
+div.modal.hide.fade#startup-box.user-box
+    div.modal-header
+        button.close(data-dismiss='modal', aria-hidden='true', type='button') &times;
+        h3 Welcome to Markdowner, 
+            = user.twitterObj.displayName
+            | !
+    div.modal-body
+
+        div.alert.alert-info
+            button.close(type="button", data-dismiss="alert") &times;
+            p You get this message due to you have no created documents or files. 
+
+        h4 Getting Started
+
+        p To get started, you need to create a new document. Do this by going to 
+            | the menu and press <code>New &rarr; Markdown</code> (or by using the <code>&#x2318;L</code> hot key)
+
+        p After creating a file, you are free to type your Markdown document. The document will self-compile every 
+            | 5 character you type, and save every 20. To force compile, do this by using <code>Build &rarr; Compile</code> 
+            | or pressing the <code>&#x2318;M</code> hot key. To force save, press <code>File &rarr; Save</code> or <code>&#x2318;S</code>.
+
+        h4 Remark
+
+        p Markdowner support creation of <a href="https://github.com/gnab/remark">Remark documents</a>. To define a Remark document
+            | first create a regular Markdown file, and press the <i class="icon-film"></i> button above the preview screen.
+
+        p By default, a Remark document will have a defined style, but this can be replaced or used as a basis for your new style.
+            | To change the styling, you can do <code>View &rarr; Toggle Style Edit</code> when having a Remark document open. 
+            | If you want to define your style from the bottom, remove the <code>@import</code> statement.
+
+        p For more help using Remark, see the official site <a href="https://github.com/gnab/remark">at Github</a>.

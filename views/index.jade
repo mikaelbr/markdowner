@@ -29,6 +29,9 @@ block content
   include helpers/userBox
   include helpers/load
 
+  if startup
+    include helpers/startup
+
   script(src='js/vendor/require.js')
   script
     require(['js/main'], function (App) {

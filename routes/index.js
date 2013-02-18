@@ -33,6 +33,7 @@ exports.index = function(req, res){
     , folders: result.folders
     , documents: result.doc
     , fileModel: user.settings.activeDocument
+    , startup: !result.folders || result.folders.length < 1 || !result.doc
     });
   });
 };
