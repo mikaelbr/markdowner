@@ -139,6 +139,10 @@ stylesheets/default-remark.css
 ----------------
 stylesheets/default-remark.css
 
+stylesheets/document-print.css
+----------------
+stylesheets/document-print.css
+
 stylesheets/document.css
 ----------------
 stylesheets/document.css
