@@ -1,6 +1,6 @@
 var async = require('async')
-  , store = require('../lib/store')
-  , structure = require('../lib/folderHierarchy');
+  , docs = require('../lib/documents')
+  , files = require('../lib/files');
 
 /*
  * GET home page.
@@ -18,7 +18,7 @@ exports.index = function(req, res){
 
   async.series({
     folders: function (done) {
-      structure.list(user._id, function (err, list) {
+      files.list(user._id, function (err, list) {
         done(err, list);
       });
     }
@@ -26,7 +26,7 @@ exports.index = function(req, res){
     , doc: function (done) {
       if (!activeDocumentId) done(null, null);
 
-      store.get(activeDocumentId, function (err, item) {
+      docs.get(activeDocumentId, function (err, item) {
         done(err, item);
       });
     }

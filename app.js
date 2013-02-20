@@ -41,7 +41,7 @@ app.configure(function(){
 
 
   app.use(function(err, req, res, next){
-    console.log(err);
+    console.error(err);
     res.render('error/500', {
       title: "Error",
       status: err.status || 500,

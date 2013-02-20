@@ -6,27 +6,22 @@
 // PUT     /api/structure.json/:structure       ->  update
 // DELETE  /api/structure.json/:structure       ->  destroy
 
-var structure = require('../lib/folderHierarchy'),
-    store = require('../lib/store');
+var files = require('../lib/files'),
+    docs = require('../lib/documents');
 
 exports.index = function(req, res){
   var user = req.user || {_id: 1};
-  structure.list(user._id, function (err, list) {
+  files.list(user._id, function (err, list) {
     res.json(list);
   });
 };
-
-// New folder view - not include
-// exports.new = function(req, res){
-//   res.send('new folder');
-// };
 
 exports.create = function(req, res){
   var user = req.user;
   var newItem = req.body;
   newItem.user_id = user._id;
 
-  structure.insert(newItem, function(err, item) {
+  files.insert(newItem, function(err, item) {
 
     if (item.type === 0) {
       return res.json(item);
@@ -38,32 +33,27 @@ exports.create = function(req, res){
       user_id: req.user._id
     };
 
-    store.insert(newDocument, function(err, createdDocument) {
+    docs.insert(newDocument, function(err, createdDocument) {
       res.json(item);
     });
   });
 };
 
 exports.show = function(req, res){
-  structure.get(req.params.structure, function (err, item) {
+  files.get(req.params.structure, function (err, item) {
     res.json(item);
   });
 };
 
-// Edit file/folder view
-// exports.edit = function(req, res){
-//   res.send('edit file/folder ' + req.params.structure);
-// };
-
 exports.update = function(req, res){
-  structure.save(req.body, function (err, item) {
+  files.save(req.body, function (err, item) {
     res.json(req.body);
   })
 };
 
 exports.destroy = function(req, res){
-  structure.delete(req.params.structure, req.user._id, function (err, item) {
-    store.delete(req.params.structure, req.user._id, function (err, doc) {
+  files.delete(req.params.structure, req.user._id, function (err, item) {
+    docs.delete(req.params.structure, req.user._id, function (err, doc) {
       res.json(item);
     });
   });

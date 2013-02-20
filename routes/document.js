@@ -1,9 +1,9 @@
 var md = require('marked'),
     less = require('less');
 
-var store = require('../lib/store'),
+var documents = require('../lib/documents'),
     user = require('../lib/user'),
-    structure = require('../lib/folderHierarchy');
+    files = require('../lib/files');
 
 md.setOptions({
   gfm: true,
@@ -23,7 +23,7 @@ md.setOptions({
 
 exports.renderDocument = function (req, res) {
   var id = req.params.document;
-  structure.get(id, function (err, file) {
+  files.get(id, function (err, file) {
     if (!file || file.type === 0 || !file['public']) {
       res.status(404);
       res.render('error/404', {
@@ -36,7 +36,7 @@ exports.renderDocument = function (req, res) {
     var view = file.remark ? 'remark' : 'document';
 
     user.get({'_id': user_id}, function (err, user) {
-      store.get(id, function(err, data) {
+      documents.get(id, function(err, data) {
         res.render(view, { 
           title: file.name, 
           doc: data,
@@ -52,7 +52,7 @@ exports.renderDocument = function (req, res) {
 
 exports.json = function (req, res) {
   var id = req.params.document;
-  structure.get(id, function (err, file) {
+  files.get(id, function (err, file) {
     if (!file || file.type === 0 || !file['public']) {
       res.json(404, {
           msg: 'Not found'
@@ -69,7 +69,7 @@ exports.json = function (req, res) {
       delete user.settings.activeDocument; 
       delete user.admin; 
 
-      store.get(id, function(err, data) {
+      documents.get(id, function(err, data) {
         data.user = user;
         data.file = file;
         res.json(data);
@@ -80,7 +80,7 @@ exports.json = function (req, res) {
 
 exports.style = function(req, res){
   var id = req.params.document;
-  structure.get(id, function (err, file) {
+  files.get(id, function (err, file) {
 
     if (!file || file.type < 2 || !file['public'] || !file.remark) {
         res.status(404);
@@ -90,7 +90,7 @@ exports.style = function(req, res){
         return;
     }
 
-    store.get(id, function(err, data) {
+    documents.get(id, function(err, data) {
       var lessData = data.style;
 
       less.render(lessData, function (e, css) {
