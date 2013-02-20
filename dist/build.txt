@@ -237,7 +237,7 @@ js/vendor/ace/theme/textmate.js
 js/vendor/ace/ace.js
 js/models/document.js
 js/views/editor.js
-js/vendor/marked/lib/marked.js
+js/libs/marked.js
 js/views/compiled.js
 js/views/fileOptions.js
 js/models/user.js
