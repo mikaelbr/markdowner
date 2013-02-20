@@ -4,6 +4,7 @@
  */
 
 var express = require('express')
+  , connect = require('connect')
   , routes = require('./routes')
   , documentRoute = require('./routes/document')
   , adminRoute = require('./routes/admin')
@@ -16,6 +17,8 @@ var app = express()
   , auth = require('./auth');
 
 auth.connect();
+
+var oneYear = 31557600000;
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -52,15 +55,16 @@ app.configure(function(){
 });
 
 app.configure('production', function(){
+  app.use(connect.compress());
   app.use(require('less-middleware')({ src: __dirname + '/dist' }));
-  app.use(express.static(path.join(__dirname, 'dist')));
+  app.use(express.static(path.join(__dirname, 'dist'), { maxAge: oneYear }));
 });
 
 app.configure('development', function(){
   app.use(express.errorHandler());
-
+  app.use(connect.compress());
   app.use(require('less-middleware')({ src: __dirname + '/public' }));
-  app.use(express.static(path.join(__dirname, 'public')));
+  app.use(express.static(path.join(__dirname, 'public'), { maxAge: oneYear }));
 });
 
 

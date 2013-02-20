@@ -23,7 +23,8 @@
     "marked": "~0.2.8",
     "less": "~1.3.3",
     "async": "~0.2.5",
-    "underscore": "~1.4.4"
+    "underscore": "~1.4.4",
+    "connect": "~2.7.3"
   },
   "jam": {
     "packageDir": "public/js/vendor",
