@@ -3,6 +3,7 @@ require.config({
     order: 'js/libs/requirejs-plugins/order',
     vent: 'js/vent',
     bootstrap: 'js/vendor/bootstrap/docs/assets/js/bootstrap',
+    marked: 'js/libs/marked',
     'ace/ace/lib': 'js/vendor/ace/lib'
   },
   shim: {

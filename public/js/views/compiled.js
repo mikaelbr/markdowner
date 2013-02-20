@@ -14,7 +14,7 @@ define(['backbone', 'underscore', 'jquery', 'vent', 'marked'], function (Backbon
         pedantic: false,
         sanitize: true,
         smartLists: true,
-        langPrefix: 'language-',
+        langPrefix: 'language-'
         // highlight: function(code, lang) {
         //   if (lang === 'js') {
         //     return highlighter.javascript(code);
@@ -34,7 +34,10 @@ define(['backbone', 'underscore', 'jquery', 'vent', 'marked'], function (Backbon
         $inEl = $(this.mdWrapper).appendTo(this.$el);
         this.$el.find('.remark-preview').remove();
       }
-      $inEl.html(marked(input)).show();
+      var md = marked(input);
+      console.log(input);
+      console.log(md);
+      $inEl.html(md).show();
     },
 
     setRemark: function (fileModel) {
