@@ -1,15 +1,47 @@
-/* GLOBAL STYLES
--------------------------------------------------- */
-/* Padding below the footer and lighter body text */
-@import "helpers/elements.less";
+// @import "../js/vendor/bootstrap/less/../js/vendor/bootstrap/less/bootstrap.less"; // Modify this for custom colors, font-sizes, etc
+
+// CSS Reset
+@import "../js/vendor/bootstrap/less/reset.less";
+
+// Core variables and mixins
+@import "../js/vendor/bootstrap/less/variables.less"; // Modify this for custom colors, font-sizes, etc
+@import "../js/vendor/bootstrap/less/mixins.less";
+
+// Grid system and page structure
+@import "../js/vendor/bootstrap/less/scaffolding.less";
+@import "../js/vendor/bootstrap/less/grid.less";
+@import "../js/vendor/bootstrap/less/layouts.less";
+
+// Base CSS
+@import "../js/vendor/bootstrap/less/type.less";
+@import "../js/vendor/bootstrap/less/code.less";
+@import "../js/vendor/bootstrap/less/forms.less";
+@import "../js/vendor/bootstrap/less/tables.less";
+
+// Components: common
+@import "../js/vendor/bootstrap/less/sprites.less";
+
+// Components: Buttons & Alerts
+@import "../js/vendor/bootstrap/less/buttons.less";
+@import "../js/vendor/bootstrap/less/alerts.less"; // Note: alerts share common CSS with buttons and thus have styles in buttons.less
+
+// Components: Nav
+@import "../js/vendor/bootstrap/less/navs.less";
+@import "../js/vendor/bootstrap/less/navbar.less";
+
+// Components: Popovers
+@import "../js/vendor/bootstrap/less/tooltip.less";
+
+// Utility classes
+@import "../js/vendor/bootstrap/less/utilities.less"; // Has to be last to override when necessary
+
+
 
 body {
   padding-bottom: 40px;
   color: #5a5a5a;
   background-image: url('/images/login/body.png');
-
 }
-
 
 .navbar-wrapper {
   position: absolute;
@@ -98,7 +130,13 @@ body {
     min-width: 100%;
     height: 400px;
 
-    .opacity(0.3);
+    -moz-opacity: 0.3;
+    -khtml-opacity: 0.3;
+    -webkit-opacity: 0.3;
+    opacity: 0.3;
+    @opperc: 0.3 * 100;
+    -ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(opacity=@{opperc})";
+    filter: ~"alpha(opacity=@{opperc})";
 
     background: rgb(135,224,253); /* Old browsers */
     background: -moz-radial-gradient(center, ellipse cover,  rgba(135,224,253,1) 0%, rgba(83,203,241,1) 40%, rgba(5,171,224,1) 100%); /* FF3.6+ */
