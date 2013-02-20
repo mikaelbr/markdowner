@@ -7,7 +7,8 @@
 // DELETE  /api/structure.json/:structure       ->  destroy
 
 var files = require('../lib/files'),
-    docs = require('../lib/documents');
+    docs = require('../lib/documents'),
+    async = require('async');
 
 exports.index = function(req, res){
   var user = req.user || {_id: 1};
@@ -52,9 +53,14 @@ exports.update = function(req, res){
 };
 
 exports.destroy = function(req, res){
-  files.delete(req.params.structure, req.user._id, function (err, item) {
-    docs.delete(req.params.structure, req.user._id, function (err, doc) {
-      res.json(item);
-    });
+  async.parallel([
+    function (done) {
+      return files.delete(req.params.structure, req.user._id, done);
+    }, 
+    function (done) {
+      return docs.delete(req.params.structure, req.user._id, done);
+    }
+  ], function (err, result) {
+    res.json(err || result[0]);
   });
 };

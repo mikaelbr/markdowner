@@ -16,7 +16,7 @@ exports.index = function(req, res){
     activeDocumentId = activeDocument._id;
   }
 
-  async.series({
+  async.parallel({
     folders: function (done) {
       files.list(user._id, function (err, list) {
         done(err, list);

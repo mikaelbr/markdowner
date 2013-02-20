@@ -1,5 +1,6 @@
 var md = require('marked'),
-    less = require('less');
+    less = require('less'),
+    async = require('async');
 
 var documents = require('../lib/documents'),
     user = require('../lib/user'),
@@ -80,34 +81,45 @@ exports.json = function (req, res) {
 
 exports.style = function(req, res){
   var id = req.params.document;
-  files.get(id, function (err, file) {
 
-    if (!file || file.type < 2 || !file['public'] || !file.remark) {
-        res.status(404);
-        res.render('error/404', {
-            title: 'Not found'
-        });
-        return;
+  var errorPage = function () {
+    res.status(404);
+    return res.render('error/404', {
+      title: 'Not Found',
+      staus: 404
+    });
+  };
+
+  async.parallel({
+    file: function (done) {
+      files.get(id, function (err, file) {
+
+        if (err || !file || file.type < 2 || !file['public'] || !file.remark) {
+          done(true, null);
+        }
+        done(err, file)
+      });
+    },
+    style: function (done) {
+      documents.get(id, function(err, data) {
+        done(err, data.style);
+      });
+    }
+  },
+  function(err, results) {
+
+    if (err && err.error || !results.style) {
+      return errorPage();
     }
 
-    documents.get(id, function(err, data) {
-      var lessData = data.style;
-
-      less.render(lessData, function (e, css) {
-        if (e) {
-          res.status(e.status || 404);
-          res.render('error/500', {
-              title: e
-          });
-          return;
-        }
-        res.writeHead(200, {'Content-Type': 'text/css'});
-        res.write(css);
-        res.end();
-      });
-      
+    less.render(results.style, function (e, css) {
+      if (e) {
+        return errorPage();
+      }
+      res.writeHead(200, {'Content-Type': 'text/css'});
+      res.write(css);
+      res.end();
     });
-    
   });
 };
 
