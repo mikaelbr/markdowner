@@ -315,11 +315,6 @@ define([
                 readOnly: true
             });
 
-            // Deactivate some commands:
-            this._deactivateCommand("search", "Ctrl-F", "Command-F");
-            this._deactivateCommand("replace", "Ctrl-R", "Command-Option-F");
-            this._deactivateCommand("replaceall", "Ctrl-Shift-R", "Command-Shift-Option-F");
-
         }
     });
 
