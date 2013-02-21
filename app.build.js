@@ -4,14 +4,11 @@
         order: 'js/libs/requirejs-plugins/order',
         vent: 'js/vent',
         templates: 'templates',
-        bootstrap: 'js/vendor/bootstrap/docs/assets/js/bootstrap'
+        bootstrap: 'js/vendor/bootstrap/docs/assets/js/bootstrap',
+        marked: 'js/libs/marked',
+        ace: 'js/libs/ace/src/ace'
     },
      "packages": [
-        {
-            "name": "ace",
-            "location": "js/vendor/ace",
-            "main": "ace.js"
-        },
         {
             "name": "backbone",
             "location": "js/vendor/backbone",
