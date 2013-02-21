@@ -48,8 +48,6 @@ define(['backbone', 'underscore', 'jquery', 'vent', 'marked'], function (Backbon
         this.$el.find('.remark-preview').remove();
       }
       var md = marked(input);
-      console.log(input);
-      console.log(md);
       $inEl.html(md).show();
     },
 
