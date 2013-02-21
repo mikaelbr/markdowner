@@ -3,10 +3,9 @@ define([
         'underscore',
         'jquery',
         'vent',
-        'ace',
         'js/models/document'
     ], 
-    function (Backbone, _, $, vent, ace, DocumentModel) {
+    function (Backbone, _, $, vent, DocumentModel) {
     var themeBase = "ace/theme/";
 
     return Backbone.View.extend({

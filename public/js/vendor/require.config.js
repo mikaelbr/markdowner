@@ -1,11 +1,6 @@
 var jam = {
     "packages": [
         {
-            "name": "ace",
-            "location": "js/vendor/ace",
-            "main": "ace.js"
-        },
-        {
             "name": "backbone",
             "location": "js/vendor/backbone",
             "main": "backbone.js"
@@ -57,11 +52,6 @@ if (typeof require !== "undefined" && require.config) {
     require.config({
     "packages": [
         {
-            "name": "ace",
-            "location": "js/vendor/ace",
-            "main": "ace.js"
-        },
-        {
             "name": "backbone",
             "location": "js/vendor/backbone",
             "main": "backbone.js"
@@ -111,11 +101,6 @@ if (typeof require !== "undefined" && require.config) {
 else {
     var require = {
     "packages": [
-        {
-            "name": "ace",
-            "location": "js/vendor/ace",
-            "main": "ace.js"
-        },
         {
             "name": "backbone",
             "location": "js/vendor/backbone",

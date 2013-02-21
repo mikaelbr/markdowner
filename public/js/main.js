@@ -4,7 +4,7 @@ require.config({
     vent: 'js/vent',
     bootstrap: 'js/vendor/bootstrap/docs/assets/js/bootstrap',
     marked: 'js/libs/marked',
-    'ace/ace/lib': 'js/vendor/ace/lib'
+    ace: 'js/libs/ace/src/ace'
   },
   shim: {
     'bootstrap': {
@@ -13,12 +13,7 @@ require.config({
   }
 });
 
-// require(["ace/config"], function (config) {
-//   // config.set("packaged", true) 
-//   config.set("libPath", "js/vendor/ace/lib") 
-// });
-
-define([
+define(['ace',
         'backbone', 
         'jquery', 
         'bootstrap',
@@ -34,7 +29,7 @@ define([
         'js/models/document',
         'js/models/fileStructure'
     ], 
-    function (Backbone, 
+    function (ace, Backbone, 
               $, 
               boot, 
               vent, 
@@ -48,7 +43,6 @@ define([
               LoadingScreen,
               DocumentModel,
               FileModel) {
-
   return {
     init: function(tree, fileModel) {
 

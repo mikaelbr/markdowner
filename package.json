@@ -33,7 +33,6 @@
       "jquery": "1.9",
       "backbone": null,
       "bootstrap": null,
-      "ace": null,
       "text": null,
       "keymaster": null
     }
