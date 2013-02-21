@@ -105,7 +105,7 @@ define([
             var self = this;
             if (self.fileModel.get('remark') ){
                 return vent.trigger('editor:saveDocument', function () {
-                    vent.trigger('compiled:remark', self.fileModel);
+                    vent.trigger('compiled:remark', self.fileModel, self.e.getValue());
                 });
             }
             vent.trigger('compiled:render', self.e.getValue());

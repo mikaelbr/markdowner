@@ -1,5 +1,18 @@
 define(['backbone', 'underscore', 'jquery', 'vent', 'marked'], function (Backbone, _, $, vent, marked) {
 
+  var tagsToReplace = {
+    '<': '&lt;',
+    '>': '&gt;'
+  };
+
+  function replaceTag(tag) {
+    return tagsToReplace[tag] || tag;
+  }
+
+  function sanitize(str) {
+    return str.replace(/[&<>]/g, replaceTag);
+  }
+
   return Backbone.View.extend({
     el: '#compiled',
 
@@ -40,7 +53,7 @@ define(['backbone', 'underscore', 'jquery', 'vent', 'marked'], function (Backbon
       $inEl.html(md).show();
     },
 
-    setRemark: function (fileModel) {
+    setRemark: function (fileModel, input) {
       this.$el.find('.weak-text').remove();
 
       var $inEl = this.$el.find('.remark-preview');
@@ -48,13 +61,13 @@ define(['backbone', 'underscore', 'jquery', 'vent', 'marked'], function (Backbon
         $inEl = $(this.rmWrapper).attr('src', '/document/' + fileModel.get('_id')).appendTo(this.$el);
         this.$el.find('.compiled').remove();
       } else {
-        this.refreshIFrame($inEl[0]);
+        this.refreshIFrame($inEl[0], input);
           // $inEl.attr('src', '/document/' + fileModel.get('_id'));
       }
     },
 
-    refreshIFrame: function (iframe) {
-      iframe.contentWindow.location.reload();
+    refreshIFrame: function (iframe, text) {
+      iframe.contentWindow.remark && iframe.contentWindow.remark.loadFromString(sanitize(text));
     }
 
   });
