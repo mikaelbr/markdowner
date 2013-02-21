@@ -62,9 +62,8 @@ app.configure('production', function(){
 
 app.configure('development', function(){
   app.use(express.errorHandler());
-  app.use(connect.compress());
   app.use(require('less-middleware')({ src: __dirname + '/public' }));
-  app.use(express.static(path.join(__dirname, 'public'), { maxAge: oneYear }));
+  app.use(express.static(path.join(__dirname, 'public')));
 });
 
 
