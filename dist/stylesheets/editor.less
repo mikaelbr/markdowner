@@ -1,0 +1,111 @@
+
+
+.tool-wrapper {
+  position: absolute;
+  left: 230px;
+  right: 0;
+  bottom: 0;
+  top: 28px;
+
+  .editor {
+    position: absolute;
+    width: 50%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 500;
+  }
+
+  .file-settings {
+    position: absolute;
+    width: 50%;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    height: 30px;
+
+    padding-top: 5px;
+    text-align: center;
+
+    background: rgb(206,220,231);
+    z-index: 888;
+
+    .drop-shadow(0, 1px, 10px, 0.3);
+
+
+    a {
+      height: 15px;
+      padding: 0px 5px 6px;
+    }
+    input[type=text] {
+      font-size: 11px;
+      height: 15px;
+      padding: 3px;
+    }
+    
+  }
+
+
+  .markdown {
+    position: absolute;
+    width: 50%;
+    bottom: 0;
+    right: 0;
+    top: 33px;
+    overflow: auto;
+    background: url('../images/background.png') #ccc;
+
+    &>.compiled {
+      margin: 30px;
+      display: none;
+    }
+
+    .remark-preview {
+      height: 99%;
+      width: 100%;
+      border: 0;
+    }
+  }
+
+  &.horizontal {
+    .editor {
+      position: absolute;
+      height: 50%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+    .markdown {
+      position: absolute;
+      width: 100%;
+      height: 50%;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      top: 50%;
+      overflow: auto;
+    }
+  }
+
+  .weak-text {
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
+    z-index: 1;
+    width: 260px;
+
+    left: 50%;
+    right: 50%;
+    margin-left: -130px;
+    top: 90px;
+
+    color: #222;
+    text-shadow: 0px 2px 3px #555;
+    background: #474747;
+    padding: 10px;
+    .rounded(5px);
+    text-align: center;
+    .opacity(.4);
+  }
+}

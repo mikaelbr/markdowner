@@ -1,0 +1,54 @@
+
+// Navbar
+.navbar {
+
+
+
+  z-index: 999;
+  position: relative;
+
+  li a {
+    span.pull-right {
+      color: #666;
+    }
+    &:hover span.pull-right {
+      color: #cfcfcf;
+    }
+  }
+
+  .navbar-inner {
+    min-height: 10px;
+  }
+
+  .brand {
+    font-size: 14px;
+    padding: 3px 8px;
+    margin-right: 10px;
+  }
+
+  .nav > li > a {
+    padding: 3px 8px;
+    font-size: 11px
+
+  }
+
+  .nav > li > a > b {
+    margin-left: 5px;
+  }
+
+}
+
+
+.navbar li.dropdown.view .dropdown-submenu .dropdown-menu {
+  max-height: 500px;
+  overflow: auto;
+}
+
+.navbar .user-avatar {
+  height: 15px;
+  margin-right: 5px;
+} 
+
+.navbar-static-top .navbar-inner {
+  .drop-shadow(0, 1px, 10px, 0.7);
+}

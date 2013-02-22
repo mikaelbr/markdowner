@@ -1,0 +1,31 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Distributed under the BSD license:
+ *
+ * Copyright (c) 2010, Ajax.org B.V.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of Ajax.org B.V. nor the
+ *       names of its contributors may be used to endorse or promote products
+ *       derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL AJAX.ORG B.V. BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+define(["require","exports","module","../lib/dom","../lib/lang","../lib/event","../requirejs/text!./searchbox.css","../keyboard/hash_handler","../lib/keys"],function(e,t,n){var r=e("../lib/dom"),i=e("../lib/lang"),s=e("../lib/event"),o=e("../requirejs/text!./searchbox.css"),u=e("../keyboard/hash_handler").HashHandler,a=e("../lib/keys");r.importCssString(o,"ace_searchbox");var f='<div class="ace_search right">    <button action="hide" class="ace_searchbtn_close"></button>    <div class="ace_search_form">        <input class="ace_search_field" placeholder="Search for" spellcheck="false">        <button action="findNext" class="ace_searchbtn next"></button>        <button action="findPrev" class="ace_searchbtn prev"></button>    </div>    <div class="ace_replace_form">        <input class="ace_search_field" placeholder="Replace with" spellcheck="false">        <button action="replace" class="ace_replacebtn">Replace</button>        <button action="replaceAll" class="ace_replacebtn">All</button>    </div></div>'.replace(/>\s+/g,">"),l=function(e,t,n){var i=r.createElement("div");i.innerHTML=f,this.element=i.firstChild,this.$init(),this.setEditor(e)};(function(){this.setEditor=function(e){e.searchBox=this,e.container.appendChild(this.element),this.editor=e},this.$init=function(){var e=this.element;this.searchBox=e.querySelector(".ace_search_form"),this.replaceBox=e.querySelector(".ace_replace_form"),this.searchInput=this.searchBox.querySelector(".ace_search_field"),this.replaceInput=this.replaceBox.querySelector(".ace_search_field");var t=this;s.addListener(e,"mousedown",function(e){setTimeout(function(){t.activeInput.focus()},0),s.stopPropagation(e)}),s.addListener(e,"click",function(e){var n=e.target,r=n.getAttribute("action");r&&t[r]&&t[r](),s.stopPropagation(e)}),s.addCommandKeyListener(e,function(e,n,r){var i=a.keyCodeToString(r),o=t.$searchBarKb.findKeyCommand(n,i);o&&o.exec&&(o.exec(t),s.stopEvent(e))}),this.$onChange=i.delayedCall(function(){t.find(!1,!1)}),s.addListener(this.searchInput,"input",function(){t.$onChange.schedule(20)}),s.addListener(this.searchInput,"focus",function(){t.activeInput=t.searchInput}),s.addListener(this.replaceInput,"focus",function(){t.activeInput=t.replaceInput})},this.$closeSearchBarKb=new u([{bindKey:"Esc",name:"closeSearchBar",exec:function(e){e.searchBox.hide()}}]),this.$searchBarKb=new u,this.$searchBarKb.bindKeys({"Ctrl-f|Command-f|Ctrl-H|Command-Option-F":function(e){var t=e.isReplace=!e.isReplace;e.replaceBox.style.display=t?"":"none",e[t?"replaceInput":"searchInput"].focus()},esc:function(e){setTimeout(function(){e.hide()})},Return:function(e){e.activeInput==e.replaceInput&&e.replace(),e.findNext()},"Shift-Return":function(e){e.activeInput==e.replaceInput&&e.replace(),e.findPrev()},Tab:function(e){(e.activeInput==e.replaceInput?e.searchInput:e.replaceInput).focus()}}),this.find=function(e,t){this.editor.find(this.searchInput.value,{skipCurrent:e,backwards:t,wrap:!0}),this.editor.session.highlight(this.editor.$search.$options.re)},this.findNext=function(){this.find(!0,!1)},this.findPrev=function(){this.find(!0,!0)},this.replace=function(){this.editor.replace(this.replaceInput.value),this.findNext()},this.replaceAll=function(){this.editor.replaceAll(this.replaceInput.value)},this.hide=function(){this.element.style.display="none",this.editor.keyBinding.removeKeyboardHandler(this.$searchKeybingin),this.editor.focus()},this.show=function(e,t){this.element.style.display="",this.replaceBox.style.display=t?"":"none",this.isReplace=t,e&&(this.searchInput.value=e),this.searchInput.focus(),this.searchInput.select(),this.editor.keyBinding.addKeyboardHandler(this.$closeSearchBarKb)}}).call(l.prototype),t.SearchBox=l,t.Search=function(e,t){var n=e.searchBox||new l(e);n.show(e.session.getTextRange(),t)},t.ISearch=function(e,t){this.$changeListener=this.$changeListener.bind(this),this.startRange=e.selection.toOrientedRange(),this.options=t||{}},function(){this.setSession=function(e){this.session&&this.session.removeListener(this.$changeListener),this.session=e,this.session.addListener(this.$changeListener)},this.setSearchString=function(){},this.getValue=function(){return this.value==null&&(this.value=this.session.getValue()),this.value},this.$changeListener=function(){this.value=null},this.find=function(){},this.$edgeBefore=function(){this.cursor=this.startRange[this.options.backwards?"start":"end"]},this.$edgeAfter=function(){},this.next=function(e){}}.call(t.ISearch.prototype)});

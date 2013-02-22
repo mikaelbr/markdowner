@@ -1,0 +1,31 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Distributed under the BSD license:
+ *
+ * Copyright (c) 2010, Ajax.org B.V.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of Ajax.org B.V. nor the
+ *       names of its contributors may be used to endorse or promote products
+ *       derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL AJAX.ORG B.V. BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+define(["require","exports","module","../lib/event","../lib/useragent","../lib/dom","../lib/lang"],function(e,t,n){var r=e("../lib/event"),i=e("../lib/useragent"),s=e("../lib/dom"),o=e("../lib/lang"),u=i.isChrome<18,a=function(e,t){function b(e){if(h)return;var t=e?2:1,r=2;try{n.setSelectionRange(t,r)}catch(i){}}function w(){if(h)return;n.value=a,i.isWebKit&&y.schedule()}function B(){setTimeout(function(){p&&(n.style.cssText=p,p=""),t.renderer.$keepTextAreaAtCursor==null&&(t.renderer.$keepTextAreaAtCursor=!0,t.renderer.$moveTextAreaToCursor())},0)}var n=s.createElement("textarea");n.className="ace_text-input",i.isTouchPad&&n.setAttribute("x-palm-disable-auto-cap",!0),n.wrap="off",n.autocorrect="off",n.autocapitalize="off",n.spellcheck=!1,n.style.bottom="2000em",e.insertBefore(n,e.firstChild);var a="",f=!1,l=!1,c=!1,h=!1,p="",d=!0;try{var v=document.activeElement===n}catch(m){}r.addListener(n,"blur",function(){t.onBlur(),v=!1}),r.addListener(n,"focus",function(){v=!0,t.onFocus(),b()}),this.focus=function(){n.focus()},this.blur=function(){n.blur()},this.isFocused=function(){return v};var g=o.delayedCall(function(){v&&b(d)}),y=o.delayedCall(function(){h||(n.value=a,v&&b())});i.isWebKit||t.addEventListener("changeSelection",function(){t.selection.isEmpty()!=d&&(d=!d,g.schedule())}),w(),v&&t.onFocus();var E=function(e){return e.selectionStart===0&&e.selectionEnd===e.value.length};!n.setSelectionRange&&n.createTextRange&&(n.setSelectionRange=function(e,t){var n=this.createTextRange();n.collapse(!0),n.moveStart("character",e),n.moveEnd("character",t),n.select()},E=function(e){try{var t=e.ownerDocument.selection.createRange()}catch(n){}return!t||t.parentElement()!=e?!1:t.text==e.value});if(i.isOldIE){var S=!1,x=function(e){if(S)return;var t=n.value;if(h||!t||t==a)return;if(e&&t==a[0])return T.schedule();k(t),S=!0,w(),S=!1},T=o.delayedCall(x);r.addListener(n,"propertychange",x);var N={13:1,27:1};r.addListener(n,"keyup",function(e){h&&(!n.value||N[e.keyCode])&&setTimeout(P,0);if((n.value.charCodeAt(0)||0)<129)return;h?D():_()})}var C=function(e){if(f){f=!1;return}if(l){l=!1;return}E(n)&&(t.selectAll(),b())},k=function(e){c?(b(),e&&t.onPaste(e),c=!1):e==a[0]?t.execCommand("del",{source:"ace"}):(e.substring(0,2)==a?e=e.substr(2):e[0]==a[0]?e=e.substr(1):e[e.length-1]==a[0]&&(e=e.slice(0,-1)),e[e.length-1]==a[0]&&(e=e.slice(0,-1)),e&&t.onTextInput(e))},L=function(e){if(h)return;var t=n.value;w(),k(t)},A=function(e){var i=t.getCopyText();if(!i){r.preventDefault(e);return}var s=e.clipboardData||window.clipboardData;if(s&&!u){var o=s.setData("Text",i);o&&(t.onCut(),r.preventDefault(e))}o||(f=!0,n.value=i,n.select(),setTimeout(function(){f=!1,w(),b(),t.onCut()}))},O=function(e){var i=t.getCopyText();if(!i){r.preventDefault(e);return}var s=e.clipboardData||window.clipboardData;if(s&&!u){var o=s.setData("Text",i);o&&(t.onCopy(),r.preventDefault(e))}o||(l=!0,n.value=i,n.select(),setTimeout(function(){l=!1,w(),b(),t.onCopy()}))},M=function(e){var s=e.clipboardData||window.clipboardData;if(s){var o=s.getData("Text");o&&t.onPaste(o),i.isIE&&setTimeout(b),r.preventDefault(e)}else n.value="",c=!0};r.addCommandKeyListener(n,t.onCommandKey.bind(t)),r.addListener(n,"select",C),r.addListener(n,"input",L),r.addListener(n,"cut",A),r.addListener(n,"copy",O),r.addListener(n,"paste",M),(!("oncut"in n)||!("oncopy"in n)||!("onpaste"in n))&&r.addListener(e,"keydown",function(e){if(i.isMac&&!e.metaKey||!e.ctrlKey)return;switch(e.keyCode){case 67:O(e);break;case 86:M(e);break;case 88:A(e)}});var _=function(e){h=!0,t.onCompositionStart(),setTimeout(D,0)},D=function(){if(!h)return;t.onCompositionUpdate(n.value)},P=function(e){h=!1,t.onCompositionEnd()},H=o.delayedCall(D,50);r.addListener(n,"compositionstart",_),r.addListener(n,i.isGecko?"text":"keyup",function(){H.schedule()}),r.addListener(n,"compositionend",P),this.getElement=function(){return n},this.setReadOnly=function(e){n.readOnly=e},this.onContextMenu=function(e){p||(p=n.style.cssText),n.style.cssText="z-index:100000;"+(i.isIE?"opacity:0.1;":""),b(t.selection.isEmpty()),t._emit("nativecontextmenu",{target:t});var s=t.container.getBoundingClientRect(),o=function(e){n.style.left=e.clientX-s.left-2+"px",n.style.top=e.clientY-s.top-2+"px"};o(e);if(e.type!="mousedown")return;t.renderer.$keepTextAreaAtCursor&&(t.renderer.$keepTextAreaAtCursor=null),i.isWin&&r.capture(t.container,o,B)},this.onContextMenuClose=B,i.isGecko||r.addListener(n,"contextmenu",function(e){t.textInput.onContextMenu(e),B()})};t.TextInput=a});

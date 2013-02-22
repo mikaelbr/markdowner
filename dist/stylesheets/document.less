@@ -1,0 +1,37 @@
+
+
+// Core variables and mixins
+@import "../js/vendor/bootstrap/less/bootstrap.less"; // Modify this for custom colors, font-sizes, etc
+@import "markdown-github.less";
+@import "helpers/elements.less";
+@import "sidebar.less";
+@import "navbar.less";
+
+body {
+    background: url('../images/background.png') #ccc;
+}
+
+.document-export {
+    width: 700px;
+    margin: 50px auto;
+    .drop-shadow(0, 0, 15px, 0.5);
+}
+
+
+.login-button {
+  text-align: center;
+}
+
+
+.navbar  {
+    min-width: 760px;
+}
+
+.navbar .brand {
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+.navbar .divider-vertical {
+    height: 26px;
+}
