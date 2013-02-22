@@ -13,7 +13,7 @@ require.config({
   "packages": [
         {
             "name": "ace",
-            "location": "js/libs/ace/",
+            "location": "js/libs/ace",
             "main": "ace.js"
         }
   ]

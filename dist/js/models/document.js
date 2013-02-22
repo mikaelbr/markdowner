@@ -1,1 +1,0 @@
-define(["backbone"],function(e){return e.Model.extend({urlRoot:"/api/document",idAttribute:"file_id"})});
