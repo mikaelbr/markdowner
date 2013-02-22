@@ -24,7 +24,7 @@ exports.index = function(req, res){
     }
 
     , doc: function (done) {
-      if (!activeDocumentId) done(null, null);
+      if (!activeDocumentId) return done(null, null);
 
       docs.get(activeDocumentId, function (err, item) {
         done(err, item);
