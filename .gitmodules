@@ -1,8 +1,0 @@
-[submodule "public/js/libs/ace"]
-	path = public/js/libs/ace
-	url = git://github.com/ajaxorg/ace-builds.git
-
-
-[submodule "dist/js/libs/ace"]
-        path = dist/js/libs/ace
-        url = git://github.com/ajaxorg/ace-builds.git

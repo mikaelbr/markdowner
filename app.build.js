@@ -5,14 +5,18 @@
         vent: 'js/vent',
         templates: 'templates',
         bootstrap: 'js/vendor/bootstrap/docs/assets/js/bootstrap',
-        marked: 'js/libs/marked',
-        ace: 'js/libs/ace/src/ace'
+        marked: 'js/libs/marked'
     },
      "packages": [
         {
             "name": "backbone",
             "location": "js/vendor/backbone",
             "main": "backbone.js"
+        },
+        {
+            "name": "ace",
+            "location": "js/libs/ace/",
+            "main": "ace.js"
         },
         {
             "name": "bootstrap",
@@ -22,11 +26,6 @@
             "name": "jquery",
             "location": "js/vendor/jquery",
             "main": "dist/jquery.js"
-        },
-        {
-            "name": "marked",
-            "location": "js/vendor/marked",
-            "main": "./lib/marked.js"
         },
         {
             "name": "keymaster",

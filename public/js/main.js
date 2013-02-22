@@ -4,16 +4,22 @@ require.config({
     vent: 'js/vent',
     bootstrap: 'js/vendor/bootstrap/docs/assets/js/bootstrap',
     marked: 'js/libs/marked',
-    ace: 'js/libs/ace/src/ace'
   },
   shim: {
     'bootstrap': {
       deps: ['jquery']
     }
-  }
+  },
+  "packages": [
+        {
+            "name": "ace",
+            "location": "js/libs/ace/",
+            "main": "ace.js"
+        }
+  ]
 });
 
-define(['ace',
+define([
         'backbone', 
         'jquery', 
         'bootstrap',
@@ -29,7 +35,7 @@ define(['ace',
         'js/models/document',
         'js/models/fileStructure'
     ], 
-    function (ace, Backbone, 
+    function (Backbone, 
               $, 
               boot, 
               vent, 
