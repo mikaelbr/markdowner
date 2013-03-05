@@ -112,7 +112,7 @@ exports.style = function(req, res){
       files.get(id, function (err, file) {
 
         if (err || !file || file.type < 2 || (!file['public'] && logged_in_user_id != user_id) || !file.remark) {
-          done(true, null);
+          return done(true, null);
         }
         done(err, file)
       });
