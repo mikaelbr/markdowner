@@ -24,15 +24,21 @@ md.setOptions({
 
 exports.renderDocument = function (req, res) {
   var id = req.params.document;
+
+  var logged_in_user_id = 0;
+  if(req.user && req.user._id) {
+    logged_in_user_id = req.user._id.toString();
+  }
+
   files.get(id, function (err, file) {
-    if (!file || file.type === 0 || !file['public']) {
+    var user_id = file.user_id;
+    if (!file || file.type === 0 || (!file['public'] && logged_in_user_id != user_id)) {
       res.status(404);
       res.render('error/404', {
           title: 'Not found'
       });
       return;
     }
-    var user_id = file.user_id;
 
     var view = file.remark ? 'remark' : 'document';
 
@@ -53,8 +59,14 @@ exports.renderDocument = function (req, res) {
 
 exports.json = function (req, res) {
   var id = req.params.document;
+
+  var logged_in_user_id = 0;
+  if(req.user && req.user._id) {
+    logged_in_user_id = req.user._id.toString();
+  }
+
   files.get(id, function (err, file) {
-    if (!file || file.type === 0 || !file['public']) {
+    if (!file || file.type === 0 || (!file['public'] && logged_in_user_id != user_id)) {
       res.json(404, {
           msg: 'Not found'
       });
@@ -82,6 +94,11 @@ exports.json = function (req, res) {
 exports.style = function(req, res){
   var id = req.params.document;
 
+  var logged_in_user_id = 0;
+  if(req.user && req.user._id) {
+    logged_in_user_id = req.user._id.toString();
+  }
+
   var errorPage = function () {
     res.status(404);
     return res.render('error/404', {
@@ -94,7 +111,7 @@ exports.style = function(req, res){
     file: function (done) {
       files.get(id, function (err, file) {
 
-        if (err || !file || file.type < 2 || !file['public'] || !file.remark) {
+        if (err || !file || file.type < 2 || (!file['public'] && logged_in_user_id != user_id) || !file.remark) {
           done(true, null);
         }
         done(err, file)
