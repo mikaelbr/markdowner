@@ -44,9 +44,6 @@ define(['backbone',
             }
 
             var isPublic = this.model.get('public') || false;
-            if (this.model.get('remark')) {
-                return;
-            }
             this.model.save({ 
                 'public': !isPublic 
             }).then($.proxy(this.render, this));
@@ -57,9 +54,6 @@ define(['backbone',
                 return;
             }
             var isRemark = this.model.get('remark') || false;
-            if (!this.model.get('public')) {
-                this.model.set('public', true);
-            }
             this.model.save({ 
                 'remark': !isRemark, 
                 'type': (1 + !isRemark) 
