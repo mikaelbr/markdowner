@@ -66,13 +66,14 @@ exports.json = function (req, res) {
   }
 
   files.get(id, function (err, file) {
+    var user_id = file.user_id;
+
     if (!file || file.type === 0 || (!file['public'] && logged_in_user_id != user_id)) {
       res.json(404, {
           msg: 'Not found'
       });
       return;
     }
-    var user_id = file.user_id;
     var view = file.remark ? 'remark' : 'document';
 
     user.get({'_id': user_id}, function (err, user) {
@@ -110,7 +111,7 @@ exports.style = function(req, res){
   async.parallel({
     file: function (done) {
       files.get(id, function (err, file) {
-
+        var user_id = file.user_id;
         if (err || !file || file.type < 2 || (!file['public'] && logged_in_user_id != user_id) || !file.remark) {
           return done(true, null);
         }
