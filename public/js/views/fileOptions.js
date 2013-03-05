@@ -38,7 +38,9 @@ define(['backbone',
             }, 300);
         },
 
-        togglePublic: function () {
+        togglePublic: function (e) {
+            e.preventDefault();
+            
             if (!this.model) {
                 return;
             }
@@ -49,7 +51,8 @@ define(['backbone',
             }).then($.proxy(this.render, this));
         },
 
-        toggleRemark: function () {
+        toggleRemark: function (e) {
+            e.preventDefault();
             if (!this.model) {
                 return;
             }
