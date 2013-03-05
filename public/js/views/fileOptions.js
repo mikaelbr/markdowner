@@ -23,6 +23,7 @@ define(['backbone',
         events: {
             'click .public-button': 'togglePublic',
             'click .remark-button': 'toggleRemark',
+            'click .style-button': 'toggleStyle',
             'focus input[type="text"]': 'selectText'
         },
 
@@ -36,6 +37,11 @@ define(['backbone',
             setTimeout(function () {
                 self.$el.find('input[type="text"]').select();
             }, 300);
+        },
+
+        toggleStyle: function (e) {
+            e.preventDefault();
+            vent.trigger('editor:editStyling');
         },
 
         togglePublic: function (e) {
@@ -86,6 +92,7 @@ define(['backbone',
             var input = this.$el.find('input[type="text"]'),
                 publicButton = this.$el.find('.public-button'),
                 remarkButton = this.$el.find('.remark-button'),
+                styleButton = this.$el.find('.style-button'),
                 isPublic = this.model.get('public'),
                 isRemark = this.model.get('remark');
 
@@ -99,8 +106,10 @@ define(['backbone',
             }
 
             if ( isRemark ) {
+                styleButton.show();
                 remarkButton.addClass('btn-info active');
             } else {
+                styleButton.hide();
                 remarkButton.removeClass('btn-info active');
             }
             vent.trigger('editor:compile');

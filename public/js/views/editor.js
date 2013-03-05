@@ -61,6 +61,11 @@ define(['ace',
         toggleEditStyling: function (file) {
             file = file || this.fileModel;
             var self = this;
+
+            if (!self.fileModel.get('remark')) {
+                return false;
+            }
+
             var toggle = function () {
                 if (self._activeStyling) {
                     return self.regularWriteMode();
@@ -297,6 +302,19 @@ define(['ace',
                 },
                 exec: function(t){
                     vent.trigger('sidebar:newfolder');
+                    return false;
+                },
+                readOnly: true
+            });
+
+            this.e.commands.addCommand({ 
+                name:"newFolder", 
+                bindKey: { 
+                    win:"Shift-Ctrl-I",
+                    mac:"Shift-Command-I"
+                },
+                exec: function(t){
+                    vent.trigger('editor:editStyling');
                     return false;
                 },
                 readOnly: true

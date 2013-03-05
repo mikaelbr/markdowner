@@ -72,6 +72,7 @@ define(['backbone',
         bindKeyMaster: function () {
             key('⌘+l, ctrl+l', $.proxy(this.newfile, this));
             key('⇧+⌘+l, ⇧+ctrl+l', $.proxy(this.newfolder, this));
+            key('⇧+⌘+i, ⇧+ctrl+i', $.proxy(this.toggleStyling, this));
             key('⌘+m, ctrl+m', $.proxy(this.compile, this));
             key('⌘+s, ctrl+s', $.proxy(this.save, this));
             key('⌘+k, ctrl+k', $.proxy(this.toggleSidebar, this));

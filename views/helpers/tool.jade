@@ -2,9 +2,13 @@
 div.tool-wrapper
   div#editor.editor
 
-  div.file-settings#file-settings
-      div.input-prepend.input-append
-        a.btn.public-button(href="#", title='Is Public?', data-placement="right", data-toggle="tooltip") 
+  div.file-settings#file-settings.row
+      div.span
+        a.style-button.btn.btn-success(href="#", title='Toggle Styling Edit', data-placement="right", data-toggle="tooltip") 
+          i.icon-eye-open
+
+      div.input-prepend.input-append.span6
+        a.btn.public-button(href="#", title='Should Document be available Public?', data-placement="right", data-toggle="tooltip") 
           i.icon-globe
         input.span5.readonly(type='text', value='Not Loaded', disabled)
         a.btn.remark-button(href="#", title='Is document Remark Type?', data-placement="left", data-toggle="tooltip") 
