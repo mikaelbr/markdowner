@@ -1,6 +1,8 @@
 node_modules/
 config/runtime.json
 data/cache.json
+bin/
+
 
 # Generated files #
 ###################
@@ -12,6 +14,7 @@ dist/stylesheets/*.css
 *.log
 *.sql
 *.sqlite
+db.dump/
 
 # Editor files
 *.sublime-project
