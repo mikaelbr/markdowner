@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2010, Ajax.org B.V.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *     * Redistributions of source code must retain the above copyright
@@ -14,7 +14,7 @@
  *     * Neither the name of Ajax.org B.V. nor the
  *       names of its contributors may be used to endorse or promote products
  *       derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -28,4 +28,4 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-define(["require","exports","module","../lib/oop","./text","../tokenizer","./ruby_highlight_rules","./matching_brace_outdent","../range","./folding/coffee"],function(e,t,n){var r=e("../lib/oop"),i=e("./text").Mode,s=e("../tokenizer").Tokenizer,o=e("./ruby_highlight_rules").RubyHighlightRules,u=e("./matching_brace_outdent").MatchingBraceOutdent,a=e("../range").Range,f=e("./folding/coffee").FoldMode,l=function(){this.$tokenizer=new s((new o).getRules()),this.$outdent=new u,this.foldingRules=new f};r.inherits(l,i),function(){this.toggleCommentLines=function(e,t,n,r){var i=!0,s=/^(\s*)#/;for(var o=n;o<=r;o++)if(!s.test(t.getLine(o))){i=!1;break}if(i){var u=new a(0,0,0,0);for(var o=n;o<=r;o++){var f=t.getLine(o),l=f.match(s);u.start.row=o,u.end.row=o,u.end.column=l[0].length,t.replace(u,l[1])}}else t.indentRows(n,r,"#")},this.getNextLineIndent=function(e,t,n){var r=this.$getIndent(t),i=this.$tokenizer.getLineTokens(t,e),s=i.tokens;if(s.length&&s[s.length-1].type=="comment")return r;if(e=="start"){var o=t.match(/^.*[\{\(\[]\s*$/);o&&(r+=n)}return r},this.checkOutdent=function(e,t,n){return this.$outdent.checkOutdent(t,n)},this.autoOutdent=function(e,t,n){this.$outdent.autoOutdent(t,n)}}.call(l.prototype),t.Mode=l});
+define(["require","exports","module","../lib/oop","./text","../tokenizer","./ruby_highlight_rules","./matching_brace_outdent","../range","./folding/coffee"],function(e,t,n){var r=e("../lib/oop"),i=e("./text").Mode,s=e("../tokenizer").Tokenizer,o=e("./ruby_highlight_rules").RubyHighlightRules,u=e("./matching_brace_outdent").MatchingBraceOutdent,a=e("../range").Range,f=e("./folding/coffee").FoldMode,l=function(){this.$tokenizer=new s((new o).getRules()),this.$outdent=new u,this.foldingRules=new f};r.inherits(l,i),function(){this.lineCommentStart="#",this.getNextLineIndent=function(e,t,n){var r=this.$getIndent(t),i=this.$tokenizer.getLineTokens(t,e),s=i.tokens;if(s.length&&s[s.length-1].type=="comment")return r;if(e=="start"){var o=t.match(/^.*[\{\(\[]\s*$/),u=t.match(/^\s*(class|def)\s.*$/),a=t.match(/.*do(\s*|\s+\|.*\|\s*)$/),f=t.match(/^\s*(if|else)\s*/);if(o||u||a||f)r+=n}return r},this.checkOutdent=function(e,t,n){return/\s+end$/.test(t+n)||/\s+}$/.test(t+n)||/\s+else$/.test(t+n)},this.autoOutdent=function(e,t,n){var r=this.$getIndent(t.getLine(n)),i=t.getTabString();r.slice(-i.length)==i&&t.remove(new a(n,r.length-i.length,n,r.length))}}.call(l.prototype),t.Mode=l});

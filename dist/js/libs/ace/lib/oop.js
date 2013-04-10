@@ -28,4 +28,4 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-define(["require","exports","module"],function(e,t,n){t.inherits=function(){var e=function(){};return function(t,n){e.prototype=n.prototype,t.super_=n.prototype,t.prototype=new e,t.prototype.constructor=t}}(),t.mixin=function(e,t){for(var n in t)e[n]=t[n]},t.implement=function(e,n){t.mixin(e,n)}});
+define(["require","exports","module"],function(e,t,n){t.inherits=function(){var e=function(){};return function(t,n){e.prototype=n.prototype,t.super_=n.prototype,t.prototype=new e,t.prototype.constructor=t}}(),t.mixin=function(e,t){for(var n in t)e[n]=t[n];return e},t.implement=function(e,n){t.mixin(e,n)}});

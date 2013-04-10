@@ -92,10 +92,10 @@ XMLComment
          ::= DirCommentContents | '-->' | EOF
           /* ws: explicit */
 
-PI       ::= DirPIContents | '?>' | EOF
+PI       ::= DirPIContents | '?' | '?>' | EOF
           /* ws: explicit */
 
-Pragma   ::= PragmaContents | '#)' | EOF
+Pragma   ::= PragmaContents | '#' | '#)' | EOF
           /* ws: explicit */
 
 Comment  ::= ':)' | '(:' | CommentContents | EOF
@@ -406,7 +406,7 @@ PragmaContents
 DirCommentContents
          ::= ( ( Char - '-' ) | '-' ( Char - '-' ) )+
 DirPIContents
-         ::= ( Char* - ( Char* '?' Char* ) ) 
+         ::= ( Char* - ( Char* '?' Char* ) )+ 
 CDataSectionContents
          ::= ( Char+ - ( Char* ']]>' Char* ) ) & ']]'
            | ( Char+ - ( Char* ']]>' Char* ) ) & $ 
@@ -469,13 +469,13 @@ CharRef  ::= '&#' [0-9]+ ';'
            | '&#x' [0-9A-Fa-f]+ ';'
 Digits   ::= [0-9]+
 CommentContents
-         ::= ( Char+ - ( Char* ( '(:' | ':)' ) Char* ) ) & '('
+         ::= ( Char+ - ( Char* ( '(:' | ':)' ) Char* ) ) & '(:'
            | ( Char+ - ( Char* ( '(:' | ':)' ) Char* ) ) & $
-           | ( ( Char+ - ( Char* ( '(:' | ':)' | ' @' ) Char* ) ) - ( Char* '(' ) ) & ':'
+           | ( ( Char+ - ( Char* ( '(:' | ':)' ) Char* ) ) - ( Char* '(' ) ) & ':'
 DocTag   ::= ' @' NCName?
 DocCommentContents
          ::= ( ( Char+ - ( Char* ( '(:' | ':)' | ' @' ) Char* ) ) - ( Char* '(' ) ) & ':'
-           |   ( Char+ - ( Char* ( '(:' | ':)' | ' @' ) Char* ) )                   & '('
+           |   ( Char+ - ( Char* ( '(:' | ':)' | ' @' ) Char* ) )                   & '(:'
            |   ( Char+ - ( Char* ( '(:' | ':)' | ' @' ) Char* ) )                   & ' @'
            | ( Char+ - ( Char* ( '(:' | ':)' | ' @') Char* ) ) & $
 EOF      ::= $

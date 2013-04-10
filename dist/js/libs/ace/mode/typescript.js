@@ -26,11 +26,6 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- *
- * Contributor(s):
- * 
- *
- *
  * ***** END LICENSE BLOCK ***** */
 
 define(["require","exports","module","../lib/oop","./javascript","../tokenizer","./typescript_highlight_rules","./behaviour/cstyle","./folding/cstyle","./matching_brace_outdent"],function(e,t,n){var r=e("../lib/oop"),i=e("./javascript").Mode,s=e("../tokenizer").Tokenizer,o=e("./typescript_highlight_rules").TypeScriptHighlightRules,u=e("./behaviour/cstyle").CstyleBehaviour,a=e("./folding/cstyle").FoldMode,f=e("./matching_brace_outdent").MatchingBraceOutdent,l=function(){var e=new o;this.$tokenizer=new s(e.getRules()),this.$outdent=new f,this.$behaviour=new u,this.foldingRules=new a};r.inherits(l,i),function(){this.createWorker=function(e){return null}}.call(l.prototype),t.Mode=l});

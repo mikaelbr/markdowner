@@ -27,10 +27,6 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  *
- * Contributor(s):
- * 
- *
- *
  * ***** END LICENSE BLOCK ***** */
 
-define(["require","exports","module","../lib/oop","./text","../tokenizer","./lisp_highlight_rules"],function(e,t,n){var r=e("../lib/oop"),i=e("./text").Mode,s=e("../tokenizer").Tokenizer,o=e("./lisp_highlight_rules").LispHighlightRules,u=function(){var e=new o;this.$tokenizer=new s(e.getRules())};r.inherits(u,i),function(){}.call(u.prototype),t.Mode=u});
+define(["require","exports","module","../lib/oop","./text","../tokenizer","./lisp_highlight_rules"],function(e,t,n){var r=e("../lib/oop"),i=e("./text").Mode,s=e("../tokenizer").Tokenizer,o=e("./lisp_highlight_rules").LispHighlightRules,u=function(){var e=new o;this.$tokenizer=new s(e.getRules())};r.inherits(u,i),function(){this.lineCommentStart=";"}.call(u.prototype),t.Mode=u});

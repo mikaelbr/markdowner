@@ -33,4 +33,4 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-define(["require","exports","module","../lib/oop","./text","../tokenizer","./pascal_highlight_rules","./folding/coffee"],function(e,t,n){var r=e("../lib/oop"),i=e("./text").Mode,s=e("../tokenizer").Tokenizer,o=e("./pascal_highlight_rules").PascalHighlightRules,u=e("./folding/coffee").FoldMode,a=function(){var e=new o;this.foldingRules=new u,this.$tokenizer=new s(e.getRules())};r.inherits(a,i),function(){}.call(a.prototype),t.Mode=a});
+define(["require","exports","module","../lib/oop","./text","../tokenizer","./pascal_highlight_rules","./folding/coffee"],function(e,t,n){var r=e("../lib/oop"),i=e("./text").Mode,s=e("../tokenizer").Tokenizer,o=e("./pascal_highlight_rules").PascalHighlightRules,u=e("./folding/coffee").FoldMode,a=function(){var e=new o;this.foldingRules=new u,this.$tokenizer=new s(e.getRules())};r.inherits(a,i),function(){this.lineCommentStart=["--","//"],this.blockComment=[{start:"(*",end:"*)"},{start:"{",end:"}"}]}.call(a.prototype),t.Mode=a});

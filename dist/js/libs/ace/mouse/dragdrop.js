@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2010, Ajax.org B.V.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *     * Redistributions of source code must retain the above copyright
@@ -14,7 +14,7 @@
  *     * Neither the name of Ajax.org B.V. nor the
  *       names of its contributors may be used to endorse or promote products
  *       derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -28,4 +28,4 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-define(["require","exports","module","../lib/event"],function(e,t,n){var r=e("../lib/event"),i=function(e){var t=e.editor,n,i,s,o,u,a,f,l=0,c=t.container;r.addListener(c,"dragenter",function(e){if(t.getReadOnly())return;l++;if(!n){u=t.getSelectionRange(),a=t.selection.isBackwards();var i=t.getSelectionStyle();n=t.session.addMarker(u,"ace_selection",i),t.clearSelection(),clearInterval(o),o=setInterval(h,20)}return r.preventDefault(e)}),r.addListener(c,"dragover",function(e){if(t.getReadOnly())return;return i=e.clientX,s=e.clientY,r.preventDefault(e)});var h=function(){f=t.renderer.screenToTextCoordinates(i,s),t.moveCursorToPosition(f),t.renderer.scrollCursorIntoView()};r.addListener(c,"dragleave",function(e){if(t.getReadOnly())return;l--;if(l>0)return;return clearInterval(o),t.session.removeMarker(n),n=null,t.selection.setSelectionRange(u,a),r.preventDefault(e)}),r.addListener(c,"drop",function(e){if(t.getReadOnly())return;return l=0,clearInterval(o),t.session.removeMarker(n),n=null,u.end=t.session.insert(f,e.dataTransfer.getData("Text")),u.start=f,t.focus(),t.selection.setSelectionRange(u),r.preventDefault(e)})};t.DragdropHandler=i});
+define(["require","exports","module","../lib/event"],function(e,t,n){var r=e("../lib/event"),i=function(e){function h(){u=t.selection.toOrientedRange(),n=t.session.addMarker(u,"ace_selection",t.getSelectionStyle()),t.clearSelection(),clearInterval(o),o=setInterval(c,20),f=0,r.addListener(document,"mousemove",v)}function p(){clearInterval(o),t.session.removeMarker(n),n=null,t.selection.fromOrientedRange(u),f=0,r.removeListener(document,"mousemove",v)}function v(){d==null&&(d=setTimeout(function(){d!=null&&n&&p()},20))}var t=e.editor,n,i,s,o,u,a,f=0,l=t.container;r.addListener(l,"dragenter",function(e){if(t.getReadOnly())return;var i=e.dataTransfer.types;if(i&&Array.prototype.indexOf.call(i,"text/plain")===-1)return;return n||h(),f++,r.preventDefault(e)}),r.addListener(l,"dragover",function(e){if(t.getReadOnly())return;var n=e.dataTransfer.types;if(n&&Array.prototype.indexOf.call(n,"text/plain")===-1)return;return d!==null&&(d=null),i=e.clientX,s=e.clientY,r.preventDefault(e)});var c=function(){a=t.renderer.screenToTextCoordinates(i,s),t.moveCursorToPosition(a),t.renderer.scrollCursorIntoView()};r.addListener(l,"dragleave",function(e){f--;if(f<=0&&n)return p(),r.preventDefault(e)}),r.addListener(l,"drop",function(e){if(!n)return;return u.end=t.session.insert(a,e.dataTransfer.getData("Text")),u.start=a,p(),t.focus(),r.preventDefault(e)});var d=null};t.DragdropHandler=i});

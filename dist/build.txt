@@ -91,6 +91,10 @@ js/libs/ace/theme/solarized_light.css
 ----------------
 js/libs/ace/theme/solarized_light.css
 
+js/libs/ace/theme/terminal.css
+----------------
+js/libs/ace/theme/terminal.css
+
 js/libs/ace/theme/textmate.css
 ----------------
 js/libs/ace/theme/textmate.css
@@ -221,6 +225,7 @@ js/libs/ace/document.js
 js/libs/ace/background_tokenizer.js
 js/libs/ace/search_highlight.js
 js/libs/ace/edit_session/fold_line.js
+js/libs/ace/range_list.js
 js/libs/ace/edit_session/fold.js
 js/libs/ace/token_iterator.js
 js/libs/ace/edit_session/folding.js
@@ -241,15 +246,17 @@ js/libs/ace/renderloop.js
 js/libs/ace/requirejs/text.js
 ace/requirejs/text!ace/css/editor.css
 js/libs/ace/virtual_renderer.js
-js/libs/ace/range_list.js
 js/libs/ace/mouse/multi_select_handler.js
 js/libs/ace/commands/multi_select_commands.js
 js/libs/ace/multi_select.js
 js/libs/ace/worker/worker_client.js
 js/libs/ace/placeholder.js
 js/libs/ace/mode/folding/fold_mode.js
+ace/requirejs/text!ace/theme/textmate.css
+js/libs/ace/theme/textmate.js
 js/libs/ace/ace.js
 js/models/document.js
+js/collections/openDocuments.js
 js/views/editor.js
 js/libs/marked.js
 js/views/compiled.js
