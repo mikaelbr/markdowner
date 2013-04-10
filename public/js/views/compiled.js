@@ -40,7 +40,7 @@ define(['backbone', 'underscore', 'jquery', 'vent', 'marked'], function (Backbon
     },
 
     setOutput: function (fileModel, inputModel) {
-      
+
       if (fileModel.get('remark')) {
         return this.setRemark(fileModel, inputModel);
       }
@@ -64,20 +64,27 @@ define(['backbone', 'underscore', 'jquery', 'vent', 'marked'], function (Backbon
         $inEl = $(this.rmWrapper).attr('src', '/document/' + fileModel.get('_id')).appendTo(this.$el);
         this.$el.find('.compiled').remove();
       } else {
-        var input = typeof(inputModel) === "string" ? inputModel : inputModel.get('body'),
-            isStyling = typeof(inputModel) === "string" ? inputModel : inputModel.isStyling;
-        this.refreshIFrame($inEl[0], input, isStyling);
-          // $inEl.attr('src', '/document/' + fileModel.get('_id'));
+        this.refreshIFrame($inEl[0], fileModel, inputModel);
       }
     },
 
-    refreshIFrame: function (iframe, text, isStyle) {
+    refreshIFrame: function (iframe, fileModel, inputModel) {
 
-      if (isStyle) {
+      var text = typeof(inputModel) === "string" ? inputModel : inputModel.get('body'),
+          isStyling = typeof(inputModel) === "string" ? inputModel : inputModel.isStyling,
+          id = fileModel.get('_id');
+
+      if (isStyling) {
         // Update styling...
         var link = $(iframe.contentWindow.document).find('link[rel="stylesheet"][href^="/document/"]')
-          , url = link.attr('href').split("?")[0]
+          , url = link.length > 0 ? link.attr('href').split("?")[0] : ""
           , newUrl = url + "?" + (new Date()).getTime();
+
+        if (link.length < 1) {
+          // Add new 
+          link = $(iframe.contentWindow.document).find('link');
+          newUrl = '/document/' + id + '.css'
+        }
 
         link.attr('href', newUrl);
       } else {
