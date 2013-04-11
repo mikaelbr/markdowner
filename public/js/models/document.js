@@ -46,6 +46,14 @@ define(['backbone', 'jquery', 'ace'], function (Backbone, $, ace) {
           return this.cssEditorSession;
         },
 
+        setSettings: function (settings) {
+            this.editorSession && this.editorSession.setUseWrapMode(settings['wrap-lines']);
+            this.editorSession && this.editorSession.setUseSoftTabs(settings['use-soft-tab']);
+            this.editorSession && this.editorSession.setTabSize(2);
+            this.cssEditorSession && this.cssEditorSession.setUseWrapMode(settings['wrap-lines']);
+            this.cssEditorSession && this.cssEditorSession.setUseSoftTabs(settings['use-soft-tab']);
+            this.cssEditorSession && this.cssEditorSession.setTabSize(2);
+        },
 
         bodyChange: function (e, s) {
           this.set('body', s.getValue());

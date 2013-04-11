@@ -12,14 +12,12 @@ define([
         el: '#user-box',
 
         initialize: function () {
-            this.model = new UserModel({_id: 'foo'});
-            this.model.fetch().then($.proxy(this.initiateMarkdowner, this));
+            this.initiateMarkdowner();
 
             this.$el.modal({
                 show: false,
                 keyboard: true
             });
-
 
             vent.on('user:show', this.showModal, this);
             vent.on('user:hide', this.hideModal, this);

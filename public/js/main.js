@@ -33,7 +33,10 @@ define([
         'js/views/user',
         'js/views/load',
         'js/models/document',
-        'js/models/fileStructure'
+        'js/models/fileStructure',
+        'js/views/user',
+        'js/views/settings',
+        'js/models/user'
     ], 
     function (Backbone, 
               $, 
@@ -48,9 +51,22 @@ define([
               UserBox, 
               LoadingScreen,
               DocumentModel,
-              FileModel) {
+              FileModel,
+              UserBox,
+              SettingsBox,
+              UserModel) {
   return {
     init: function(tree, fileModel) {
+
+      var userModel = new UserModel({_id: 'foo'});
+      userModel.fetch().then(function () {
+        new UserBox({
+          model: userModel
+        });
+        new SettingsBox({
+          model: userModel
+        });
+      });
 
       var existingDocs;
 
@@ -66,7 +82,6 @@ define([
       
       var editor = new EditorView(existingDocs);
       new FileOptions();
-      new UserBox();
 
       if (fileModel) {
         vent.trigger('editor:loadDocument', sidebarStructureView.collection.get(fileModel._id));

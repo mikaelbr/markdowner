@@ -9,29 +9,20 @@ div#top-nav.navbar.navbar-static-top
           li
             a#savefile(tabindex="-1", href='#') Save
               span.pull-right &#x2318;S
+
+          li.dropdown-submenu
+            a(tabindex="-1", href='#') New
+            ul.dropdown-menu
+              li
+                a#newfile(tabindex="-1", href='#') Markdown
+                  span.pull-right &#x2318;L
+              li
+                a#newfolder(tabindex="-1", href='#') Folder
+                  span.pull-right &#x21E7;&#x2318;L
           li.divider
           li.disabled
             a(tabindex="-1", href="#") Export file 
               span.pull-right &#x2318;E
-
-      li.dropdown
-        a.dropdown-toggle(tabindex="-1", data-toggle='dropdown', href="#") New
-          b.caret
-        ul.dropdown-menu
-          li
-            a#newfile(tabindex="-1", href='#') Markdown
-              span.pull-right &#x2318;L
-          li
-            a#newfolder(tabindex="-1", href='#') Folder
-              span.pull-right &#x21E7;&#x2318;L
-
-      li.dropdown
-        a.dropdown-toggle(tabindex="-1", data-toggle='dropdown', href="#") Build
-          b.caret
-        ul.dropdown-menu
-          li
-            a#compile-button(tabindex="-1", href='#') Compile
-              span.pull-right &#x2318;M
 
       li.dropdown.view
         a.dropdown-toggle(tabindex="-1", data-toggle='dropdown', href="#") View
@@ -47,9 +38,19 @@ div#top-nav.navbar.navbar-static-top
             a(tabindex="-1", href='#') Theme
             ul#themelist.dropdown-menu
 
-          //- li
-          //-   a#toggle-horizontal(href='#') Toggle Horizontal View
-
+      li.dropdown
+        a.dropdown-toggle(tabindex="-1", data-toggle='dropdown', href="#") Tools &amp; Settings
+          b.caret
+        ul.dropdown-menu
+          li
+            a#compile-button(tabindex="-1", href='#') Compile
+              span.pull-right &#x2318;M
+          li
+            a#help-button(tabindex="-1", href='#') Markdown Cheats
+              span.pull-right &#x2318;M
+          li.divider
+          li
+            a#settings-button(tabindex="-1", href='#', href="#editor-settings", role="button", data-toggle="modal") Editor Settings
    
 
     ul.nav.pull-right

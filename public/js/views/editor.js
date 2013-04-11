@@ -47,8 +47,25 @@ define(['ace',
             vent.on('editor:currentEditorFileOptions', this.currentEditorFileOptions, this);
 
             vent.on('editor:noFile', this.noFile, this);
+            vent.on('editor:settings', this.setSettings, this);
 
             vent.on('editor:toggleHorizontal', this.toggleHorizontal, this);
+        },
+
+        setSettings: function (settings) {
+            this.e.setSelectionStyle(settings['full-line-selection'] ? 'line' : 'text');
+            this.e.setHighlightActiveLine(settings['highlight-active-line']);
+            this.e.setShowInvisibles(settings['show-invisibles']);
+            this.e.setDisplayIndentGuides(settings['show-indent-guides']);
+            this.e.renderer.setShowGutter(settings['show-gutter']);
+            this.e.setShowPrintMargin(settings['show-print-margin']);
+            this.e.setHighlightSelectedWord(settings['hightlight-selected-word']);
+            
+            this.setDocSettings(settings);  
+        },
+
+        setDocSettings: function (settings) {
+            this.activeDoc && this.activeDoc.setSettings(settings);
         },
 
         noFile: function () {
@@ -175,6 +192,7 @@ define(['ace',
         setContent: function (cb) {
             cb = cb || function () {};
 
+            this.activeDoc.getCSSEditorSession()
             this.e.setSession(this.activeDoc.getEditorSession());
             vent.trigger('load:hide');
 
@@ -183,6 +201,7 @@ define(['ace',
             this.e.setReadOnly(false);
 
             vent.trigger('editor:compile');
+            vent.trigger('editor:documentLoaded', self.activeDoc);
 
             this._fetchingDocument = false;
             this._changeIterator = 0;
