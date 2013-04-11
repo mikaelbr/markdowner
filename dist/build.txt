@@ -264,4 +264,5 @@ js/views/fileOptions.js
 js/models/user.js
 js/views/user.js
 js/views/load.js
+js/views/settings.js
 js/main.js
