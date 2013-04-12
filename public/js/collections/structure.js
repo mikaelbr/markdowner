@@ -42,7 +42,6 @@ define(['backbone', 'underscore', 'jquery', 'js/models/fileStructure'], function
         },
 
         getTreeSilent: function (model) {
-            console.log('Get new treee');
             var tree = this._buildTree(this.models);
             tree = _.sortBy(tree, function (el) {
                 return el.item.get('name');
