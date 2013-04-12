@@ -38,6 +38,7 @@ define(['backbone', 'jquery', 'ace'], function (Backbone, $, ace) {
 
           if (!style) {
             style = '// Write in LESS\n\n// Default style:\n@import "/stylesheets/default-remark.css";';
+            this.set('style', style);
           }
 
           this.cssEditorSession = new EditSession(style);
