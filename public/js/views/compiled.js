@@ -51,6 +51,7 @@ define(['backbone', 'underscore', 'jquery', 'vent', 'marked'], function (Backbon
         $inEl = $(this.mdWrapper).appendTo(this.$el);
         this.$el.find('.remark-preview').remove();
       }
+
       var input = typeof(inputModel) === "string" ? inputModel : inputModel.get('body');
       var md = marked(input);
       $inEl.html(md).show();
@@ -62,34 +63,34 @@ define(['backbone', 'underscore', 'jquery', 'vent', 'marked'], function (Backbon
       var $inEl = this.$el.find('.remark-preview');
       if (!$inEl.length) {
         $inEl = $(this.rmWrapper).attr('src', '/document/' + fileModel.get('_id')).appendTo(this.$el);
-        this.$el.find('.compiled').remove();
-      } else {
-        this.refreshIFrame($inEl[0], fileModel, inputModel);
+        return this.$el.find('.compiled').remove();
       }
+
+      // Check if it is the same document.
+      var currentID = $inEl.attr('src').replace('/document/', '');
+      if (currentID !== fileModel.get('_id')) {
+        return $inEl.attr('src', '/document/' + fileModel.get('_id'));
+      }
+
+      // A simple refersh. Re-compile Remark document.
+      this.refreshIFrame($inEl[0], fileModel, inputModel);
     },
 
     refreshIFrame: function (iframe, fileModel, inputModel) {
 
       var text = typeof(inputModel) === "string" ? inputModel : inputModel.get('body'),
-          isStyling = typeof(inputModel) === "string" ? inputModel : inputModel.isStyling,
+          isStyling = typeof(inputModel) === "string" ? false : inputModel.isStyling,
           id = fileModel.get('_id');
 
       if (isStyling) {
         // Update styling...
-        var link = $(iframe.contentWindow.document).find('link[rel="stylesheet"][href^="/document/"]')
-          , url = link.length > 0 ? link.attr('href').split("?")[0] : ""
-          , newUrl = url + "?" + (new Date()).getTime();
+        var link = $(iframe.contentWindow.document).find('link'),
+            newUrl = '/document/' + id + '.css'
 
-        if (link.length < 1) {
-          // Add new 
-          link = $(iframe.contentWindow.document).find('link');
-          newUrl = '/document/' + id + '.css'
-        }
-
-        link.attr('href', newUrl);
-      } else {
-        iframe.contentWindow.remark && iframe.contentWindow.remark.loadFromString(sanitize(text));
+        return link.attr('href', newUrl);
       }
+
+      iframe.contentWindow.remark && iframe.contentWindow.remark.loadFromString(sanitize(text));
     }
 
   });
