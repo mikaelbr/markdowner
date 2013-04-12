@@ -7,6 +7,7 @@ var express = require('express')
   , connect = require('connect')
   , routes = require('./routes')
   , documentRoute = require('./routes/document')
+  , userRoute = require('./routes/user')
   , adminRoute = require('./routes/admin')
   , resource = require('express-resource')
   , http = require('http')
@@ -69,6 +70,7 @@ app.configure('development', function(){
 
 app.get('/', auth.ensureAuthenticated, routes.index);
 app.get('/document/:document.:format?', documentRoute.index);
+app.get('/user/:user.:format?', userRoute.index);
 adminRoute.connect(app, auth);
 
 // JSON API

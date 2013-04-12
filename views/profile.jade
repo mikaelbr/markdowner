@@ -1,0 +1,51 @@
+extends layouts/profile
+
+block content
+
+  div#top-nav.navbar.navbar-static-top
+    div.navbar-inner
+      a.brand(href='/') Markdowner: 
+        != user.twitterObj.username
+
+      if loggedInUser
+        ul.nav.pull-right
+          li
+            a(tabindex="-1", href="#user-box", role="button", data-toggle="modal")
+              img.user-avatar(src=loggedInUser.twitterObj._json.profile_image_url, alt=loggedInUser.twitterObj.username)
+              = loggedInUser.twitterObj.username
+
+  article.profile-view
+
+    div.user-profile
+      img(src=user.twitterObj._json.profile_image_url)
+      h1.title 
+        span #{user.twitterObj.username}
+
+    if slideshows.length > 0
+      h2.title Public Slideshows
+
+      ul#grid.clearfix
+        each doc, i in slideshows
+          - var klass = ((i+1) % 4 === 0 ? 'end' : '')
+          li(class=klass)
+            div.details
+              h3 #{doc.file.name}
+              a(href="/document/" + doc.file._id).more Open
+            iframe(src="/document/" + doc.file._id)
+
+    if documents.length > 0
+      h2.title Public Documents
+      ul.document-profile-list
+        each doc, i in documents
+          li
+            div.details
+              h3 
+                a(href="/document/" + doc.file._id) #{doc.file.name}
+              a(href="/document/" + doc.file._id).more Open
+
+
+
+  script(src='/js/vendor/jquery/dist/jquery.js')
+  script(src='/js/vendor/bootstrap/js/bootstrap-dropdown.js')
+
+  include helpers/google

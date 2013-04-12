@@ -175,6 +175,10 @@ stylesheets/main.css
 ----------------
 stylesheets/main.css
 
+stylesheets/profile.css
+----------------
+stylesheets/profile.css
+
 js/main.js
 ----------------
 js/vendor/underscore/underscore.js

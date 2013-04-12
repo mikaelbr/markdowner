@@ -1,6 +1,7 @@
 var md = require('marked'),
     less = require('less'),
-    async = require('async');
+    async = require('async'),
+    apiUtils = require('../lib/apiUtils');
 
 var documents = require('../lib/documents'),
     user = require('../lib/user'),
@@ -78,15 +79,9 @@ exports.json = function (req, res) {
 
     user.get({'_id': user_id}, function (err, user) {
 
-      // Remove info from public API listing. 
-      delete user.twitterObj; 
-      delete user.settings.activeDocument; 
-      delete user.admin; 
-
       documents.get(id, function(err, data) {
-        data.user = user;
-        data.file = file;
-        res.json(data);
+        var doc = apiUtils.cleanTotal(data, user, file);
+        res.json(doc);
       });
     });
   });

@@ -1,0 +1,96 @@
+
+
+// Core variables and mixins
+@import "../js/vendor/bootstrap/less/bootstrap.less"; // Modify this for custom colors, font-sizes, etc
+@import "helpers/elements.less";
+@import "sidebar.less";
+@import "navbar.less";
+@import "helpers/grid.less";
+
+body {
+    background: url('../images/background.png') #ccc;
+}
+
+
+.navbar  {
+    min-width: 760px;
+}
+
+.navbar .brand {
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+.navbar .divider-vertical {
+    height: 26px;
+}
+
+.profile-view {
+  width: 1000px;
+  margin: 0 auto;
+  padding-top: 30px;
+}
+
+.group:after,
+.profile-view:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+
+* html .group { height: 1%; }
+*:first-child+html .group { min-height: 1px; }
+
+h1, h2, h3, p { color: #333; }
+
+a { text-decoration: none; color: #0090e2; }
+a.ig:hover { background: #0090e2; color: #fff; padding: 3px 10px; border-radius: 20px; }
+
+p { line-height: 23px; margin-bottom: 20px; }
+p:last-of-type { margin-bottom: 0px; }
+
+
+h3 { 
+  margin: 0;
+  padding: 0;
+  margin-bottom: 20px; 
+  font-size: 1.1em;
+  line-height: 1.1em;
+  font-weight: normal;
+}
+
+.profile-view > ul > li > iframe {
+  height: 158px;
+  width: 210px;
+  border: 0;
+}
+
+.document-profile-list {
+  padding: 0;
+  margin: 0;
+
+  li {
+    list-style-type: none;
+    .drop-shadow(0px, 0px, 5px, 0.6);
+    background: #fff;
+    position: relative;
+
+    .rounded(5px);
+    padding: 9px;
+    margin-bottom: 10px;
+
+    .details .more {
+      top: 5px;
+    }
+
+    h3 {
+      font-size: 1.5em;
+      font-weight: bold;
+      margin: 0;
+    }
+  }
+}
+
+.user-profile img {
+  float: left;
+  margin-right: 10px;
+}
+
+// box-shadow: 0 5px 10px 0 rgba(0,0,0,0.5);
+
