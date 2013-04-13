@@ -22,23 +22,29 @@ block content
         span #{user.twitterObj.username}
 
     if slideshows.length > 0
-      h2.title Public Slideshows
+      h2.title Slideshows
 
       ul#grid.clearfix
         each doc, i in slideshows
           - var klass = ((i+1) % 4 === 0 ? 'end' : '')
-          li(class=klass)
+          - var lock = (doc.file['public'] ? '' : 'lock')
+          li(class=klass + ' ' + lock)
             div.details
+              if !doc.file['public']
+                i.icon-lock
               h3 #{doc.file.name}
               a(href="/document/" + doc.file._id).more Open
             iframe(src="/document/" + doc.file._id)
 
     if documents.length > 0
-      h2.title Public Documents
+      h2.title Documents
       ul.document-profile-list
         each doc, i in documents
-          li
+          - var lock = (doc.file['public'] ? '' : 'lock')
+          li(class=lock)
             div.details
+              if !doc.file['public']
+                i.icon-lock
               h3 
                 a(href="/document/" + doc.file._id) #{doc.file.name}
               a(href="/document/" + doc.file._id).more Open
