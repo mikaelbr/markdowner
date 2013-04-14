@@ -71,7 +71,7 @@ exports.renderUser = function (req, res) {
 
   userLib.get({  "twitterObj.username": id }, function (err, user) {
     // Found user?
-    if (err) { 
+    if (err || !user) { 
       res.status(404);
       res.render('error/404', {
           title: 'Not found'
