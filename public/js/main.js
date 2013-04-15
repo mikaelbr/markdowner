@@ -4,10 +4,14 @@ require.config({
     vent: 'js/vent',
     bootstrap: 'js/vendor/bootstrap/docs/assets/js/bootstrap',
     marked: 'js/libs/marked',
+    jRespond: 'js/libs/jRespond',
   },
   shim: {
     'bootstrap': {
       deps: ['jquery']
+    },
+    'jRespond': {
+      exports: 'jRespond'
     }
   },
   "packages": [
@@ -36,7 +40,8 @@ define([
         'js/models/fileStructure',
         'js/views/user',
         'js/views/settings',
-        'js/models/user'
+        'js/models/user',
+        'js/views/responsive'
     ], 
     function (Backbone, 
               $, 
@@ -54,9 +59,11 @@ define([
               FileModel,
               UserBox,
               SettingsBox,
-              UserModel) {
+              UserModel, ResponsiveView) {
   return {
     init: function(tree, fileModel) {
+
+      new ResponsiveView();
 
       var userModel = new UserModel({_id: 'foo'});
       userModel.fetch().then(function () {

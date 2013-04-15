@@ -66,7 +66,20 @@ define(['backbone',
             'click #savefile': 'save',
             'click #toggle-sidebar': 'toggleSidebar',
             'click #toggle-horizontal': 'toggleHorizontal',
+            'click .file-menu-list': 'togglePreviewResponsive',
             'click #toggle-style': 'toggleStyling'
+        },
+
+        togglePreviewResponsive: function (e) {
+            e.preventDefault();
+            if ($("#editor").is(":visible")) {
+                $("#editor").hide();
+                $("#compiled, #file-settings").show();
+            } else {
+                $("#compiled, #file-settings").hide();
+                $("#editor").show();
+            }
+            return false;
         },
 
         bindKeyMaster: function () {
