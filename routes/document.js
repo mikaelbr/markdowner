@@ -32,7 +32,7 @@ exports.renderDocument = function (req, res) {
   }
 
   files.get(id, function (err, file) {
-    var user_id = file.user_id;
+    var user_id = !file ? 0 : file.user_id;
     if (!file || file.type === 0 || (!file['public'] && logged_in_user_id != user_id)) {
       res.status(404);
       res.render('error/404', {
@@ -67,7 +67,7 @@ exports.json = function (req, res) {
   }
 
   files.get(id, function (err, file) {
-    var user_id = file.user_id;
+    var user_id = !file ? 0 : file.user_id;
 
     if (!file || file.type === 0 || (!file['public'] && logged_in_user_id != user_id)) {
       res.json(404, {
@@ -106,7 +106,7 @@ exports.style = function(req, res){
   async.parallel({
     file: function (done) {
       files.get(id, function (err, file) {
-        var user_id = file.user_id;
+        var user_id = !file ? 0 : file.user_id;
         if (err || !file || file.type < 2 || (!file['public'] && logged_in_user_id != user_id) || !file.remark) {
           return done(true, null);
         }
